@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CodingKid</string>
+
+    <!-- Main activity -->
+    <string name="settings">Nastavenia</string>
+    <string name="play">Hra</string>
+    <string name="editor">Editor levelu</string>
+
+
+
+
+</resources>
