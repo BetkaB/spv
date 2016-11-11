@@ -3,4 +3,21 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPinkFlare">#DCBCCC</color>
+    <color name="colorVisVis">#E5EEC1</color>
+    <color name="colorMoonMist">#E0DDCD</color>
+    <color name="colorWhite">#ffffff</color>
+
+
+
+    <!-- color theme  -->
+    <color name="colorDonJuan">#5A5050</color>
+    <color name="colorCuttySark">#547A82</color>
+    <color name="colorKeppel">#3EACA8</color>
+    <color name="colorMossGreen">#A2D4AB</color>
+    <color name="colorTahunaSands">#E5EEC1</color>
+
+
+
 </resources>

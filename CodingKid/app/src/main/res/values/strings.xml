@@ -2,11 +2,21 @@
     <string name="app_name">CodingKid</string>
 
     <!-- Main activity -->
-    <string name="settings">Nastavenia</string>
-    <string name="play">Hra</string>
-    <string name="editor">Editor levelu</string>
-    <string name="welcome_label">Vitaj v aplikácii</string>
+    <string name="main_activity_settings">Nastavenia</string>
+    <string name="main_activity_play">Hra</string>
+    <string name="main_activity_editor">Editor levelu</string>
+    <string name="main_activity_welcome_label">Vitaj v aplikácii</string>
+    <string name="main_activity_game">Otvor aktivitu s hrou</string>
 
+    <!-- Game activity -->
+    <string name="game_activity_remaining_hearts">Zostávajúce srdiečka: </string>
+    <string name="game_activity_remaining_commands">Zostávajúce príkazy: </string>
+    <string name="game_activity_code">Kód</string>
+
+    <!-- Game activity buttons -->
+    <string name="game_activity_button_play">play</string>
+    <string name="game_activity_button_loop_start">Začiatok cyklu</string>
+    <string name="game_activity_button_loop_end">koniec cyklu</string>
 
 
 

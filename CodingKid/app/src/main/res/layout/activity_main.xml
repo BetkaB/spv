@@ -21,25 +21,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/welcome"
-            android:text="@string/welcome_label"
+            android:text="@string/main_activity_welcome_label"
             android:layout_gravity="center_horizontal" />
 
         <Button
-            android:text="@string/play"
+            android:text="@string/main_activity_play"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/play_button" />
 
         <Button
-            android:text="@string/editor"
+            android:text="@string/main_activity_editor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editor_button" />
 
         <Button
-            android:text="@string/settings"
+            android:text="@string/main_activity_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/settings_button" />
+
+        <Button
+            android:text="@string/main_activity_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_button" />
     </LinearLayout>
 </LinearLayout>

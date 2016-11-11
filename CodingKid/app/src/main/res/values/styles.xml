@@ -3,9 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorDonJuan</item>
+        <item name="colorPrimaryDark">@color/colorDonJuan</item>
+        <item name="colorAccent">@color/colorKeppel</item>
     </style>
 
+
+    <style name="ControlPanelsButtonsWithText" >
+        <item name="android:layout_marginRight">@dimen/activity_game_control_panel_buttons_padding</item>
+        <item name="android:layout_marginLeft">@dimen/activity_game_control_panel_buttons_padding</item>
+    </style>
 </resources>
