@@ -105,8 +105,7 @@
                 <ListView
                     android:id="@+id/code_list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorKeppel" />
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 

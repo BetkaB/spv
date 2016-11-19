@@ -18,6 +18,15 @@
     <string name="game_activity_button_loop_start">Začiatok cyklu</string>
     <string name="game_activity_button_loop_end">koniec cyklu</string>
 
+    <!-- Game activity commands -->
+    <string name="command_left">vľavo</string>
+    <string name="command_right">vpravo</string>
+    <string name="command_up">hore</string>
+    <string name="command_down">dole</string>
+    <string name="command_loop_start">začiatok cyklu</string>
+    <string name="command_loop_end">koniec cyklu</string>
+
+
 
 
 </resources>
