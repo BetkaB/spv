@@ -19,7 +19,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     @BindView(R.id.code_list_view)
     ListView codeListView;
 
-    private ArrayList<Command> mCommands;
+    private ArrayList<Command> mCommandTypes;
     private CommandAdapter mCommandAdapter;
 
     public static void startActivity(Context context) {
@@ -45,45 +45,45 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     }
 
     private void init(){
-        mCommands = new ArrayList<Command>();
-        mCommandAdapter = new CommandAdapter(this, mCommands, this);
+        mCommandTypes = new ArrayList<Command>();
+        mCommandAdapter = new CommandAdapter(this, mCommandTypes, this);
         codeListView.setAdapter(mCommandAdapter);
     }
 
     @OnClick(R.id.button_loop_start)
     public void loopStart() {
-        mCommands.add(Command.LOOP_START);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.add(new Command(CommandType.LOOP_START));
+        mCommandAdapter.setData(mCommandTypes);
     }
 
     @OnClick(R.id.button_loop_end)
     public void loopEnd() {
-        mCommands.add(Command.LOOP_END);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.add(new Command(CommandType.LOOP_END));
+        mCommandAdapter.setData(mCommandTypes);
     }
 
     @OnClick(R.id.button_left)
     public void commandLeft() {
-        mCommands.add(Command.LEFT);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.add(new Command(CommandType.LEFT));
+        mCommandAdapter.setData(mCommandTypes);
     }
 
     @OnClick(R.id.button_down)
     public void commandDown() {
-        mCommands.add(Command.DOWN);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.add(new Command(CommandType.DOWN));
+        mCommandAdapter.setData(mCommandTypes);
     }
 
     @OnClick(R.id.button_up)
     public void commandUp() {
-        mCommands.add(Command.UP);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.add(new Command(CommandType.UP));
+        mCommandAdapter.setData(mCommandTypes);
     }
 
     @OnClick(R.id.button_right)
     public void commandRight() {
-        mCommands.add(Command.RIGHT);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.add(new Command(CommandType.RIGHT));
+        mCommandAdapter.setData(mCommandTypes);
     }
 
     @OnClick(R.id.button_play)
@@ -93,7 +93,14 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     @Override
     public void onCommandCanceled(int position) {
-        mCommands.remove(position);
-        mCommandAdapter.setData(mCommands);
+        mCommandTypes.remove(position);
+        mCommandAdapter.setData(mCommandTypes);
     }
+
+    @Override
+    public void onLoopIterationChange(int position, int newValue) {
+        mCommandTypes.get(position).setCount(newValue);
+        mCommandAdapter.setData(mCommandTypes);
+    }
+
 }

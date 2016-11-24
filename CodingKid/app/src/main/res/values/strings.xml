@@ -23,7 +23,8 @@
     <string name="command_right">vpravo</string>
     <string name="command_up">hore</string>
     <string name="command_down">dole</string>
-    <string name="command_loop_start">začiatok cyklu</string>
+    <string name="command_loop_start">Cyklus </string>
+    <string name="command_loop_start_2">x</string>
     <string name="command_loop_end">koniec cyklu</string>
 
 

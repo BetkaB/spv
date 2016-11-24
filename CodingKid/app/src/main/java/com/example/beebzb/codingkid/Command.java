@@ -1,20 +1,29 @@
 package com.example.beebzb.codingkid;
 
-public enum Command {
-    LOOP_START(R.string.command_loop_start),
-    LOOP_END(R.string.command_loop_end),
-    LEFT(R.string.command_left),
-    UP(R.string.command_up),
-    DOWN(R.string.command_down),
-    RIGHT(R.string.command_right);
+public class Command {
+    private CommandType mCommandType;
+    private int count = 0;
 
-    private final int stringId;
 
-    Command(int id) {
-        this.stringId = id;
+    public Command(CommandType mCommandType) {
+
+        this.mCommandType = mCommandType;
+        if (mCommandType == CommandType.LOOP_START){
+            count = 1;
+        }
     }
 
-    public int getStringId() {
-        return stringId;
+    public int getCount() {
+        return count;
     }
+
+    public CommandType getmCommandType() {
+        return mCommandType;
+    }
+
+    public void setCount(int count) {
+
+        this.count = count;
+    }
+
 }

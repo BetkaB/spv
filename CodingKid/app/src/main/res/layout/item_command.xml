@@ -6,25 +6,65 @@
     android:orientation="horizontal"
     android:weightSum="7">
 
-    <TextView
-        android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp"
-        android:id="@+id/command_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_decrease"
+            style="@style/LoopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_remove_black_24dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/command_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/command_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginStart="4dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/command_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/command_loop_start_2" />
+
+        <ImageButton
+            style="@style/LoopButton"
+            android:id="@+id/button_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_black_24dp"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="6">
+        android:layout_weight="6"
+        android:gravity="center">
 
         <ImageButton
-            android:id="@+id/cancel_button"
+            android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
-            android:contentDescription="@string/app_name"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_clear_black_24dp" />
 
     </LinearLayout>
