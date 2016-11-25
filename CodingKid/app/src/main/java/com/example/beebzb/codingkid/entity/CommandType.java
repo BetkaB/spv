@@ -1,4 +1,6 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.entity;
+
+import com.example.beebzb.codingkid.R;
 
 public enum CommandType {
     LOOP_START(R.string.command_loop_start),

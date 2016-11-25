@@ -39,6 +39,5 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.game_button)
     public void openGameActivity() {
         GameActivity.startActivity(this);
-        Toast.makeText(this, "clicked on gmae button",Toast.LENGTH_SHORT).show();
     }
 }

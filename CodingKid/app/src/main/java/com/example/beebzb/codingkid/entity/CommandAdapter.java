@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.entity;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.entity.Command;
+import com.example.beebzb.codingkid.entity.CommandType;
 
 import java.util.ArrayList;
 import java.util.List;

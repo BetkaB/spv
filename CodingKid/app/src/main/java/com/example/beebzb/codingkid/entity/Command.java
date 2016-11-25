@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.entity;
 
 public class Command {
     private CommandType mCommandType;

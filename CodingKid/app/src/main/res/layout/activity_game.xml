@@ -17,8 +17,9 @@
         android:orientation="horizontal"
         android:weightSum="4">
 
-        <View
+        <view
             android:id="@+id/canvas"
+            class="com.example.beebzb.codingkid.entity.GameView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -63,8 +64,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
-                            android:gravity="center|end"
-                            android:text="2" />
+                            android:gravity="center|end" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -86,8 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
-                            android:gravity="center|end"
-                            android:text="3" />
+                            android:gravity="center|end" />
 
                     </LinearLayout>
 
