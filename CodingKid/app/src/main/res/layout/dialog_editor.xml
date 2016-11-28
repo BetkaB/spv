@@ -11,27 +11,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/heart" />
+        android:src="@drawable/heart" />
 
     <ImageButton
         android:id="@+id/houseIb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/house" />
+        android:src="@drawable/house" />
 
     <ImageButton
         android:id="@+id/playerIb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/player" />
+        android:src="@drawable/player" />
 
     <ImageButton
         android:id="@+id/emptyIb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:srcCompat="@drawable/box" />
+        android:src="@drawable/box" />
 
 </LinearLayout>

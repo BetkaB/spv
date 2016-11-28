@@ -5,8 +5,11 @@
     <string name="main_activity_settings">Nastavenia</string>
     <string name="main_activity_play">Hra</string>
     <string name="main_activity_editor">Editor levelu</string>
-    <string name="main_activity_welcome_label">Vitaj v aplikácii</string>
+    <string name="main_activity_welcome_label">Coding Kid</string>
     <string name="main_activity_game">Otvor aktivitu s hrou</string>
+
+    <string name="menu_settings">Nastavenia</string>
+
 
     <!-- Game activity -->
     <string name="game_activity_remaining_hearts">Zostávajúce srdiečka: </string>
@@ -26,6 +29,9 @@
     <string name="command_loop_start">Cyklus </string>
     <string name="command_loop_start_2">x</string>
     <string name="command_loop_end">koniec cyklu</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
