@@ -13,4 +13,8 @@ public interface AppComponent {
     void injectMainActivity(MainActivity mainActivity);
 
     void injectLevelChoiceFragment(LevelChoiceFragment levelChoiceFragment);
+
+    void injectGameActivity(GameActivity gameActivity);
+
+    void injectEditorActivity(EditorActivity editorActivity);
 }

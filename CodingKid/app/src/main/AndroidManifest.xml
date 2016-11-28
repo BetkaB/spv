@@ -29,7 +29,6 @@
             android:screenOrientation="landscape"
             android:label="@string/editor"/>
 
-        <activity android:name=".EditorXXActivity"></activity>
     </application>
 
 </manifest>

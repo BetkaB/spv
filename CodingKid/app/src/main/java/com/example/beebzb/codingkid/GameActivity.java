@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.beebzb.codingkid.LevelChoiceFragment.KEY_EXTRA_LEVEL;
 
 public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks {
 
@@ -40,12 +43,17 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     private ArrayList<Command> mCommandTypes;
     private CommandAdapter mCommandAdapter;
 
-    public static void startActivity(Context context) {
+    // TODO remove
+    public static Level level2;
+
+    public static void startActivity(Context context, Level level) {
         Intent intent = new Intent(context, GameActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //intent.putExtra(KEY_EXTRA_LEVEL, level);
         }
         context.startActivity(intent);
+        level2 = level;
     }
 
     @Override
@@ -55,6 +63,8 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         setContentView(R.layout.activity_game);
 
         ButterKnife.bind(this);
+        ((MainApplication) getApplication()).getComponent().injectGameActivity(this);
+
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -70,8 +80,26 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         boxPosition.add(new Position(4,2)); boxPosition.add(new Position(3,2));
 
         this.level = new Level(4,2, new Position(4,2), new Position(1,1),heartsPosition, boxPosition, "Level 1", "Betka" );
+       // this.level = getLevelFromExtra(savedInstanceState);
+        this.level = level2;
+        Log.e("EDITOR FROM EXTRA",level.toString());
         init();
 
+    }
+
+    private Level getLevelFromExtra(Bundle savedInstanceState){
+        String levelFromExtra;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                levelFromExtra= null;
+            } else {
+                levelFromExtra= extras.getString(KEY_EXTRA_LEVEL);
+            }
+        } else {
+            levelFromExtra= (String) savedInstanceState.getSerializable(KEY_EXTRA_LEVEL);
+        }
+        return Utils.stringToLevel(levelFromExtra);
     }
 
     private void init() {

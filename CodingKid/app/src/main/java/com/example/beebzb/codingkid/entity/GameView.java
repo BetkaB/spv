@@ -33,11 +33,6 @@ public class GameView extends View {
     private int partWidth;
     private  int partHeight;
 
-    private final int rows = 8;
-    private final  int columns = 15;
-
-
-
     private Context context;
     private Activity activity;
 
@@ -96,8 +91,8 @@ public class GameView extends View {
         paint.setStrokeWidth(1);
         paint.setColor(getResources().getColor(R.color.colorDonJuan));
 
-        partWidth = this.getWidth() / columns;
-        partHeight = this.getHeight() / rows;
+        partWidth = this.getWidth() / GameConstants.columns;
+        partHeight = this.getHeight() / GameConstants.rows;
 
         // code for grid
         /*

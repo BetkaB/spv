@@ -28,7 +28,7 @@
         android:src="@drawable/player" />
 
     <ImageButton
-        android:id="@+id/emptyIb"
+        android:id="@+id/boxIb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"

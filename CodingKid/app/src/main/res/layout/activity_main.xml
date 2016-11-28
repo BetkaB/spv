@@ -33,27 +33,10 @@
             android:text="@string/main_activity_welcome_label" />
 
         <Button
-            android:id="@+id/play_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/main_activity_play" />
-
-        <Button
             android:id="@+id/editor_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/main_activity_editor" />
 
-        <Button
-            android:id="@+id/settings_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/main_activity_settings" />
-
-        <Button
-            android:id="@+id/game_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/main_activity_game" />
     </LinearLayout>
 </LinearLayout>

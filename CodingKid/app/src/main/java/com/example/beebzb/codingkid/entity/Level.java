@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Level {
 
     private String name;
-    private String author;
+    private String author = "Coding Kid";
     private int commands;
     private int hearts;
     private Position housePosition;
@@ -23,6 +23,10 @@ public class Level {
         this.boxPositions = boxPositions;
         this.name = name;
         this.author = author;
+    }
+
+    public Level(){
+
     }
 
     public String getName() {
@@ -95,5 +99,24 @@ public class Level {
 
     public void setPlayer(Position player) {
         this.player = player;
+    }
+
+    public boolean isValid(){
+        return housePosition!= null && startPosition != null;
+    }
+
+    @Override
+    public String toString() {
+        return "Level{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", commands=" + commands +
+                ", hearts=" + hearts +
+                ", housePosition=" + housePosition +
+                ", startPosition=" + startPosition +
+                ", heartsPositions=" + heartsPositions +
+                ", boxPositions=" + boxPositions +
+                ", player=" + player +
+                '}';
     }
 }

@@ -84,11 +84,12 @@ public class EditorButton extends Button {
             case R.id.playerIb:
                 got = GameObjectType.PLAYER;
                 break;
-            default:
+            case R.id.boxIb:
                 got = GameObjectType.BOX;
                 break;
 
         }
+        this.checked = true;
         Drawable temp = ContextCompat.getDrawable(context, got.drawableId);
         this.setBackgroundDrawable(temp);
 
