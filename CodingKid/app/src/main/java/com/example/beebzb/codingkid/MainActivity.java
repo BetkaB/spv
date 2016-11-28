@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.editor_button)
     public void openEditorActivity() {
-        title.setAllCaps(false);
+        EditorActivity.startActivity(this);
+        Toast.makeText(this, "clicked on editor button", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.settings_button)

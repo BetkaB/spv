@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">CodingKid</string>
+    <string name="editor">Editor levelu</string>
 
     <!-- Main activity -->
     <string name="main_activity_settings">Nastavenia</string>
@@ -17,9 +18,18 @@
     <string name="game_activity_code">Kód</string>
 
     <!-- Game activity buttons -->
-    <string name="game_activity_button_play">play</string>
+    <string name="game_activity_button_play">Hrať</string>
     <string name="game_activity_button_loop_start">Začiatok cyklu</string>
     <string name="game_activity_button_loop_end">koniec cyklu</string>
+
+    <!-- Editor activity buttons -->
+    <string name="editor_activity_button_save">Uložiť</string>
+    <string name="level_name">Názov levelu</string>
+    <string name="number">0</string>
+
+    <!-- Editor activity -->
+    <string name="text_commands">Príkazy</string>
+    <string name="text_objects">Objekty</string>
 
     <!-- Game activity commands -->
     <string name="command_left">vľavo</string>

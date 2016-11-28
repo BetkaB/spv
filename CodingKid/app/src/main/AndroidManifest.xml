@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
@@ -18,9 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".GameActivity"
             android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".EditorActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/editor"/>
+
         <activity android:name=".EditorXXActivity"></activity>
     </application>
 
