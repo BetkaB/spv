@@ -6,6 +6,9 @@ public class Position{
         this.x = x;
     }
 
+    public Position() {
+    }
+
     public int x;
     public int y;
 }

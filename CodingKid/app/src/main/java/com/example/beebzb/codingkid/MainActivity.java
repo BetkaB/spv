@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.settings_button)
     public void openSettingsActivity() {
+        EditorXXActivity.startActivity(this);
 
     }
 
