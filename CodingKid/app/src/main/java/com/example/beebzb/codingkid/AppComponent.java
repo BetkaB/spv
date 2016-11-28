@@ -10,6 +10,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {AppModule.class, PreferencesModule.class})
 public interface AppComponent {
-    //injecting actvities and fragments
     void injectMainActivity(MainActivity mainActivity);
+
+    void injectLevelChoiceFragment(LevelChoiceFragment levelChoiceFragment);
 }

@@ -32,7 +32,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ((MainApplication) getApplication()).getComponent().injectMainActivity(this);
+        init();
 
+    }
+
+    private void init() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.buttons_layout,new LevelChoiceFragment(), LevelChoiceFragment.TAG)
+                .disallowAddToBackStack()
+                .commit();
     }
 
     @OnClick(R.id.play_button)

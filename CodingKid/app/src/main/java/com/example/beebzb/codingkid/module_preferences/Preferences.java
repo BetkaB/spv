@@ -9,4 +9,8 @@ public interface Preferences {
     String getLevel (int index);
 
     Set<String> getDefaultLevels();
+
+    void setHighestLevel(int id);
+
+    int getHighestLevel();
 }

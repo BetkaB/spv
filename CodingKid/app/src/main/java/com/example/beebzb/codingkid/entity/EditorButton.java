@@ -43,6 +43,7 @@ public class EditorButton extends Button {
         position.y = column;
 
         this.setBackgroundDrawable(drawableEmptyBox);
+       // this.setBackgroundResource(R.drawable.empty)
 
         final Context con = context;
         this.setOnClickListener(new OnClickListener() {
