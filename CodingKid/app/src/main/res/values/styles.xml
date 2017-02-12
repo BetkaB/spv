@@ -8,14 +8,28 @@
         <item name="colorAccent">@color/colorKeppel</item>
     </style>
 
-
-    <style name="ControlPanelsButtonsWithText" >
-        <item name="android:layout_marginRight">@dimen/activity_game_control_panel_buttons_padding</item>
-        <item name="android:layout_marginLeft">@dimen/activity_game_control_panel_buttons_padding</item>
+    <style name="ControlPanelsButtonsWithText">
+        <item name="android:layout_marginRight">@dimen/activity_game_control_panel_buttons_padding
+        </item>
+        <item name="android:layout_marginLeft">@dimen/activity_game_control_panel_buttons_padding
+        </item>
     </style>
 
-    <style name="LoopButton" >
+    <style name="LoopButton">
         <item name="android:layout_margin">4dp</item>
         <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="MainActivityButton">
+        <item name="android:background">@drawable/button_current</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="MainActivityLabel">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:gravity">start|center_vertical</item>
     </style>
 </resources>

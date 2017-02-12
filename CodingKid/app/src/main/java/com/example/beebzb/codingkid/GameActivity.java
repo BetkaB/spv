@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.beebzb.codingkid.LevelChoiceFragment.KEY_EXTRA_LEVEL;
+import static com.example.beebzb.codingkid.screens.main.LevelChoiceFragment.KEY_EXTRA_LEVEL;
 
 public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks {
 
@@ -52,8 +52,9 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             //intent.putExtra(KEY_EXTRA_LEVEL, level);
         }
-        context.startActivity(intent);
         level2 = level;
+        context.startActivity(intent);
+
     }
 
     @Override
@@ -79,8 +80,8 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         boxPosition.add(new Position(3,1)); boxPosition.add(new Position(4,1));
         boxPosition.add(new Position(4,2)); boxPosition.add(new Position(3,2));
 
-        this.level = new Level(4,2, new Position(4,2), new Position(1,1),heartsPosition, boxPosition, "Level 1", "Betka" );
-       // this.level = getLevelFromExtra(savedInstanceState);
+        //this.level = new Level(4,2, new Position(4,2), new Position(1,1),heartsPosition, boxPosition, "Level 1", "Betka" );
+        //this.level = getLevelFromExtra(savedInstanceState);
         this.level = level2;
         Log.e("EDITOR FROM EXTRA",level.toString());
         init();

@@ -14,7 +14,7 @@ public interface Preferences {
 
     int getHighestLevel();
 
-    void saveLevelToUsersLevels(String level);
+    void saveCustomLevel(String string);
 
-    Set<String> getAllUsersLevels();
+    Set<String> getCustomLevels();
 }

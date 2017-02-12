@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 public class MySharedPreferences implements Preferences {
 
     private final String KEY_HIGHEST_LEVEL = "KEY_HIGHEST_LEVEL";
-    private final String KEY_USERS_LEVELS = "KEY_USERS_LEVELS";
+    private final String KEY_CUSTOM_LEVELS = "KEY_CUSTOM_LEVELS";
 
     //TODO refactor - save to database
     private final String KEY_LEVEL_1 = "KEY_LEVEL_1";
@@ -39,15 +39,15 @@ public class MySharedPreferences implements Preferences {
     }
 
     @Override
-    public void saveLevelToUsersLevels(String level) {
-        Set<String> allUsersLevels = getAllUsersLevels();
+    public void saveCustomLevel(String level) {
+        Set<String> allUsersLevels = getCustomLevels();
         allUsersLevels.add(level);
-        mSharedPreferences.edit().putStringSet(KEY_USERS_LEVELS, allUsersLevels).apply();
+        mSharedPreferences.edit().putStringSet(KEY_CUSTOM_LEVELS, allUsersLevels).apply();
     }
 
     @Override
-    public Set<String> getAllUsersLevels() {
-        return mSharedPreferences.getStringSet(KEY_USERS_LEVELS, new HashSet<String>());
+    public Set<String> getCustomLevels() {
+        return mSharedPreferences.getStringSet(KEY_CUSTOM_LEVELS, new HashSet<String>());
     }
 
     @Override

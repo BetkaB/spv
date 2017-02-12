@@ -9,5 +9,7 @@
     <!-- Game activity -->
     <dimen name="code_commands_margin">16dp</dimen>
 
+    <!-- Main activity -->
+
 
 </resources>

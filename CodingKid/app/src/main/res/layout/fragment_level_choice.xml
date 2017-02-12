@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:weightSum="10"
     android:id="@+id/level_choices_layout"
-    tools:context="com.example.beebzb.codingkid.LevelChoiceFragment">
+    tools:context="com.example.beebzb.codingkid.screens.main.LevelChoiceFragment">
 
 
 </LinearLayout>

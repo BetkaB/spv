@@ -159,7 +159,7 @@ public class EditorActivity extends AppCompatActivity {
     public void saveLevel(){
         Level createdLevel = getLevel();
         if (createdLevel.isValid()){
-            preferences.setLevel1(getLevel());
+            preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
             finish();
             Utils.shortToast(this, "Level bol uložený");
         }

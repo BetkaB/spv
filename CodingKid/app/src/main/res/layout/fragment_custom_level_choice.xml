@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7"
+    tools:context="com.example.beebzb.codingkid.screens.main.CustomLevelChoiceFragment">
+
+    <TextView
+        style="@style/MainActivityLabel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/main_activity_custom_levels_title" />
+
+    <ListView
+        android:background="@color/colorAccent"
+        android:id="@+id/custom_levels_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5" />
+
+    <Button
+        android:id="@+id/add_new_level_button"
+        style="@style/MainActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/ic_add_black_24dp"
+        android:drawableStart="@drawable/ic_add_black_24dp"
+        android:text="@string/main_activity_add_level" />
+
+</LinearLayout>

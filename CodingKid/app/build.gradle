@@ -43,5 +43,4 @@ dependencies {
     // GJSon
     compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
 
-
 }

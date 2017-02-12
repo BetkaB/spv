@@ -69,7 +69,6 @@ public class GameView extends View {
         playerDrawable = ContextCompat.getDrawable(activity, R.drawable.player);
         houseDrawable = ContextCompat.getDrawable(activity, R.drawable.house);
         heartDrawable = ContextCompat.getDrawable(activity, R.drawable.heart);
-
     }
 
     @Override

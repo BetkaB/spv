@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.screens.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.beebzb.codingkid.EditorActivity;
+import com.example.beebzb.codingkid.MainApplication;
+import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
 import javax.inject.Inject;
@@ -41,12 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 .disallowAddToBackStack()
                 .commit();
     }
-
-    @OnClick(R.id.editor_button)
-    public void openEditorActivity() {
-        EditorActivity.startActivity(this);
-    }
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

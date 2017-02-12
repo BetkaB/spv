@@ -2,6 +2,9 @@ package com.example.beebzb.codingkid;
 
 
 import com.example.beebzb.codingkid.module_preferences.PreferencesModule;
+import com.example.beebzb.codingkid.screens.main.CustomLevelChoiceFragment;
+import com.example.beebzb.codingkid.screens.main.LevelChoiceFragment;
+import com.example.beebzb.codingkid.screens.main.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -17,4 +20,6 @@ public interface AppComponent {
     void injectGameActivity(GameActivity gameActivity);
 
     void injectEditorActivity(EditorActivity editorActivity);
+
+    void injectCustomLevelChoiceFragment(CustomLevelChoiceFragment customLevelChoiceFragment);
 }

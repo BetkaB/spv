@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.screens.main;
 
 
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import com.example.beebzb.codingkid.GameActivity;
+import com.example.beebzb.codingkid.MainApplication;
+import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.ChoiceButton;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 

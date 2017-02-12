@@ -12,7 +12,7 @@ import dagger.Provides;
 @Module
 public class PreferencesModule {
 
-    private static final String SHARED_PREFERENCES_FILE = "attendance";
+    private static final String SHARED_PREFERENCES_FILE = "coding_kid";
 
     @Provides
     public Preferences provideSettings(MySharedPreferences preferences) {

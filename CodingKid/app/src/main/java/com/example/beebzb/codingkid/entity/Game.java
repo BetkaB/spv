@@ -16,9 +16,9 @@ public class Game {
     private int x = 0;
     private Paint paint;
 
-    public Game(Resources res, Canvas cas) {
+    public Game(Resources res, Canvas canvas) {
         resources = res;
-        canvas = cas;
+        this.canvas = canvas;
 
         paint = new Paint();
         paint.setTextSize(50);
@@ -26,8 +26,7 @@ public class Game {
 
     public void draw() {
         //TODO drawing movable object
-      //  canvas.drawColor(Color.WHITE);
-      //  canvas.drawRect(new Rect(x, 0, x + 50, 50), paint);
+        //canvas.drawRect(new Rect(x, 0, x + 50, 50), paint);
     }
 
     public void update() {
