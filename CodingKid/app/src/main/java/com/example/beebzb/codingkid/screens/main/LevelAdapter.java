@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.entity.Level;
-import com.example.beebzb.codingkid.module_preferences.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LevelAdapter extends ArrayAdapter<Level> {
-
-    public interface AdapterCallbacks {
-
-        void onLevelDeleted(int position);
-
-    }
 
     private List<Level> mData = new ArrayList<>();
 
@@ -37,12 +30,8 @@ public class LevelAdapter extends ArrayAdapter<Level> {
         return mData.get(position);
     }
 
-    private Preferences mPreferences;
-    private final AdapterCallbacks callbacks;
-
-    public LevelAdapter(Context context, List<Level> data, AdapterCallbacks callbacks) {
+    public LevelAdapter(Context context, List<Level> data) {
         super(context, R.layout.listview_level_item, data);
-        this.callbacks = callbacks;
         this.mData = data;
     }
 
@@ -62,6 +51,12 @@ public class LevelAdapter extends ArrayAdapter<Level> {
         holder.initItem(level);
 
         return convertView;
+    }
+
+    @Override
+    public void remove(Level object) {
+        super.remove(object);
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder {

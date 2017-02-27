@@ -6,31 +6,31 @@
     android:weightSum="4">
 
     <ImageButton
-        android:id="@+id/heartIb"
+        android:id="@+id/dialog_level_picker_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/heart" />
+        android:src="@drawable/ic_dialog_level_picker_play" />
 
     <ImageButton
-        android:id="@+id/houseIb"
+        android:id="@+id/dialog_level_picker_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/house" />
+        android:src="@drawable/ic_dialog_level_picker_edit" />
 
     <ImageButton
-        android:id="@+id/playerIb"
+        android:id="@+id/dialog_level_picker_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/player" />
+        android:src="@drawable/ic_dialog_level_picker_share" />
 
     <ImageButton
-        android:id="@+id/boxIb"
+        android:id="@+id/dialog_level_picker_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/box" />
+        android:src="@drawable/ic_dialog_level_picker_delete" />
 
 </LinearLayout>

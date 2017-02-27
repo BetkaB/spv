@@ -21,9 +21,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.welcome)
-    TextView title;
-
     @Inject
     Preferences preferences;
 

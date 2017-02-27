@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.Level;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ public class MySharedPreferences implements Preferences {
 
     private final String KEY_HIGHEST_LEVEL = "KEY_HIGHEST_LEVEL";
     private final String KEY_CUSTOM_LEVELS = "KEY_CUSTOM_LEVELS";
+    private final String KEY_USER_NAME = "KEY_USER_NAME";
+    private final String KEY_USER_LEVEL_COUNT = "KEY_USER_LEVEL_COUNT";
 
     //TODO refactor - save to database
     private final String KEY_LEVEL_1 = "KEY_LEVEL_1";
@@ -51,14 +54,47 @@ public class MySharedPreferences implements Preferences {
     }
 
     @Override
+    public void setCustomLevels(ArrayList<Level> levels) {
+        HashSet<String> newLevels = new HashSet<>();
+        for (Level level : levels){
+            newLevels.add(Utils.getLevelInString(level));
+        }
+        mSharedPreferences.edit().putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
+    }
+
+    @Override
+    public void setUserName(String name) {
+        mSharedPreferences.edit().putString(KEY_USER_NAME, name).apply();
+    }
+
+    @Override
+    public String getUserName() {
+        return mSharedPreferences.getString(KEY_USER_NAME, "Coding Kid ");
+    }
+
+    @Override
+    public void incrementUserLevelCount() {
+        int currentLevelCount = getUserLevelCount();
+        currentLevelCount++;
+        mSharedPreferences.edit().putInt(KEY_USER_LEVEL_COUNT, currentLevelCount).apply();
+    }
+
+    @Override
+    public int getUserLevelCount() {
+        return mSharedPreferences.getInt(KEY_USER_LEVEL_COUNT,1);
+    }
+
+    @Override
     public void setLevel1(Level level) {
         String levelInString = Utils.getLevelInString(level);
-        mSharedPreferences.edit().putString(KEY_LEVEL_1,levelInString).apply();
+        mSharedPreferences.edit().putString(KEY_LEVEL_1, levelInString).apply();
     }
 
     @Override
     public String getLevel1() {
         return mSharedPreferences.getString(KEY_LEVEL_1, "");
     }
+
+
 
 }

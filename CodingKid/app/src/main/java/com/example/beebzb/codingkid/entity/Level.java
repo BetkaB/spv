@@ -10,8 +10,8 @@ public class Level {
     private int hearts;
     private Position housePosition;
     private Position startPosition;
-    private ArrayList<Position> heartsPositions;
-    private ArrayList<Position> boxPositions;
+    private ArrayList<Position> heartsPositions = new ArrayList<>();
+    private ArrayList<Position> boxPositions ;
     private Position player;
 
     public Level(int commands, int hearts, Position housePosition, Position startPosition, ArrayList<Position> heartsPositions, ArrayList<Position> boxPositions, String name, String author) {
@@ -25,7 +25,7 @@ public class Level {
         this.author = author;
     }
 
-    public Level(){
+    public Level() {
 
     }
 
@@ -101,8 +101,8 @@ public class Level {
         this.player = player;
     }
 
-    public boolean isValid(){
-        return housePosition!= null && startPosition != null;
+    public boolean isValid() {
+        return housePosition != null && startPosition != null;
     }
 
     @Override

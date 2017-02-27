@@ -105,7 +105,10 @@ public class EditorActivity extends AppCompatActivity {
 
     private Level getLevel(){
         parseObjectsFromGameSurface();
-        if (!isInputFieldEmpty(inputLevelName)){
+        if (isInputFieldEmpty(inputLevelName)){
+            level.setName(preferences.getUserName() + " level " + preferences.getUserLevelCount());
+        }
+        else {
             level.setName(inputLevelName.getText().toString());
         }
         if (!isInputFieldEmpty(inputCommands)){
@@ -160,6 +163,7 @@ public class EditorActivity extends AppCompatActivity {
         Level createdLevel = getLevel();
         if (createdLevel.isValid()){
             preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
+            preferences.incrementUserLevelCount();
             finish();
             Utils.shortToast(this, "Level bol uložený");
         }

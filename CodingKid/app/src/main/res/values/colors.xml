@@ -10,7 +10,6 @@
     <color name="colorWhite">#ffffff</color>
 
 
-
     <!-- color theme  -->
     <color name="colorDonJuan">#5A5050</color>
     <color name="colorCuttySark">#547A82</color>
@@ -18,6 +17,9 @@
     <color name="colorMossGreen">#A2D4AB</color>
     <color name="colorTahunaSands">#E5EEC1</color>
     <color name="colorEditor">#ffe4c4</color>
+
+    <color name="colorStrokeMainActivity">@color/colorDonJuan</color>
+
 
 
 </resources>

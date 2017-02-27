@@ -14,8 +14,9 @@ import android.widget.TableRow;
 import com.example.beebzb.codingkid.GameActivity;
 import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
-import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.ChoiceButton;
+import com.example.beebzb.codingkid.entity.DefaultLevels;
+import com.example.beebzb.codingkid.entity.Level;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
 import java.util.ArrayList;
@@ -76,9 +77,8 @@ public class LevelChoiceFragment extends Fragment {
 
     private void openGame(int id) {
         // TODO get level based on id
-        String levelInString = preferences.getLevel1();
-        GameActivity.startActivity(getContext(), Utils.stringToLevel(levelInString));
-
+        Level level = DefaultLevels.DEFAULT_LEVELS[0];
+        GameActivity.startActivity(getContext(), level);
     }
 
     private void init() {

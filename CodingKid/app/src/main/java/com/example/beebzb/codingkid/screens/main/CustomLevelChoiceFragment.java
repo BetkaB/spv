@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.beebzb.codingkid.EditorActivity;
+import com.example.beebzb.codingkid.GameActivity;
 import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.Utils;
@@ -24,9 +25,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 
-public class CustomLevelChoiceFragment extends Fragment implements LevelAdapter.AdapterCallbacks {
+public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDialog.LevelPickerDialogCallback {
     private final String TAG = "CustomLevelsFragment";
 
     @Inject
@@ -35,8 +37,11 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelAdapter.
     @BindView(R.id.custom_levels_listview)
     ListView customLevelsListView;
 
-    private ArrayList<Level> customLevelData;
     private LevelAdapter levelsAdapter;
+
+    ArrayList<Level> customLevelData;
+
+    private Level chosenLevel = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,22 +67,52 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelAdapter.
         init();
     }
 
-    private void init() {
-        Log.e(TAG, "init");
-        customLevelData = Utils.getLevels(mPreferences);
-        Log.e(TAG, "data size: "+ customLevelData.size());
-        levelsAdapter = new LevelAdapter(getContext(), customLevelData, this);
-        customLevelsListView.setAdapter(levelsAdapter);
+    @OnItemClick(R.id.custom_levels_listview)
+    public void onItemClicked(int position) {
+        chosenLevel = levelsAdapter.getItem(position);
+        LevelPickerDialog levelPickerDialog = new LevelPickerDialog(getContext(), this);
+        levelPickerDialog.show();
     }
 
-    @Override
-    public void onLevelDeleted(int position) {
-        //  TODO
+    private void init() {
+        Log.i(TAG, "init");
+        customLevelData = Utils.getLevels(mPreferences);
+        Log.i(TAG, "data size: " + customLevelData.size());
+        levelsAdapter = new LevelAdapter(getContext(), customLevelData);
+        customLevelsListView.setAdapter(levelsAdapter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         init();
+    }
+
+    @Override
+    public void onPlayButtonClicked() {
+        if (chosenLevel != null) {
+            GameActivity.startActivity(getContext(), chosenLevel);
+        }
+    }
+
+    @Override
+    public void onEditButtonClicked() {
+
+    }
+
+    @Override
+    public void onDeleteButtonClicked() {
+        if (chosenLevel != null) {
+            levelsAdapter.remove(chosenLevel);
+            customLevelData.remove(chosenLevel);
+            Log.i(TAG,"array list size"+customLevelData.size());
+            mPreferences.setCustomLevels(customLevelData);
+            levelsAdapter.setData(customLevelData);
+        }
+    }
+
+    @Override
+    public void onShareButtonClicked() {
+
     }
 }
