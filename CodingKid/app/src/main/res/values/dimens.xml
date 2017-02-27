@@ -10,6 +10,9 @@
     <dimen name="code_commands_margin">16dp</dimen>
 
     <!-- Main activity -->
+    <dimen name="fragment_level_picker_item_height">80dp</dimen>
+    <dimen name="fragment_level_picker_item_padding">8dp</dimen>
+
 
 
 </resources>

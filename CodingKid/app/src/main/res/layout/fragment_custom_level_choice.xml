@@ -14,7 +14,7 @@
         android:text="@string/main_activity_custom_levels_title" />
 
     <ListView
-        android:background="@color/colorAccent"
+        android:background="@drawable/bg_level_picker_fragment"
         android:id="@+id/custom_levels_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
