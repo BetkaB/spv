@@ -115,4 +115,11 @@ public class EditorButton extends Button {
     public GameObjectType getGot() {
         return got;
     }
+
+    public void setGot(GameObjectType got) {
+        this.got = got;
+        this.checked = true;
+        Drawable temp = ContextCompat.getDrawable(context, got.drawableId);
+        this.setBackgroundDrawable(temp);
+    }
 }

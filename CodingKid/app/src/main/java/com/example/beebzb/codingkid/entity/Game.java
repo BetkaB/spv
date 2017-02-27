@@ -31,6 +31,6 @@ public class Game {
 
     public void update() {
         x += 1;
-        Log.d(TAG, "X: " + x);
+       // Log.d(TAG, "X: " + x);
     }
 }

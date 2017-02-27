@@ -15,15 +15,12 @@ import com.example.beebzb.codingkid.entity.CommandAdapter;
 import com.example.beebzb.codingkid.entity.CommandType;
 import com.example.beebzb.codingkid.entity.GameView;
 import com.example.beebzb.codingkid.entity.Level;
-import com.example.beebzb.codingkid.entity.Position;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.example.beebzb.codingkid.screens.main.LevelChoiceFragment.KEY_EXTRA_LEVEL;
 
 public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks {
 
@@ -43,16 +40,16 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     private ArrayList<Command> mCommandTypes;
     private CommandAdapter mCommandAdapter;
 
-    // TODO remove
-    public static Level level2;
+    public static Level levelFromMainActivity;
+
+    private static final String TAG = "GameActivity";
 
     public static void startActivity(Context context, Level level) {
         Intent intent = new Intent(context, GameActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            //intent.putExtra(KEY_EXTRA_LEVEL, level);
         }
-        level2 = level;
+        levelFromMainActivity = level;
         context.startActivity(intent);
 
     }
@@ -72,35 +69,13 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // TODO level set up
-        ArrayList<Position> heartsPosition = new ArrayList<Position>(){};
-        heartsPosition.add(new Position(4,1)); heartsPosition.add(new Position(3,1));
-        ArrayList<Position> boxPosition = new ArrayList<Position>(){};
-        boxPosition.add(new Position(1,1)); boxPosition.add(new Position(2,1));
-        boxPosition.add(new Position(3,1)); boxPosition.add(new Position(4,1));
-        boxPosition.add(new Position(4,2)); boxPosition.add(new Position(3,2));
-
-        //this.level = new Level(4,2, new Position(4,2), new Position(1,1),heartsPosition, boxPosition, "Level 1", "Betka" );
-        //this.level = getLevelFromExtra(savedInstanceState);
-        this.level = level2;
-        Log.e("EDITOR FROM EXTRA",level.toString());
-        init();
-
-    }
-
-    private Level getLevelFromExtra(Bundle savedInstanceState){
-        String levelFromExtra;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                levelFromExtra= null;
-            } else {
-                levelFromExtra= extras.getString(KEY_EXTRA_LEVEL);
-            }
+        if (levelFromMainActivity != null) {
+            this.level = levelFromMainActivity;
+            init();
         } else {
-            levelFromExtra= (String) savedInstanceState.getSerializable(KEY_EXTRA_LEVEL);
+            Log.e(TAG, "Level is null");
         }
-        return Utils.stringToLevel(levelFromExtra);
+
     }
 
     private void init() {

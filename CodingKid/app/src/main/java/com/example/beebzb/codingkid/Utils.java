@@ -10,10 +10,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Set;
 
-/**
- * Created by Betka on 28. 11. 2016.
- */
-
 public class Utils {
     public static String getLevelInString(Level level) {
         Gson gson = new Gson();

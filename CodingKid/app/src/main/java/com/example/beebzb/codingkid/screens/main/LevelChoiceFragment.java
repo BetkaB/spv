@@ -29,8 +29,6 @@ import butterknife.ButterKnife;
 
 public class LevelChoiceFragment extends Fragment {
 
-    public static String KEY_EXTRA_LEVEL = "KEY_EXTRA_LEVEL";
-
     private ArrayList<ChoiceButton> buttons;
     public static String TAG = "LevelChoice";
 

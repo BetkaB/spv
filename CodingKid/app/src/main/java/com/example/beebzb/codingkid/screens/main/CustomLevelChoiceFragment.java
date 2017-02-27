@@ -97,7 +97,9 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
 
     @Override
     public void onEditButtonClicked() {
-
+        if (chosenLevel != null) {
+            EditorActivity.startActivity(getContext(), chosenLevel);
+        }
     }
 
     @Override
@@ -105,7 +107,7 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
         if (chosenLevel != null) {
             levelsAdapter.remove(chosenLevel);
             customLevelData.remove(chosenLevel);
-            Log.i(TAG,"array list size"+customLevelData.size());
+            Log.i(TAG, "array list size" + customLevelData.size());
             mPreferences.setCustomLevels(customLevelData);
             levelsAdapter.setData(customLevelData);
         }

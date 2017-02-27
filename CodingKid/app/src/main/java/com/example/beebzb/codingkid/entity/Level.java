@@ -6,15 +6,16 @@ public class Level {
 
     private String name;
     private String author = "Coding Kid";
-    private int commands;
-    private int hearts;
+    private int commands = 0;
+    private int hearts = 0;
     private Position housePosition;
     private Position startPosition;
     private ArrayList<Position> heartsPositions = new ArrayList<>();
-    private ArrayList<Position> boxPositions ;
+    private ArrayList<Position> boxPositions;
     private Position player;
+    private int id;
 
-    public Level(int commands, int hearts, Position housePosition, Position startPosition, ArrayList<Position> heartsPositions, ArrayList<Position> boxPositions, String name, String author) {
+    public Level(int id,int commands, int hearts, Position housePosition, Position startPosition, ArrayList<Position> heartsPositions, ArrayList<Position> boxPositions, String name, String author) {
         this.commands = commands;
         this.hearts = hearts;
         this.housePosition = housePosition;
@@ -23,10 +24,18 @@ public class Level {
         this.boxPositions = boxPositions;
         this.name = name;
         this.author = author;
+        this.id = id;
     }
 
     public Level() {
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -8,6 +8,7 @@ public class DefaultLevels {
 
     private static Level getDefaultLevel1() {
         Level level1 = new Level();
+        level1.setId(0);
         level1.setCommands(4);
         level1.setHearts(0);
         level1.setStartPosition(new Position(4, 6));

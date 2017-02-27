@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public interface Preferences {
-    void setLevel1(Level level);
-
-    String getLevel1 ();
 
     void setHighestLevel(int id);
 
@@ -28,4 +25,9 @@ public interface Preferences {
     void incrementUserLevelCount();
 
     int getUserLevelCount();
+
+    void incrementLevelId();
+
+    int getLevelId();
+
 }

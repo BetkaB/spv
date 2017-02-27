@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.Toast;
 
 import com.example.beebzb.codingkid.entity.EditorButton;
 import com.example.beebzb.codingkid.entity.GameConstants;
@@ -44,14 +43,34 @@ public class EditorActivity extends AppCompatActivity {
     @Inject
     Preferences preferences;
 
+    private enum Mode {
+        UPDATING, CREATING;
+    }
+
+    private Mode mode;
+
+    private static final String TAG = "EditorActivity";
+
     private boolean onFirstWindowMeasured = true;
 
-    private ArrayList<EditorButton> buttons = new ArrayList<>();
+    private EditorButton[][] buttons = new EditorButton[GameConstants.rows][GameConstants.columns];
 
     private Level level;
 
+    private static Level levelToEdit;
+
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, EditorActivity.class);
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        context.startActivity(intent);
+    }
+
+    public static void startActivity(Context context, Level level) {
+        Log.d(TAG, "start Activity with level");
+        Intent intent = new Intent(context, EditorActivity.class);
+        levelToEdit = level;
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
@@ -69,7 +88,13 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void init() {
-        level = new Level();
+        if (levelToEdit == null) {
+            Log.d(TAG, "level to edit is " + levelToEdit);
+            level = new Level();
+        } else {
+            Log.d(TAG, "level to edit nn " + levelToEdit.toString());
+            level = levelToEdit;
+        }
     }
 
     private void initGrid() {
@@ -77,7 +102,7 @@ public class EditorActivity extends AppCompatActivity {
         int partWidth = grid.getWidth() / GameConstants.columns;
 
         EditorButton ib;
-        for (int i = 0;  i < GameConstants.rows; i++) {
+        for (int i = 0; i < GameConstants.rows; i++) {
             for (int j = 0; j < GameConstants.columns; j++) {
                 ib = new EditorButton(this, j, i);
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
@@ -88,39 +113,60 @@ public class EditorActivity extends AppCompatActivity {
                 param.rowSpec = GridLayout.spec(i);
                 ib.setLayoutParams(param);
                 grid.addView(ib);
-                buttons.add(ib);
+                buttons[i][j] = ib;
             }
+        }
 
+        if (levelToEdit != null) {
+            initSurface(levelToEdit);
         }
     }
 
+    private void initSurface(Level level) {
+        Log.i(TAG, "init surface:" + level.toString());
+        inputLevelName.setText(level.getName());
+        inputCommands.setText(String.valueOf(level.getCommands()));
+        inputHearts.setText(String.valueOf(level.getHearts()));
+        ArrayList<Position> boxPositions = level.getBoxPositions();
+        for (Position boxPos : boxPositions) {
+            buttons[boxPos.y][boxPos.x].setGot(EditorButton.GameObjectType.BOX);
+        }
+        ArrayList<Position> heartPositions = level.getHeartsPositions();
+        for (Position heartPos : heartPositions) {
+            buttons[heartPos.y][heartPos.x].setGot(EditorButton.GameObjectType.HEART);
+        }
+        Position startPos = level.getStartPosition();
+        buttons[startPos.y][startPos.x].setGot(EditorButton.GameObjectType.PLAYER);
+        Position house = level.getHousePosition();
+        buttons[house.y][house.x].setGot(EditorButton.GameObjectType.HOUSE);
+    }
+
     @Override
-    public void onWindowFocusChanged (boolean hasFocus) {
+    public void onWindowFocusChanged(boolean hasFocus) {
         // the height will be set at this point
-        if (onFirstWindowMeasured){
+        if (onFirstWindowMeasured) {
             initGrid();
             onFirstWindowMeasured = false;
         }
     }
 
-    private Level getLevel(){
+    private Level getLevel() {
         parseObjectsFromGameSurface();
-        if (isInputFieldEmpty(inputLevelName)){
+        if (isInputFieldEmpty(inputLevelName)) {
             level.setName(preferences.getUserName() + " level " + preferences.getUserLevelCount());
-        }
-        else {
+        } else {
             level.setName(inputLevelName.getText().toString());
         }
-        if (!isInputFieldEmpty(inputCommands)){
+        if (!isInputFieldEmpty(inputCommands)) {
             level.setCommands(Integer.parseInt(inputCommands.getText().toString()));
         }
-        if (!isInputFieldEmpty(inputHearts)){
+        if (!isInputFieldEmpty(inputHearts)) {
             level.setHearts(Integer.parseInt(inputHearts.getText().toString()));
         }
         return level;
     }
 
-    private boolean isInputFieldEmpty(EditText inputField){
+    private boolean isInputFieldEmpty(EditText inputField) {
         return inputField.getText().toString().trim().length() == 0;
     }
 
@@ -130,24 +176,26 @@ public class EditorActivity extends AppCompatActivity {
         Position startPosition = null;
         Position housePosition = null;
 
-        for (EditorButton eb : buttons){
-            if (eb.isChecked()){
-                switch (eb.getGot()){
-                    case HOUSE:
-                        housePosition = eb.getPosition();
-                        boxPositions.add(eb.getPosition());
-                        break;
-                    case PLAYER:
-                        startPosition = eb.getPosition();
-                        boxPositions.add(eb.getPosition());
-                        break;
-                    case HEART:
-                        heartsPositions.add(eb.getPosition());
-                        boxPositions.add(eb.getPosition());
-                        break;
-                    default:
-                        boxPositions.add(eb.getPosition());
-                        break;
+        for (EditorButton[] rowButton : buttons) {
+            for (EditorButton eb : rowButton) {
+                if (eb.isChecked()) {
+                    switch (eb.getGot()) {
+                        case HOUSE:
+                            housePosition = eb.getPosition();
+                            boxPositions.add(eb.getPosition());
+                            break;
+                        case PLAYER:
+                            startPosition = eb.getPosition();
+                            boxPositions.add(eb.getPosition());
+                            break;
+                        case HEART:
+                            heartsPositions.add(eb.getPosition());
+                            boxPositions.add(eb.getPosition());
+                            break;
+                        default:
+                            boxPositions.add(eb.getPosition());
+                            break;
+                    }
                 }
             }
         }
@@ -159,15 +207,22 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.button_save)
-    public void saveLevel(){
+    public void saveLevel() {
         Level createdLevel = getLevel();
-        if (createdLevel.isValid()){
-            preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
-            preferences.incrementUserLevelCount();
+        if (createdLevel.isValid()) {
+            if (levelToEdit == null){
+                createdLevel.setId(preferences.getLevelId());
+                preferences.incrementLevelId();
+                preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
+                preferences.incrementUserLevelCount();
+            }
+            else {
+                // TODO update
+            }
+
             finish();
             Utils.shortToast(this, "Level bol uložený");
-        }
-        else {
+        } else {
             Utils.shortToast(this, "Nemožno uložiť level, chýba domček alebo panáčik");
         }
     }
@@ -179,10 +234,16 @@ public class EditorActivity extends AppCompatActivity {
     /**
      * Shows the soft keyboard
      */
-    @OnClick ({R.id.inputHearts, R.id.inputCommands, R.id.inputName})
+    @OnClick({R.id.inputHearts, R.id.inputCommands, R.id.inputName})
     public void showSoftKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         view.requestFocus();
         inputMethodManager.showSoftInput(view, 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        levelToEdit = null;
     }
 }

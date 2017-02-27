@@ -3,6 +3,8 @@ package com.example.beebzb.codingkid.module_preferences;
 import android.content.SharedPreferences;
 
 import com.example.beebzb.codingkid.Utils;
+import com.example.beebzb.codingkid.entity.DefaultLevels;
+import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;
 
 import java.util.ArrayList;
@@ -19,10 +21,7 @@ public class MySharedPreferences implements Preferences {
     private final String KEY_CUSTOM_LEVELS = "KEY_CUSTOM_LEVELS";
     private final String KEY_USER_NAME = "KEY_USER_NAME";
     private final String KEY_USER_LEVEL_COUNT = "KEY_USER_LEVEL_COUNT";
-
-    //TODO refactor - save to database
-    private final String KEY_LEVEL_1 = "KEY_LEVEL_1";
-
+    private final String KEY_USER_LEVEL_ID = "KEY_USER_LEVEL_ID";
 
     private final SharedPreferences mSharedPreferences;
 
@@ -81,20 +80,19 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public int getUserLevelCount() {
-        return mSharedPreferences.getInt(KEY_USER_LEVEL_COUNT,1);
+        return mSharedPreferences.getInt(KEY_USER_LEVEL_COUNT, 1);
     }
 
     @Override
-    public void setLevel1(Level level) {
-        String levelInString = Utils.getLevelInString(level);
-        mSharedPreferences.edit().putString(KEY_LEVEL_1, levelInString).apply();
+    public void incrementLevelId() {
+        int currentLevelId = getLevelId();
+        currentLevelId++;
+        mSharedPreferences.edit().putInt(KEY_USER_LEVEL_ID, currentLevelId).apply();
     }
 
     @Override
-    public String getLevel1() {
-        return mSharedPreferences.getString(KEY_LEVEL_1, "");
+    public int getLevelId() {
+        return mSharedPreferences.getInt(KEY_USER_LEVEL_ID, GameConstants.DEFAULT_LEVELS_COUNT);
     }
-
-
 
 }
