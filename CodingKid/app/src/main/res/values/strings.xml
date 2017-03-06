@@ -19,6 +19,7 @@
     <string name="game_activity_remaining_hearts">Zostávajúce srdiečka: </string>
     <string name="game_activity_remaining_commands">Zostávajúce príkazy: </string>
     <string name="game_activity_code">Kód</string>
+    <string name="game_activity_run_out_of_commands">Minul si všetky príkazy</string>
 
     <!-- Game activity buttons -->
     <string name="game_activity_button_play">Hrať</string>
