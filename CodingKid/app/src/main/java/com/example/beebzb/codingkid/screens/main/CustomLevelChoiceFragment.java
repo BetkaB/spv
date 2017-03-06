@@ -107,7 +107,6 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
         if (chosenLevel != null) {
             levelsAdapter.remove(chosenLevel);
             customLevelData.remove(chosenLevel);
-            Log.i(TAG, "array list size" + customLevelData.size());
             mPreferences.setCustomLevels(customLevelData);
             levelsAdapter.setData(customLevelData);
         }

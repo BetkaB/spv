@@ -12,6 +12,7 @@
 
     <!-- color theme  -->
     <color name="colorDonJuan">#5A5050</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorCuttySark">#547A82</color>
     <color name="colorKeppel">#3EACA8</color>
     <color name="colorMossGreen">#A2D4AB</color>

@@ -14,20 +14,33 @@
         android:text="@string/main_activity_custom_levels_title" />
 
     <ListView
-        android:background="@drawable/bg_level_picker_fragment"
         android:id="@+id/custom_levels_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="5"
+        android:background="@drawable/bg_level_picker_fragment" />
 
-    <Button
+    <LinearLayout
         android:id="@+id/add_new_level_button"
-        style="@style/MainActivityButton"
+        style="@style/MainActivityButtonBg"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:drawableLeft="@drawable/ic_add_black_24dp"
-        android:drawableStart="@drawable/ic_add_black_24dp"
-        android:text="@string/main_activity_add_level" />
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MainActivityButtonImage"
+            android:src="@drawable/ic_add_black_24dp" />
+
+        <TextView
+            style="@style/MainActivityButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_activity_add_level" />
+
+    </LinearLayout>
 
 </LinearLayout>

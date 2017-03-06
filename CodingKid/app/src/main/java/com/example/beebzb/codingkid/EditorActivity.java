@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 
@@ -43,14 +44,11 @@ public class EditorActivity extends AppCompatActivity {
     @BindView(R.id.grid)
     GridLayout grid;
 
+    @BindView(R.id.button_save)
+    Button buttonSave;
+
     @Inject
     Preferences preferences;
-
-    private enum Mode {
-        UPDATING, CREATING;
-    }
-
-    private Mode mode;
 
     private static final String TAG = "EditorActivity";
 
@@ -63,6 +61,7 @@ public class EditorActivity extends AppCompatActivity {
     private static Level levelToEdit;
 
     public static void startActivity(Context context) {
+        levelToEdit = null;
         Intent intent = new Intent(context, EditorActivity.class);
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -93,9 +92,11 @@ public class EditorActivity extends AppCompatActivity {
     private void init() {
         if (levelToEdit == null) {
             level = new Level();
+            buttonSave.setText(R.string.editor_activity_button_save);
         } else {
-            Log.d(TAG, "level to edit nn " + levelToEdit.toString());
+            Log.d(TAG, "level to edit: " + levelToEdit.toString());
             level = levelToEdit;
+            buttonSave.setText(R.string.editor_activity_button_update);
         }
     }
 
@@ -219,19 +220,19 @@ public class EditorActivity extends AppCompatActivity {
                 preferences.incrementUserLevelCount();
             }
             else {
-                // TODO update
+                // removing current level from custom levels
+                int updatedLevelId = levelToEdit.getId();
                 Set<String> customLevels = preferences.getCustomLevels();
                 for (String levelInString : customLevels) {
                     Level savedLevel = Utils.stringToLevel(levelInString);
-                    if (savedLevel.getId() == levelToEdit.getId()) {
+                    if (savedLevel.getId() == updatedLevelId) {
                         customLevels.remove(levelInString);
                         return;
                     }
                 }
-                createdLevel.setId(levelToEdit.getId());
+                createdLevel.setId(updatedLevelId);
                 customLevels.add(Utils.getLevelInString(createdLevel));
                 preferences.setCustomLevels(customLevels);
-
             }
 
             finish();
