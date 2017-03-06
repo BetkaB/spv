@@ -1,6 +1,7 @@
 package com.example.beebzb.codingkid;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 import com.example.beebzb.codingkid.entity.Level;
@@ -23,6 +24,10 @@ public class Utils {
 
     public static void shortToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void shortToast(Context context, @StringRes int stringId) {
+        Toast.makeText(context,context.getString(stringId), Toast.LENGTH_SHORT).show();
     }
 
     public static ArrayList<Level> getLevels(Preferences preferences) {

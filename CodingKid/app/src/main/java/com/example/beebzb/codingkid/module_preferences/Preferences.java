@@ -18,6 +18,8 @@ public interface Preferences {
 
     void setCustomLevels(ArrayList<Level> levels);
 
+    void setCustomLevels(Set<String> levels);
+
     void setUserName(String name);
 
     String getUserName();

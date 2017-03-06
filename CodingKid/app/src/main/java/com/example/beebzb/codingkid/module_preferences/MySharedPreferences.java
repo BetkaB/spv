@@ -62,6 +62,11 @@ public class MySharedPreferences implements Preferences {
     }
 
     @Override
+    public void setCustomLevels(Set<String> newLevels) {
+        mSharedPreferences.edit().putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
+    }
+
+    @Override
     public void setUserName(String name) {
         mSharedPreferences.edit().putString(KEY_USER_NAME, name).apply();
     }

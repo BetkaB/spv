@@ -43,4 +43,8 @@
     <string name="command_loop_start_2">x</string>
     <string name="command_loop_end">koniec cyklu</string>
 
+    <!-- Editor activity -->
+    <string name="editor_activity_level_was_saved">Level bol uložený</string>
+    <string name="editor_activity_cannot_be_saved">Nemožno uložiť level, chýba domček alebo panáčik</string>
+
 </resources>

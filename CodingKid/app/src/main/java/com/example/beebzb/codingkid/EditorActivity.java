@@ -20,6 +20,9 @@ import com.example.beebzb.codingkid.entity.Position;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -89,7 +92,6 @@ public class EditorActivity extends AppCompatActivity {
 
     private void init() {
         if (levelToEdit == null) {
-            Log.d(TAG, "level to edit is " + levelToEdit);
             level = new Level();
         } else {
             Log.d(TAG, "level to edit nn " + levelToEdit.toString());
@@ -218,12 +220,24 @@ public class EditorActivity extends AppCompatActivity {
             }
             else {
                 // TODO update
+                Set<String> customLevels = preferences.getCustomLevels();
+                for (String levelInString : customLevels) {
+                    Level savedLevel = Utils.stringToLevel(levelInString);
+                    if (savedLevel.getId() == levelToEdit.getId()) {
+                        customLevels.remove(levelInString);
+                        return;
+                    }
+                }
+                createdLevel.setId(levelToEdit.getId());
+                customLevels.add(Utils.getLevelInString(createdLevel));
+                preferences.setCustomLevels(customLevels);
+
             }
 
             finish();
-            Utils.shortToast(this, "Level bol uložený");
+               Utils.shortToast(this, R.string.editor_activity_level_was_saved);
         } else {
-            Utils.shortToast(this, "Nemožno uložiť level, chýba domček alebo panáčik");
+            Utils.shortToast(this, R.string.editor_activity_cannot_be_saved);
         }
     }
 
