@@ -8,7 +8,7 @@ public class Command {
     public Command(CommandType mCommandType) {
 
         this.mCommandType = mCommandType;
-        if (mCommandType == CommandType.LOOP_START){
+        if (mCommandType == CommandType.LOOP_START) {
             count = 1;
         }
     }
@@ -26,4 +26,10 @@ public class Command {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "Command{" + mCommandType +
+                ", count=" + count +
+                '}';
+    }
 }

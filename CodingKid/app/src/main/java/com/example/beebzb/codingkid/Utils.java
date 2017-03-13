@@ -32,6 +32,10 @@ public class Utils {
         Toast.makeText(context,context.getString(stringId), Toast.LENGTH_SHORT).show();
     }
 
+    public static void longToast(Context context, @StringRes int stringId) {
+        Toast.makeText(context,context.getString(stringId), Toast.LENGTH_LONG).show();
+    }
+
     public static ArrayList<Level> getLevels(Preferences preferences) {
         Set<String> savedLevels = preferences.getCustomLevels();
         ArrayList<Level> levels = new ArrayList<>();

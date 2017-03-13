@@ -19,7 +19,8 @@
     <string name="game_activity_remaining_hearts">| Srdiečka: </string>
     <string name="game_activity_remaining_commands">Príkazy: </string>
     <string name="game_activity_code">Kód</string>
-    <string name="game_activity_run_out_of_commands">Minul si všetky príkazy</string>
+    <string name="game_activity_toast_run_out_of_commands">Minul si všetky príkazy</string>
+    <string name="game_activity_toast_invalid_code">Počet začiatkov cyklu a koncov cyklu sa nezhoduje</string>
 
     <!-- Game activity buttons -->
     <string name="game_activity_button_play">Hrať</string>

@@ -16,6 +16,7 @@ import com.example.beebzb.codingkid.entity.Command;
 import com.example.beebzb.codingkid.entity.CommandAdapter;
 import com.example.beebzb.codingkid.entity.CommandType;
 import com.example.beebzb.codingkid.entity.GameView;
+import com.example.beebzb.codingkid.entity.Interpreter;
 import com.example.beebzb.codingkid.entity.Level;
 
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     public static Level levelFromMainActivity;
 
     private static final String TAG = "GameActivity";
+
+    private Interpreter mInterpreter;
 
     public static void startActivity(Context context, Level level) {
         Intent intent = new Intent(context, GameActivity.class);
@@ -165,7 +168,27 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     @OnClick(R.id.button_play)
     public void play() {
+        if (isValidCode()){
+            mInterpreter = new Interpreter(mCommandTypes);
+        }
+        else {
+            Utils.longToast(this,R.string.game_activity_toast_invalid_code)
+            ;
+        }
+    }
 
+    private boolean isValidCode(){
+        int loopStarts = 0;
+        int loopEnds=0;
+        for (Command command : mCommandTypes){
+            if (command.getmCommandType() == CommandType.LOOP_START){
+                loopStarts++;
+            }
+            else if (command.getmCommandType() == CommandType.LOOP_END){
+                loopEnds++;
+            }
+        }
+        return loopStarts == loopEnds;
     }
 
     @Override
@@ -188,7 +211,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
             return true;
         } else {
             if (runOutOfCommandsToast == null || !runOutOfCommandsToast.getView().isShown()) {
-                runOutOfCommandsToast = Toast.makeText(this, getString(R.string.game_activity_run_out_of_commands), Toast.LENGTH_SHORT);
+                runOutOfCommandsToast = Toast.makeText(this, getString(R.string.game_activity_toast_run_out_of_commands), Toast.LENGTH_SHORT);
                 runOutOfCommandsToast.show();
             }
             return false;
