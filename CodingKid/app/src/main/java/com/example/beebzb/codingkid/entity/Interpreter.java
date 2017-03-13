@@ -78,5 +78,8 @@ public class Interpreter {
         }
     }
 
+    public ArrayList<CommandType> getResultCommandTypes() {
+        return mResultCommandTypes;
+    }
 }
 

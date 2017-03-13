@@ -18,7 +18,7 @@
 
         <view
             android:id="@+id/canvas"
-            class="com.example.beebzb.codingkid.entity.GameView"
+            class="com.example.beebzb.codingkid.GameGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

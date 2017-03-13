@@ -38,6 +38,8 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     GameView gameView;
 
+    GameGrid gameGrid;
+
     private Level level;
 
     private Toast runOutOfCommandsToast;
@@ -102,10 +104,10 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         mCommandTypes = new ArrayList<Command>();
         mCommandAdapter = new CommandAdapter(this, mCommandTypes, this);
         codeListView.setAdapter(mCommandAdapter);
-        gameView = (GameView) findViewById(R.id.canvas);
-        if (gameView != null) {
-            gameView.init(this);
-            gameView.setLevel(level);
+
+        gameGrid = (GameGrid) findViewById(R.id.canvas);
+        if (gameGrid != null) {
+            gameGrid.setLevel(level);
         }
 
         remainingCommands = level.getCommands();
@@ -170,6 +172,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     public void play() {
         if (isValidCode()){
             mInterpreter = new Interpreter(mCommandTypes);
+            gameGrid.startMoving(mInterpreter.getResultCommandTypes());
         }
         else {
             Utils.longToast(this,R.string.game_activity_toast_invalid_code)
