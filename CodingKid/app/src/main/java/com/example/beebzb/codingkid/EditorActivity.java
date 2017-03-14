@@ -21,8 +21,6 @@ import com.example.beebzb.codingkid.entity.Position;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -156,7 +154,8 @@ public class EditorActivity extends AppCompatActivity {
     private Level getLevel() {
         parseObjectsFromGameSurface();
         if (isInputFieldEmpty(inputLevelName)) {
-            level.setName(preferences.getUserName() + " level " + preferences.getUserLevelCount());
+            String defaultName = getResources().getString(R.string.editor_activity_level_default);
+            level.setName(preferences.getUserName() + defaultName + preferences.getUserLevelCount());
         } else {
             level.setName(inputLevelName.getText().toString());
         }
@@ -213,13 +212,12 @@ public class EditorActivity extends AppCompatActivity {
     public void saveLevel() {
         Level createdLevel = getLevel();
         if (createdLevel.isValid()) {
-            if (levelToEdit == null){
+            if (levelToEdit == null) {
                 createdLevel.setId(preferences.getLevelId());
                 preferences.incrementLevelId();
                 preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
                 preferences.incrementUserLevelCount();
-            }
-            else {
+            } else {
                 // removing current level from custom levels
                 int updatedLevelId = levelToEdit.getId();
                 Set<String> customLevels = preferences.getCustomLevels();
@@ -236,7 +234,7 @@ public class EditorActivity extends AppCompatActivity {
             }
 
             finish();
-               Utils.shortToast(this, R.string.editor_activity_level_was_saved);
+            Utils.shortToast(this, R.string.editor_activity_level_was_saved);
         } else {
             Utils.shortToast(this, R.string.editor_activity_cannot_be_saved);
         }
