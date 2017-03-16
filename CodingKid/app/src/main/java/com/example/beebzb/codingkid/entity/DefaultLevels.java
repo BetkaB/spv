@@ -12,7 +12,9 @@ public class DefaultLevels {
         level1.setCommands(4);
         level1.setHearts(0);
         level1.setStartPosition(new Position(4, 6));
-        level1.setHousePosition(new Position(4, 10));
+        level1.setHousesPositions(new ArrayList<Position>() {{
+            add(new Position(4, 10));
+        }});
         level1.setBoxPositions(new ArrayList<Position>() {{
             add(new Position(4, 6));
             add(new Position(4, 7));

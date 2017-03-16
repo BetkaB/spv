@@ -79,8 +79,15 @@ public class GameView extends View {
         if (level != null) {
             drawBoxes(canvas);
             drawDrawable(level.getStartPosition().x,level.getStartPosition().y,playerDrawable,canvas);
-            drawDrawable(level.getHousePosition().x,level.getHousePosition().y,houseDrawable,canvas);
             drawHearts(canvas);
+            drawHouses(canvas);
+
+        }
+    }
+
+    private void drawHouses(Canvas canvas) {
+        for (Position pos : level.getHousesPositions()){
+            drawDrawable(pos.x,pos.y,houseDrawable,canvas);
         }
     }
 

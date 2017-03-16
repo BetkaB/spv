@@ -136,10 +136,13 @@ public class EditorActivity extends AppCompatActivity {
         for (Position heartPos : heartPositions) {
             buttons[heartPos.y][heartPos.x].setGot(EditorButton.GameObjectType.HEART);
         }
+
+        ArrayList<Position> housesPositions = level.getHousesPositions();
+        for (Position housePos : housesPositions) {
+            buttons[housePos.y][housePos.x].setGot(EditorButton.GameObjectType.HOUSE);
+        }
         Position startPos = level.getStartPosition();
         buttons[startPos.y][startPos.x].setGot(EditorButton.GameObjectType.PLAYER);
-        Position house = level.getHousePosition();
-        buttons[house.y][house.x].setGot(EditorButton.GameObjectType.HOUSE);
     }
 
     @Override
@@ -175,15 +178,15 @@ public class EditorActivity extends AppCompatActivity {
     private void parseObjectsFromGameSurface() {
         ArrayList<Position> boxPositions = new ArrayList<>();
         ArrayList<Position> heartsPositions = new ArrayList<>();
+        ArrayList<Position> housesPositions = new ArrayList<>();
         Position startPosition = null;
-        Position housePosition = null;
 
         for (EditorButton[] rowButton : buttons) {
             for (EditorButton eb : rowButton) {
                 if (eb.isChecked()) {
                     switch (eb.getGot()) {
                         case HOUSE:
-                            housePosition = eb.getPosition();
+                            housesPositions.add(eb.getPosition());
                             boxPositions.add(eb.getPosition());
                             break;
                         case PLAYER:
@@ -203,7 +206,7 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         level.setStartPosition(startPosition);
-        level.setHousePosition(housePosition);
+        level.setHousesPositions(housesPositions);
         level.setHeartsPositions(heartsPositions);
         level.setBoxPositions(boxPositions);
     }

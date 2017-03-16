@@ -8,17 +8,18 @@ public class Level {
     private String author = "Coding Kid";
     private int commands = 0;
     private int hearts = 0;
-    private Position housePosition;
     private Position startPosition;
     private ArrayList<Position> heartsPositions = new ArrayList<>();
     private ArrayList<Position> boxPositions;
+    private ArrayList<Position> housesPositions = new ArrayList<>();
+
     private Position player;
     private int id;
 
-    public Level(int id,int commands, int hearts, Position housePosition, Position startPosition, ArrayList<Position> heartsPositions, ArrayList<Position> boxPositions, String name, String author) {
+    public Level(int id,int commands, int hearts, ArrayList<Position> housePositions, Position startPosition, ArrayList<Position> heartsPositions, ArrayList<Position> boxPositions, String name, String author) {
         this.commands = commands;
         this.hearts = hearts;
-        this.housePosition = housePosition;
+        this.housesPositions = housePositions;
         this.startPosition = startPosition;
         this.heartsPositions = heartsPositions;
         this.boxPositions = boxPositions;
@@ -70,12 +71,12 @@ public class Level {
         this.hearts = hearts;
     }
 
-    public Position getHousePosition() {
-        return housePosition;
+    public ArrayList<Position> getHousesPositions() {
+        return housesPositions;
     }
 
-    public void setHousePosition(Position housePosition) {
-        this.housePosition = housePosition;
+    public void setHousesPositions(ArrayList<Position> housesPositions) {
+        this.housesPositions = housesPositions;
     }
 
     public Position getStartPosition() {
@@ -111,7 +112,7 @@ public class Level {
     }
 
     public boolean isValid() {
-        return housePosition != null && startPosition != null;
+        return housesPositions.size() != 0 && startPosition != null;
     }
 
     @Override
@@ -121,7 +122,7 @@ public class Level {
                 ", author='" + author + '\'' +
                 ", commands=" + commands +
                 ", hearts=" + hearts +
-                ", housePosition=" + housePosition +
+                ", housePosition=" + housesPositions +
                 ", startPosition=" + startPosition +
                 ", heartsPositions=" + heartsPositions +
                 ", boxPositions=" + boxPositions +
