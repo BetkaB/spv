@@ -107,6 +107,7 @@ public class GameGrid extends GridLayout {
     }
 
     private void initGrid() {
+        Log.d(TAG,"level: "+level.toString());
         init();
         level.setPlayer(level.getStartPosition());
         drawBoxes();
@@ -123,7 +124,7 @@ public class GameGrid extends GridLayout {
 
         Log.d(TAG,"moving: "+type.toString());
         Log.d(TAG,"Player before: "+ level.getPlayer().toString());
-        int fromXposition = level.getPlayer().x;
+        int fromXPosition = level.getPlayer().x;
         int fromYPosition = level.getPlayer().y;
         int toXPosition = level.getPlayer().x;
         int toYPosition = level.getPlayer().y;
@@ -132,30 +133,29 @@ public class GameGrid extends GridLayout {
         int newY = level.getPlayer().y;
 
         // TODO animation stay at place
-        @DrawableRes int dirAnimDrawId = R.drawable.player_animation_right;
+        @DrawableRes int dirAnimDrawId = R.drawable.player_animation_down;
         switch (type) {
             case RIGHT:
                 toXPosition = level.getPlayer().x + mPartWidth;
-                dirAnimDrawId = R.drawable.player_animation_right;
+                dirAnimDrawId = R.drawable.player_animation_down;
                 newX++;
                 break;
             case LEFT:
                 toXPosition = level.getPlayer().x - mPartWidth;
-                dirAnimDrawId = R.drawable.player_animation_right;
+                dirAnimDrawId = R.drawable.player_animation_down;
                 newX--;
                 // TODO change drawbale file
                 break;
             case UP:
                 toYPosition = level.getPlayer().y - mPartHeight;
-                dirAnimDrawId = R.drawable.player_animation_right;
+                dirAnimDrawId = R.drawable.player_animation_down;
                 newY--;
                 // TODO change drawbale file
                 break;
             case DOWN:
                 newY++;
                 toYPosition = level.getPlayer().y + mPartHeight;
-                dirAnimDrawId = R.drawable.player_animation_right;
-                // TODO change drawbale file
+                dirAnimDrawId = R.drawable.player_animation_down;
                 break;
             default:
                 break;
@@ -171,7 +171,7 @@ public class GameGrid extends GridLayout {
             directionAnimation.start();
         }
 
-        TranslateAnimation transAnimation = new TranslateAnimation(fromXposition, toXPosition, fromYPosition, toYPosition);
+        TranslateAnimation transAnimation = new TranslateAnimation(fromXPosition, toXPosition, fromYPosition, toYPosition);
         transAnimation.setDuration(1000);
         final int finalNewY = newY;
         final int finalNewX = newX;
@@ -187,12 +187,11 @@ public class GameGrid extends GridLayout {
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.width = mPartWidth;
                 param.height = mPartHeight;
-                param.setGravity(Gravity.CENTER);
+                //param.setGravity(Gravity.CENTER);
                 param.columnSpec = GridLayout.spec(level.getPlayer().x);
                 param.rowSpec = GridLayout.spec(level.getPlayer().y);
 
                 playerView.setLayoutParams(param);
-
 
                 Log.d(TAG,"Player after: "+ level.getPlayer().toString());
 

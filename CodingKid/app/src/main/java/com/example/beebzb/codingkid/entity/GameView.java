@@ -52,14 +52,10 @@ public class GameView extends View {
     @SuppressLint("DrawAllocation")
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
-
         gameBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-
         gameCanvas.setBitmap(gameBitmap);
-
         setMeasuredDimension(w, h);
     }
 
