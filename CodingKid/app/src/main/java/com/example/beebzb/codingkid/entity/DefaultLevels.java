@@ -1,8 +1,6 @@
 package com.example.beebzb.codingkid.entity;
 
 
-import java.util.ArrayList;
-
 public class DefaultLevels {
     public static final Level[] DEFAULT_LEVELS = new Level[]{getDefaultLevel1()};
 
@@ -11,17 +9,14 @@ public class DefaultLevels {
         level1.setId(0);
         level1.setCommands(4);
         level1.setHearts(0);
-        level1.setStartPosition(new Position(4, 6));
-        level1.setHousesPositions(new ArrayList<Position>() {{
-            add(new Position(4, 10));
-        }});
-        level1.setBoxPositions(new ArrayList<Position>() {{
-            add(new Position(4, 6));
-            add(new Position(4, 7));
-            add(new Position(4, 8));
-            add(new Position(4, 9));
-            add(new Position(4, 10));
-        }});
+        level1.setStartPosition(new Position(1, 6));
+        int[][] gameMap = new int[GameConstants.rows][GameConstants.columns];
+        gameMap[1][6] = Level.CONST_BOX;
+        gameMap[1][7] = Level.CONST_BOX;
+        gameMap[1][8] = Level.CONST_BOX;
+        gameMap[1][9] = Level.CONST_BOX;
+        gameMap[1][10] = Level.CONST_HOUSE;
+        level1.setGameMap(gameMap);
         level1.setName("Lets start");
         level1.setAuthor("Default Kid");
 

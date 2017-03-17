@@ -20,7 +20,6 @@ import com.example.beebzb.codingkid.entity.Level;
 import com.example.beebzb.codingkid.entity.Position;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -128,19 +127,20 @@ public class EditorActivity extends AppCompatActivity {
         inputLevelName.setText(level.getName());
         inputCommands.setText(String.valueOf(level.getCommands()));
         inputHearts.setText(String.valueOf(level.getHearts()));
-        ArrayList<Position> boxPositions = level.getBoxPositions();
-        for (Position boxPos : boxPositions) {
-            buttons[boxPos.y][boxPos.x].setGot(EditorButton.GameObjectType.BOX);
-        }
-        ArrayList<Position> heartPositions = level.getHeartsPositions();
-        for (Position heartPos : heartPositions) {
-            buttons[heartPos.y][heartPos.x].setGot(EditorButton.GameObjectType.HEART);
+
+        int[][] gameMap = level.getGameMap();
+        for (int i = 0; i < gameMap.length; i++) {
+            for (int j = 0; j < gameMap[i].length; j++) {
+                if (gameMap[i][j] == Level.CONST_BOX) {
+                    buttons[i][j].setGot(EditorButton.GameObjectType.BOX);
+                } else if (gameMap[i][j] == Level.CONST_HOUSE) {
+                    buttons[i][j].setGot(EditorButton.GameObjectType.HOUSE);
+                } else if (gameMap[i][j] == Level.CONST_HEART) {
+                    buttons[i][j].setGot(EditorButton.GameObjectType.HEART);
+                }
+            }
         }
 
-        ArrayList<Position> housesPositions = level.getHousesPositions();
-        for (Position housePos : housesPositions) {
-            buttons[housePos.y][housePos.x].setGot(EditorButton.GameObjectType.HOUSE);
-        }
         Position startPos = level.getStartPosition();
         buttons[startPos.y][startPos.x].setGot(EditorButton.GameObjectType.PLAYER);
     }
@@ -176,29 +176,26 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void parseObjectsFromGameSurface() {
-        ArrayList<Position> boxPositions = new ArrayList<>();
-        ArrayList<Position> heartsPositions = new ArrayList<>();
-        ArrayList<Position> housesPositions = new ArrayList<>();
         Position startPosition = null;
+        int[][] gameMap = new int[GameConstants.rows][GameConstants.columns];
 
-        for (EditorButton[] rowButton : buttons) {
-            for (EditorButton eb : rowButton) {
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons[i].length; j++) {
+                EditorButton eb = buttons[i][j];
                 if (eb.isChecked()) {
                     switch (eb.getGot()) {
                         case HOUSE:
-                            housesPositions.add(eb.getPosition());
-                            boxPositions.add(eb.getPosition());
+                            gameMap[i][j] = Level.CONST_HOUSE;
                             break;
                         case PLAYER:
                             startPosition = eb.getPosition();
-                            boxPositions.add(eb.getPosition());
+                            gameMap[i][j] = Level.CONST_BOX;
                             break;
                         case HEART:
-                            heartsPositions.add(eb.getPosition());
-                            boxPositions.add(eb.getPosition());
+                            gameMap[i][j] = Level.CONST_HEART;
                             break;
                         default:
-                            boxPositions.add(eb.getPosition());
+                            gameMap[i][j] = Level.CONST_BOX;
                             break;
                     }
                 }
@@ -206,42 +203,49 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         level.setStartPosition(startPosition);
-        level.setHousesPositions(housesPositions);
-        level.setHeartsPositions(heartsPositions);
-        level.setBoxPositions(boxPositions);
+        level.setGameMap(gameMap);
     }
 
     @OnClick(R.id.button_save)
     public void saveLevel() {
         Level createdLevel = getLevel();
-        if (createdLevel.isValid()) {
-            if (levelToEdit == null) {
-                createdLevel.setId(preferences.getLevelId());
-                preferences.incrementLevelId();
-                preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
-                preferences.incrementUserLevelCount();
-            } else {
-                // removing current level from custom levels
-                int updatedLevelId = levelToEdit.getId();
-                Set<String> customLevels = preferences.getCustomLevels();
-                for (String levelInString : customLevels) {
-                    Level savedLevel = Utils.stringToLevel(levelInString);
-                    if (savedLevel.getId() == updatedLevelId) {
-                        customLevels.remove(levelInString);
-                        break;
-                    }
-                }
-                createdLevel.setId(updatedLevelId);
-                customLevels.add(Utils.getLevelInString(createdLevel));
-                preferences.setCustomLevels(customLevels);
-            }
-
-            finish();
-            Utils.shortToast(this, R.string.editor_activity_level_was_saved);
-        } else {
-            Utils.shortToast(this, R.string.editor_activity_cannot_be_saved);
+        if (!createdLevel.hasHouse()) {
+            Utils.shortToast(this, R.string.editor_activity_cannot_be_saved_missing_house);
+            return;
         }
+        if (!createdLevel.hasPlayer()) {
+            Utils.shortToast(this, R.string.editor_activity_cannot_be_saved_missing_player);
+            return;
+        }
+        if (!createdLevel.isMaximumNumberOfCommandsDefined()) {
+            Utils.shortToast(this, R.string.editor_activity_cannot_be_saved_not_enough_commands);
+            return;
+        }
+        if (levelToEdit == null) {
+            createdLevel.setId(preferences.getLevelId());
+            preferences.incrementLevelId();
+            preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
+            preferences.incrementUserLevelCount();
+        } else {
+            // removing current level from custom levels
+            int updatedLevelId = levelToEdit.getId();
+            Set<String> customLevels = preferences.getCustomLevels();
+            for (String levelInString : customLevels) {
+                Level savedLevel = Utils.stringToLevel(levelInString);
+                if (savedLevel.getId() == updatedLevelId) {
+                    customLevels.remove(levelInString);
+                    return;
+                }
+            }
+            createdLevel.setId(updatedLevelId);
+            customLevels.add(Utils.getLevelInString(createdLevel));
+            preferences.setCustomLevels(customLevels);
+        }
+
+        finish();
+        Utils.shortToast(this, R.string.editor_activity_level_was_saved);
     }
+
 
     private void hideSoftKeyboard() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

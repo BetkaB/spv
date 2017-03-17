@@ -31,7 +31,7 @@ public class GameView extends View {
     private Level level;
 
     private int partWidth;
-    private  int partHeight;
+    private int partHeight;
 
     private Context context;
     private Activity activity;
@@ -59,7 +59,7 @@ public class GameView extends View {
         setMeasuredDimension(w, h);
     }
 
-    public void init(Activity activity){
+    public void init(Activity activity) {
         this.activity = activity;
         boxDrawable = ContextCompat.getDrawable(activity, R.drawable.box);
         playerDrawable = ContextCompat.getDrawable(activity, R.drawable.player);
@@ -73,17 +73,8 @@ public class GameView extends View {
         drawGrid(canvas);
         invalidate();
         if (level != null) {
-            drawBoxes(canvas);
-            drawDrawable(level.getStartPosition().x,level.getStartPosition().y,playerDrawable,canvas);
-            drawHearts(canvas);
-            drawHouses(canvas);
-
-        }
-    }
-
-    private void drawHouses(Canvas canvas) {
-        for (Position pos : level.getHousesPositions()){
-            drawDrawable(pos.x,pos.y,houseDrawable,canvas);
+            drawGameMap(canvas);
+            drawDrawable(level.getStartPosition().x, level.getStartPosition().y, playerDrawable, canvas);
         }
     }
 
@@ -117,21 +108,28 @@ public class GameView extends View {
         this.level = level;
     }
 
-    private void drawDrawable(int x, int y, Drawable drawable, Canvas canvas){
-        drawable.setBounds(x*partWidth, y*partHeight, (x*partWidth) + partWidth, (y*partHeight)+ partHeight);
+    private void drawDrawable(int x, int y, Drawable drawable, Canvas canvas) {
+        drawable.setBounds(x * partWidth, y * partHeight, (x * partWidth) + partWidth, (y * partHeight) + partHeight);
         drawable.draw(canvas);
     }
 
-    private void drawBoxes(Canvas canvas){
-        for (Position pos : level.getBoxPositions()){
-            drawDrawable(pos.x,pos.y,boxDrawable,canvas);
+    private void drawGameMap(Canvas canvas) {
+        int[][] gameMap = level.getGameMap();
+        for (int i = 0; i < gameMap.length; i++) {
+            for (int j = 0; j < gameMap[i].length; j++) {
+                int obj = gameMap[i][j];
+                if (obj == Level.CONST_BOX) {
+                    drawDrawable(i, j, boxDrawable, canvas);
+                } else if (obj == Level.CONST_HOUSE) {
+                    drawDrawable(i, j, boxDrawable, canvas);
+                    drawDrawable(i, j, houseDrawable, canvas);
+                } else if (obj == Level.CONST_HEART) {
+                    drawDrawable(i, j, boxDrawable, canvas);
+                    drawDrawable(i, j, heartDrawable, canvas);
+                }
+            }
         }
     }
 
-    private void drawHearts(Canvas canvas){
-        for (Position pos : level.getHeartsPositions()){
-            drawDrawable(pos.x,pos.y,heartDrawable,canvas);
-        }
-    }
 }
 

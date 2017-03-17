@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import com.example.beebzb.codingkid.entity.Command;
 import com.example.beebzb.codingkid.entity.CommandAdapter;
 import com.example.beebzb.codingkid.entity.CommandType;
-import com.example.beebzb.codingkid.entity.GameView;
 import com.example.beebzb.codingkid.entity.Interpreter;
 import com.example.beebzb.codingkid.entity.Level;
 
@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks {
+public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks, GameGrid.GameCallback {
 
     @BindView(R.id.code_list_view)
     ListView codeListView;
@@ -36,11 +36,14 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     @BindView(R.id.label_remaining_hearts)
     TextView remainingHeartsLabel;
 
-    GameView gameView;
+    @BindView(R.id.button_play)
+    Button playButton;
 
     GameGrid gameGrid;
 
     private Level level;
+
+    private enum ButtonMode {PLAY, RESET}
 
     private Toast runOutOfCommandsToast;
 
@@ -48,6 +51,8 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     private ArrayList<Command> mCommandTypes;
     private CommandAdapter mCommandAdapter;
+
+    private ButtonMode buttonMode = ButtonMode.PLAY;
 
     public static Level levelFromMainActivity;
 
@@ -170,24 +175,32 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     @OnClick(R.id.button_play)
     public void play() {
-        if (isValidCode()){
-            mInterpreter = new Interpreter(mCommandTypes);
-            gameGrid.startMoving(mInterpreter.getResultCommandTypes());
+        if (buttonMode == ButtonMode.PLAY) {
+            if (isValidCode()) {
+                buttonMode = ButtonMode.RESET;
+                playButton.setEnabled(false);
+                mInterpreter = new Interpreter(mCommandTypes);
+                gameGrid.startMoving(mInterpreter.getResultCommandTypes(), this);
+            } else {
+                Utils.longToast(this, R.string.game_activity_toast_invalid_code);
+            }
         }
         else {
-            Utils.longToast(this,R.string.game_activity_toast_invalid_code)
-            ;
+            gameGrid.reset();
+            buttonMode = ButtonMode.PLAY;
+            playButton.setEnabled(true);
+            playButton.setText(R.string.game_activity_button_play);
+            remainingHeartsLabel.setText(String.valueOf(level.getHearts()));
         }
     }
 
-    private boolean isValidCode(){
+    private boolean isValidCode() {
         int loopStarts = 0;
-        int loopEnds=0;
-        for (Command command : mCommandTypes){
-            if (command.getmCommandType() == CommandType.LOOP_START){
+        int loopEnds = 0;
+        for (Command command : mCommandTypes) {
+            if (command.getmCommandType() == CommandType.LOOP_START) {
                 loopStarts++;
-            }
-            else if (command.getmCommandType() == CommandType.LOOP_END){
+            } else if (command.getmCommandType() == CommandType.LOOP_END) {
                 loopEnds++;
             }
         }
@@ -226,6 +239,32 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         setRemainingCommandsLabel(remainingCommands);
     }
 
+    @Override
+    public void onLastMove() {
+        playButton.setText(R.string.game_activity_button_reset);
+        playButton.setEnabled(true);
+    }
+
+    @Override
+    public void onHeartGathered(int gatheredHearts) {
+        if (gatheredHearts <= level.getHearts()){
+            int remainHearts = level.getHearts() - gatheredHearts;
+            remainingHeartsLabel.setText(String.valueOf(remainHearts));
+        }
+    }
+
+    @Override
+    public void onLost() {
+        playButton.setText(R.string.game_activity_button_reset);
+        playButton.setEnabled(true);
+
+    }
+
+    @Override
+    public void onWin() {
+        playButton.setText(R.string.game_activity_button_reset);
+        playButton.setEnabled(true);
+    }
 
 
     @OnClick({R.id.button_loop_end, R.id.button_loop_start, R.id.button_down, R.id.button_up, R.id.button_left, R.id.button_right})

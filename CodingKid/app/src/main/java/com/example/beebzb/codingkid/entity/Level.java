@@ -1,28 +1,25 @@
 package com.example.beebzb.codingkid.entity;
 
-import java.util.ArrayList;
-
 public class Level {
+
+    public static final int CONST_BOX = 1;
+    public static final int CONST_HEART = 2;
+    public static final int CONST_HOUSE = 3;
 
     private String name;
     private String author = "Coding Kid";
     private int commands = 0;
     private int hearts = 0;
     private Position startPosition;
-    private ArrayList<Position> heartsPositions = new ArrayList<>();
-    private ArrayList<Position> boxPositions = new ArrayList<>();
-    private ArrayList<Position> housesPositions = new ArrayList<>();
-
+    private int[][] gameMap = new int[GameConstants.rows][GameConstants.columns];
     private Position player;
     private int id;
 
-    public Level(int id,int commands, int hearts, ArrayList<Position> housePositions, Position startPosition, ArrayList<Position> heartsPositions, ArrayList<Position> boxPositions, String name, String author) {
+    public Level(int id, int commands, int hearts, Position startPosition, int[][] gameMap, String name, String author) {
         this.commands = commands;
         this.hearts = hearts;
-        this.housesPositions = housePositions;
         this.startPosition = startPosition;
-        this.heartsPositions = heartsPositions;
-        this.boxPositions = boxPositions;
+        this.gameMap = gameMap;
         this.name = name;
         this.author = author;
         this.id = id;
@@ -63,22 +60,6 @@ public class Level {
         this.commands = commands;
     }
 
-    public int getHearts() {
-        return hearts;
-    }
-
-    public void setHearts(int hearts) {
-        this.hearts = hearts;
-    }
-
-    public ArrayList<Position> getHousesPositions() {
-        return housesPositions;
-    }
-
-    public void setHousesPositions(ArrayList<Position> housesPositions) {
-        this.housesPositions = housesPositions;
-    }
-
     public Position getStartPosition() {
         return startPosition;
     }
@@ -87,20 +68,12 @@ public class Level {
         this.startPosition = startPosition;
     }
 
-    public ArrayList<Position> getHeartsPositions() {
-        return heartsPositions;
+    public int[][] getGameMap() {
+        return gameMap;
     }
 
-    public void setHeartsPositions(ArrayList<Position> heartsPositions) {
-        this.heartsPositions = heartsPositions;
-    }
-
-    public ArrayList<Position> getBoxPositions() {
-        return boxPositions;
-    }
-
-    public void setBoxPositions(ArrayList<Position> boxPositions) {
-        this.boxPositions = boxPositions;
+    public void setGameMap(int[][] gameMap) {
+        this.gameMap = gameMap;
     }
 
     public Position getPlayer() {
@@ -111,22 +84,58 @@ public class Level {
         this.player = player;
     }
 
-    public boolean isValid() {
-        return housesPositions.size() != 0 && startPosition != null;
+    public boolean hasPlayer() {
+        return startPosition != null ;
+    }
+
+    public boolean isMaximumNumberOfCommandsDefined(){
+        return commands > 0;
+    }
+    public int getHearts() {
+        return hearts;
+    }
+
+    public void setHearts(int hearts) {
+        this.hearts = hearts;
+    }
+
+    public boolean hasHouse() {
+        for (int[] gameObject : gameMap) {
+            for (int aGameObject : gameObject) {
+                if (aGameObject == CONST_HOUSE) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public String toString() {
         return "Level{" +
                 "name='" + name + '\'' +
+                ", gameMap=" + arrayToString(gameMap) +
                 ", author='" + author + '\'' +
                 ", commands=" + commands +
                 ", hearts=" + hearts +
-                ", housePosition=" + housesPositions +
                 ", startPosition=" + startPosition +
-                ", heartsPositions=" + heartsPositions +
-                ", boxPositions=" + boxPositions +
                 ", player=" + player +
                 '}';
+    }
+
+    private String arrayToString(int[][] array) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] == CONST_BOX) {
+                    stringBuilder.append("Box(").append(i).append(",").append(j).append("), ");
+                } else if (array[i][j] == CONST_HEART) {
+                    stringBuilder.append("Heart(").append(i).append(",").append(j).append("), ");
+                } else if (array[i][j] == CONST_HOUSE) {
+                    stringBuilder.append("House(").append(i).append(",").append(j).append("), ");
+                }
+            }
+        }
+        return stringBuilder.toString();
     }
 }
