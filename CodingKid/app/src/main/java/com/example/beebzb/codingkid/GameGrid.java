@@ -44,6 +44,8 @@ public class GameGrid extends GridLayout {
 
     ImageView[][] mCurrentHeartsViews = new ImageView[GameConstants.rows][GameConstants.columns];
 
+    private enum NextAction {NEXT_STEP, WIN, LOST}
+
     public void reset() {
         Log.d(TAG, "reset");
         removePlayer();
@@ -244,18 +246,24 @@ public class GameGrid extends GridLayout {
         } else {
             Log.d(TAG, "inside grid");
             if (!isBoxOnNextPosition(newX, newY)) {
-                makeStep(true, dirAnimDrawId, newX, newY, fromXPosition, toXPosition, fromYPosition, toYPosition);
-                Log.d(TAG,"should make game over step");
+                makeStep(NextAction.LOST, dirAnimDrawId, newX, newY, fromXPosition, toXPosition, fromYPosition, toYPosition);
             } else {
-                makeStep(false, dirAnimDrawId, newX, newY, fromXPosition, toXPosition, fromYPosition, toYPosition);
                 if (isHeartOnNextPosition(newX, newY)) {
+                    makeStep(NextAction.NEXT_STEP, dirAnimDrawId, newX, newY, fromXPosition, toXPosition, fromYPosition, toYPosition);
                     pickHeart(newY, newX);
                 }
-                // TODO is there house<
-
-
+                else if (isHouseOnNextPosition(newX, newY) && mGatheredHearts >= level.getHearts()){
+                    makeStep(NextAction.WIN, dirAnimDrawId, newX, newY, fromXPosition, toXPosition, fromYPosition, toYPosition);
+                }
+                else {
+                    makeStep(NextAction.NEXT_STEP, dirAnimDrawId, newX, newY, fromXPosition, toXPosition, fromYPosition, toYPosition);
+                }
             }
         }
+    }
+
+    private boolean isHouseOnNextPosition(int newX, int newY) {
+        return mGameMap[newY][newX] == Level.CONST_HOUSE;
     }
 
     private boolean isHeartOnNextPosition(int newX, int newY) {
@@ -311,7 +319,8 @@ public class GameGrid extends GridLayout {
         playerView.startAnimation(looseAnimation);
     }
 
-    private void makeStep(final boolean isStepOutOfGrid, @DrawableRes int dirAnimDrawId, int newX, int newY, final int fromXPosition, int toXPosition, final int fromYPosition, int toYPosition) {
+    private void makeStep(final NextAction nextAction, @DrawableRes int dirAnimDrawId, int newX, int newY, final int fromXPosition, int toXPosition, final int fromYPosition, int toYPosition) {
+        Log.d(TAG,"making step: "+nextAction.toString());
         AnimationDrawable directionAnimation = (AnimationDrawable)
                 ResourcesCompat.getDrawable(getResources(), dirAnimDrawId, null);
 
@@ -344,12 +353,20 @@ public class GameGrid extends GridLayout {
                 param.rowSpec = GridLayout.spec(level.getPlayer().y);
                 playerView.setLayoutParams(param);
 
-                if (isStepOutOfGrid){
-                    makeGameOverStep(fromXPosition, fromYPosition);
-                }
-                else {
-                    mIndex++;
-                    nextStep();
+                switch (nextAction){
+                    case LOST:
+                        makeGameOverStep(fromXPosition, fromYPosition);
+                        break;
+                    case NEXT_STEP:
+                        mIndex++;
+                        nextStep();
+                        break;
+                    case WIN:
+                        // TODO make win animation and at the end - onWin callback
+                        mGameCallback.onWin();
+                        break;
+                    default:
+                        break;
                 }
             }
 

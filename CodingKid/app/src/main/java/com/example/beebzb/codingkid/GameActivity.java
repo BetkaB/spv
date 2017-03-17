@@ -262,8 +262,10 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     @Override
     public void onWin() {
+        Utils.shortToast(this, "Vyhral si");
         playButton.setText(R.string.game_activity_button_reset);
         playButton.setEnabled(true);
+        // TODO if default level / increase in settings
     }
 
 
