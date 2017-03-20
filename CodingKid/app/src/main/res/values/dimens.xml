@@ -3,17 +3,16 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="activity_game_info_panel_padding">12dp</dimen>
-    <dimen name="activity_game_control_panel_buttons_padding">36dp</dimen>
-
     <!-- Game activity -->
-    <dimen name="code_commands_margin">16dp</dimen>
-    <dimen name="remaining_hearts_label_left_padding">4dp</dimen>
+    <dimen name="activity_game_code_commands_margin">16dp</dimen>
+    <dimen name="activity_game_remaining_hearts_label_left_padding">4dp</dimen>
+    <dimen name="activity_game_separator_padding_bottom">16dp</dimen>
+    <dimen name="activity_game_control_panel_buttons_padding">36dp</dimen>
+    <dimen name="activity_game_info_panel_padding">12dp</dimen>
 
     <!-- Main activity -->
     <dimen name="fragment_level_picker_item_height">80dp</dimen>
     <dimen name="fragment_level_picker_item_padding">8dp</dimen>
-
 
 
 </resources>

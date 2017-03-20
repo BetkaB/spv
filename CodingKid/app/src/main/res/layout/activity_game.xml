@@ -100,7 +100,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorKeppel"/>
+                    android:background="@color/colorKeppel"
+                    android:layout_margin="@dimen/activity_game_separator_padding_bottom"/>
 
                 <TextView
                     android:id="@+id/label_code"

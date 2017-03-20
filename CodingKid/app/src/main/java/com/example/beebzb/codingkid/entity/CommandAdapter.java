@@ -10,8 +10,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.beebzb.codingkid.R;
-import com.example.beebzb.codingkid.entity.Command;
-import com.example.beebzb.codingkid.entity.CommandType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +132,7 @@ public class CommandAdapter extends ArrayAdapter<Command> {
             params.leftMargin = 0;
             CommandType commandType = command.getmCommandType();
             if (isInsideOfLoop() && commandType != CommandType.LOOP_END && commandType != CommandType.LOOP_START) {
-                params.leftMargin = (int) context.getResources().getDimension(R.dimen.code_commands_margin);
+                params.leftMargin = (int) context.getResources().getDimension(R.dimen.activity_game_code_commands_margin);
 
             }
             labelText.setLayoutParams(params);
