@@ -228,7 +228,7 @@ public class EditorActivity extends AppCompatActivity {
                     Level savedLevel = Utils.stringToLevel(levelInString);
                     if (savedLevel.getId() == updatedLevelId) {
                         customLevels.remove(levelInString);
-                        return;
+                        break;
                     }
                 }
                 createdLevel.setId(updatedLevelId);

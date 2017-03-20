@@ -80,6 +80,7 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
         Log.i(TAG, "data size: " + customLevelData.size());
         levelsAdapter = new LevelAdapter(getContext(), customLevelData);
         customLevelsListView.setAdapter(levelsAdapter);
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.beebzb.codingkid.module_preferences;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.DefaultLevels;
@@ -24,6 +25,8 @@ public class MySharedPreferences implements Preferences {
     private final String KEY_USER_LEVEL_ID = "KEY_USER_LEVEL_ID";
 
     private final SharedPreferences mSharedPreferences;
+
+    private static final String TAG = "MySharedPreferences";
 
     @Inject
     public MySharedPreferences(SharedPreferences sharedPreferences) {
@@ -49,7 +52,7 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public Set<String> getCustomLevels() {
-        return mSharedPreferences.getStringSet(KEY_CUSTOM_LEVELS, new HashSet<String>());
+        return  mSharedPreferences.getStringSet(KEY_CUSTOM_LEVELS, new HashSet<String>());
     }
 
     @Override
@@ -63,7 +66,9 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public void setCustomLevels(Set<String> newLevels) {
-        mSharedPreferences.edit().putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
     }
 
     @Override

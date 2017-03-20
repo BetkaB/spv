@@ -10,7 +10,7 @@ public class Level {
     private int hearts = 0;
     private Position startPosition;
     private ArrayList<Position> heartsPositions = new ArrayList<>();
-    private ArrayList<Position> boxPositions;
+    private ArrayList<Position> boxPositions = new ArrayList<>();
     private ArrayList<Position> housesPositions = new ArrayList<>();
 
     private Position player;

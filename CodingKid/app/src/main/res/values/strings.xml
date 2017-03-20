@@ -44,7 +44,7 @@
     <string name="command_loop_end">koniec cyklu</string>
 
     <!-- Editor activity -->
-    <string name="editor_activity_level_was_saved">Hra bola uložený</string>
+    <string name="editor_activity_level_was_saved">Hra bola uložená</string>
     <string name="editor_activity_cannot_be_saved">Nemožno uložiť hru, chýba domček alebo panáčik</string>
     <string name="editor_activity_button_save">Ulož</string>
     <string name="editor_activity_button_update">Aktualizuj</string>

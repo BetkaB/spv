@@ -2,6 +2,7 @@ package com.example.beebzb.codingkid;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.beebzb.codingkid.entity.Level;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class Utils {
+    private static final String TAG = "Utils";
     public static String getLevelInString(Level level) {
         Gson gson = new Gson();
         return gson.toJson(level);
@@ -34,7 +36,8 @@ public class Utils {
         Set<String> savedLevels = preferences.getCustomLevels();
         ArrayList<Level> levels = new ArrayList<>();
         for (String levelRepre : savedLevels) {
-            levels.add(stringToLevel(levelRepre));
+            Level newLevel = stringToLevel(levelRepre);
+            levels.add(newLevel);
         }
         return levels;
     }
