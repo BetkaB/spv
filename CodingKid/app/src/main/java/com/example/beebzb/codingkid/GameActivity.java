@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,9 +70,10 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         ((MainApplication) getApplication()).getComponent().injectGameActivity(this);
 
 
-        ActionBar actionBar = getActionBar();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
         }
 
         if (levelFromMainActivity != null) {
@@ -81,6 +83,16 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
             Log.e(TAG, "Level is null");
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 
     private void init() {
@@ -186,6 +198,19 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     private void increaseRemainingCommands() {
         remainingCommands++;
         setRemainingCommandsLabel(remainingCommands);
+    }
+
+
+
+    @OnClick({R.id.button_loop_end, R.id.button_loop_start, R.id.button_down, R.id.button_up, R.id.button_left, R.id.button_right})
+    public void scrollMyListViewToBottom() {
+        codeListView.post(new Runnable() {
+            @Override
+            public void run() {
+                // Select the last row so it will scroll into view...
+                codeListView.setSelection(mCommandAdapter.getCount() - 1);
+            }
+        });
     }
 
 }
