@@ -28,6 +28,9 @@
     <string name="game_activity_button_loop_start">Začiatok cyklu</string>
     <string name="game_activity_button_loop_end">koniec cyklu</string>
 
+    <!-- Game  -->
+    <string name="game_end_of_animations">Koniec animácie. Skús to znovu.</string>
+
     <!-- Editor activity buttons -->
     <string name="level_name">Názov hry</string>
     <string name="number">0</string>

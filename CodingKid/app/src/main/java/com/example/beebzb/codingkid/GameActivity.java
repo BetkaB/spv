@@ -176,13 +176,15 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     @OnClick(R.id.button_play)
     public void play() {
         if (buttonMode == ButtonMode.PLAY) {
-            if (isValidCode()) {
-                buttonMode = ButtonMode.RESET;
-                playButton.setEnabled(false);
-                mInterpreter = new Interpreter(mCommandTypes);
-                gameGrid.startMoving(mInterpreter.getResultCommandTypes(), this);
-            } else {
-                Utils.longToast(this, R.string.game_activity_toast_invalid_code);
+            if (mCommandTypes.size() >0) {
+                if (isValidCode()) {
+                    buttonMode = ButtonMode.RESET;
+                    playButton.setEnabled(false);
+                    mInterpreter = new Interpreter(mCommandTypes);
+                    gameGrid.startMoving(mInterpreter.getResultCommandTypes(), this);
+                } else {
+                    Utils.longToast(this, R.string.game_activity_toast_invalid_code);
+                }
             }
         }
         else {
@@ -204,7 +206,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
                 loopEnds++;
             }
         }
-        return loopStarts == loopEnds;
+        return loopStarts == loopEnds && mCommandTypes.size() > 0;
     }
 
     @Override

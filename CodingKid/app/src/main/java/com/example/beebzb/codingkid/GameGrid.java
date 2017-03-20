@@ -122,7 +122,7 @@ public class GameGrid extends GridLayout {
             movePlayer(mStepsToMove.get(mIndex));
         } else {
             Log.d(TAG, "end of animation");
-            Utils.shortToast(getContext(), "End of animations");
+            Utils.longToast(getContext(), R.string.game_end_of_animations);
             mGameCallback.onLastMove();
         }
     }
@@ -198,9 +198,6 @@ public class GameGrid extends GridLayout {
     }
 
     private void movePlayer(CommandType type) {
-        Log.d(TAG, "--------- ");
-
-        Log.d(TAG, "moving: " + type.toString());
         Log.d(TAG, "Player before: " + level.getPlayer().toString());
         int fromXPosition = level.getPlayer().x;
         int fromYPosition = level.getPlayer().y;
@@ -239,10 +236,9 @@ public class GameGrid extends GridLayout {
                 break;
         }
 
-        // TODO check step out of grid? is there box ? is there heart? house?
         if (isPlayerOutsideGrid(newX, newY)) {
             Log.d(TAG, "outside grid");
-            makeGameOverStep(fromXPosition, fromYPosition);
+            makeGameOverStep();
         } else {
             Log.d(TAG, "inside grid");
             if (!isBoxOnNextPosition(newX, newY)) {
@@ -267,14 +263,13 @@ public class GameGrid extends GridLayout {
     }
 
     private boolean isHeartOnNextPosition(int newX, int newY) {
-        Log.d(TAG, "isHeartOnNextPosition: newX:" + newX + ", newY" + newY);
         return mCurrentHeartsViews[newY][newX] != null;
     }
 
-    private AnimationSet getLooseAnimation(int fromXPosition, int fromYPosition) {
+    private AnimationSet getLooseAnimation() {
         RotateAnimation rotateAnimation = new RotateAnimation(0, 360, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-        ScaleAnimation scaleAnimation = new ScaleAnimation(ScaleAnimation.RELATIVE_TO_SELF, 0, ScaleAnimation.RELATIVE_TO_SELF, 0);
-        scaleAnimation.setFillAfter(true); // Needed to keep the result of the animation
+        ScaleAnimation scaleAnimation = new ScaleAnimation(
+                1f, 0f, 1f, 0f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f );       scaleAnimation.setFillAfter(true); // Needed to keep the result of the animation
         scaleAnimation.setDuration(2000);
         rotateAnimation.setFillAfter(true);
         rotateAnimation.setDuration(2000);
@@ -288,19 +283,48 @@ public class GameGrid extends GridLayout {
         return newX >= GameConstants.columns || newX < 0 || newY >= GameConstants.rows || newY < 0;
     }
 
-    private void pickHeart(int newY, int newX) {
-        this.removeView(mCurrentHeartsViews[newY][newX]);
-        mCurrentHeartsViews[newY][newX] = null;
-        mGatheredHearts++;
-        mGameCallback.onHeartGathered(mGatheredHearts);
+    private void pickHeart(final int newY, final int newX) {
+        final GridLayout view = this;
+        ScaleAnimation sAnim = getPickedUpHeartAnimation();
+        sAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mCurrentHeartsViews[newY][newX] = null;
+                mGatheredHearts++;
+                mGameCallback.onHeartGathered(mGatheredHearts);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        mCurrentHeartsViews[newY][newX].startAnimation(sAnim);
+        view.removeView(mCurrentHeartsViews[newY][newX]);
+
+    }
+
+    private ScaleAnimation getPickedUpHeartAnimation(){
+        ScaleAnimation scale = new ScaleAnimation(1f, 0f, 1f, 0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        // scaling to the left top corner
+       // ScaleAnimation scale = new ScaleAnimation(ScaleAnimation.RELATIVE_TO_SELF, 0, ScaleAnimation.RELATIVE_TO_SELF, 0);
+        scale.setFillAfter(true);
+        scale.setDuration(800);
+        return scale;
     }
 
     private boolean isBoxOnNextPosition(int newX, int newY) {
         return mGameMap[newY][newX] >= Level.CONST_BOX;
     }
 
-    private void makeGameOverStep(int fromXPosition, int fromYPosition) {
-        AnimationSet looseAnimation = getLooseAnimation(fromXPosition, fromYPosition);
+    private void makeGameOverStep() {
+        AnimationSet looseAnimation = getLooseAnimation();
         looseAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -332,9 +356,7 @@ public class GameGrid extends GridLayout {
 
         TranslateAnimation transAnimation = new TranslateAnimation(fromXPosition, toXPosition, fromYPosition, toYPosition);
         transAnimation.setDuration(500);
-        final int finalNewY = newY;
-        final int finalNewX = newX;
-        level.setPlayer(new Position(finalNewY, finalNewX));
+        level.setPlayer(new Position(newY, newX));
 
         transAnimation.setAnimationListener(new Animation.AnimationListener() {
 
@@ -348,14 +370,14 @@ public class GameGrid extends GridLayout {
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.width = mPartWidth;
                 param.height = mPartHeight;
-                //param.setGravity(Gravity.CENTER);
+                param.setGravity(Gravity.CENTER);
                 param.columnSpec = GridLayout.spec(level.getPlayer().x);
                 param.rowSpec = GridLayout.spec(level.getPlayer().y);
                 playerView.setLayoutParams(param);
 
                 switch (nextAction){
                     case LOST:
-                        makeGameOverStep(fromXPosition, fromYPosition);
+                        makeGameOverStep();
                         break;
                     case NEXT_STEP:
                         mIndex++;
