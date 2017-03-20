@@ -4,9 +4,11 @@ package com.example.beebzb.codingkid.screens.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -32,8 +34,12 @@ public class LevelChoiceFragment extends Fragment {
     private ArrayList<ChoiceButton> buttons;
     public static String TAG = "LevelChoice";
 
-    @BindView(R.id.level_choices_layout)
-    LinearLayout layout;
+    @BindView(R.id.horizontalScrollView1)
+    HorizontalScrollView horizontalScrollView;
+
+    @BindView(R.id.shapeLayout)
+    LinearLayout shapeLayout;
+
 
     @Inject
     Preferences preferences;
@@ -81,19 +87,33 @@ public class LevelChoiceFragment extends Fragment {
 
     private void init() {
         // TODO remove setting highest level
-        preferences.setHighestLevel(4);
+        preferences.setHighestLevel(12);
         buttons = new ArrayList<>();
-        final int countButtons = 10;
+        final int countButtons = 20;
         ChoiceButton button;
+        int width = 200;
+        final int y = 0 ;
         int highestLevel = preferences.getHighestLevel();
+        final int x = width * highestLevel;
+
         for (int i = 0; i < countButtons; i++) {
             button = new ChoiceButton(getContext(), i + 1);
             TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f);
             button.setLayoutParams(params);
-            button.setType(getType(highestLevel, i));
-            layout.addView(button);
+            ChoiceButton.Type type = getType(highestLevel, i);
+            button.setType(type);
+            params.width = width;
+            shapeLayout.addView(button);
             buttons.add(button);
         }
+
+        horizontalScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                horizontalScrollView.scrollTo(x, y);
+            }
+        });
+
     }
 
     private ChoiceButton.Type getType(int highest, int i) {
