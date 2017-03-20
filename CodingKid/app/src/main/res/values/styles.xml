@@ -41,4 +41,12 @@
         <item name="android:paddingLeft">4dp</item>
         <item name="android:gravity">start|center_vertical</item>
     </style>
+
+    <style name="GameActivityInfoLabels">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+    </style>
+
+    <style name="GameActivityInfoNumbers" parent="GameActivityInfoLabels">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

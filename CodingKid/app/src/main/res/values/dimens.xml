@@ -8,6 +8,7 @@
 
     <!-- Game activity -->
     <dimen name="code_commands_margin">16dp</dimen>
+    <dimen name="remaining_hearts_label_left_padding">4dp</dimen>
 
     <!-- Main activity -->
     <dimen name="fragment_level_picker_item_height">80dp</dimen>

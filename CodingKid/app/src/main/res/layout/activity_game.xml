@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_game"
     android:layout_width="match_parent"
@@ -23,14 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorMossGreen" />
+            android:background="@color/colorKeppel" />
 
         <LinearLayout
             android:id="@+id/info_panel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@color/colorVisVis"
+            android:background="@color/colorMossGreen"
             android:orientation="vertical"
             android:padding="@dimen/activity_game_info_panel_padding">
 
@@ -43,54 +42,65 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="horizontal"
                         android:weightSum="5">
 
                         <TextView
                             android:id="@+id/textView2"
-                            android:layout_width="match_parent"
+                            style="@style/GameActivityInfoLabels"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:gravity="center|start"
                             android:text="@string/game_activity_remaining_commands" />
 
                         <TextView
                             android:id="@+id/label_remaining_commands"
-                            android:layout_width="match_parent"
+                            style="@style/GameActivityInfoNumbers"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:gravity="center|end" />
+                            android:layout_weight="1"
+                            android:gravity="center|start" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="horizontal"
                         android:weightSum="5">
 
                         <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="match_parent"
+                            style="@style/GameActivityInfoLabels"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:gravity="center|start"
                             android:text="@string/game_activity_remaining_hearts" />
 
                         <TextView
                             android:id="@+id/label_remaining_hearts"
-                            android:layout_width="match_parent"
+                            style="@style/GameActivityInfoNumbers"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:gravity="center|end" />
+                            android:layout_weight="1"
+                            android:gravity="center|start" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorKeppel"/>
 
                 <TextView
                     android:id="@+id/label_code"
@@ -161,8 +171,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
-                android:tint="@color/colorWhite"
-                android:src="@drawable/left" />
+                android:src="@drawable/left"
+                android:tint="@color/colorWhite" />
 
             <ImageButton
                 android:id="@+id/button_up"
@@ -170,8 +180,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
-                android:tint="@color/colorMossGreen"
-                android:src="@drawable/up" />
+                android:src="@drawable/up"
+                android:tint="@color/colorMossGreen" />
 
             <ImageButton
                 android:id="@+id/button_down"
@@ -179,8 +189,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
-                android:tint="@color/colorKeppel"
-                android:src="@drawable/down" />
+                android:src="@drawable/down"
+                android:tint="@color/colorKeppel" />
 
             <ImageButton
                 android:id="@+id/button_right"
@@ -188,8 +198,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
-                android:tint="@color/colorCuttySark"
-                android:src="@drawable/right" />
+                android:src="@drawable/right"
+                android:tint="@color/colorCuttySark" />
 
         </LinearLayout>
 
