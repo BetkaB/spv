@@ -138,12 +138,8 @@ public class CommandAdapter extends ArrayAdapter<Command> {
             labelText.setLayoutParams(params);
 
 
-            if (commandType == CommandType.LOOP_START) {
-                setVisibility(View.VISIBLE);
-                labelNumber.setText(String.valueOf(command.getCount()));
-            } else {
-                setVisibility(View.GONE);
-            }
+            setVisibility(View.VISIBLE);
+            labelNumber.setText(String.valueOf(command.getCount()));
 
         }
 

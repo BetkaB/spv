@@ -41,21 +41,29 @@ public class Interpreter {
                 break;
             }
             if (mToken.getmCommandType() == CommandType.LEFT) {
-                mResultCommandTypes.add(CommandType.LEFT);
+                for (int i = 0; i < mToken.getCount(); i++){
+                    mResultCommandTypes.add(CommandType.LEFT);
+                }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
                 scan();
             } else if (mToken.getmCommandType() == CommandType.DOWN) {
-                mResultCommandTypes.add(CommandType.DOWN);
+                for (int i = 0; i < mToken.getCount(); i++){
+                    mResultCommandTypes.add(CommandType.DOWN);
+                }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
 
                 scan();
             } else if (mToken.getmCommandType() == CommandType.UP) {
-                mResultCommandTypes.add(CommandType.UP);
+                for (int i = 0; i < mToken.getCount(); i++){
+                    mResultCommandTypes.add(CommandType.UP);
+                }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
 
                 scan();
             } else if (mToken.getmCommandType() == CommandType.RIGHT) {
-                mResultCommandTypes.add(CommandType.RIGHT);
+                for (int i = 0; i < mToken.getCount(); i++){
+                    mResultCommandTypes.add(CommandType.RIGHT);
+                }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
 
                 scan();
