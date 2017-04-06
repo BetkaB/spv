@@ -28,6 +28,7 @@ public class CommandAdapter extends ArrayAdapter<Command> {
         void onLoopIterationChange(int position, int newValue);
     }
 
+    // TODO when direcation is added - display 1, when end of cycle - do not display buttons
     private Context context;
     private List<Command> mData = new ArrayList<>();
     private static LayoutInflater inflater = null;

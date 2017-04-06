@@ -25,7 +25,7 @@ public class ChoiceButton extends Button {
     public ChoiceButton(Context context, int id) {
         super(context);
         this.id = id;
-        this.setText(String.valueOf(id));
+        this.setText(String.valueOf(id+1));
     }
 
     public void setType(Type type) {

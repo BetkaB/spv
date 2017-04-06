@@ -1,14 +1,13 @@
 package com.example.beebzb.codingkid;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Button;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,16 +15,23 @@ import android.widget.Toast;
 import com.example.beebzb.codingkid.entity.Command;
 import com.example.beebzb.codingkid.entity.CommandAdapter;
 import com.example.beebzb.codingkid.entity.CommandType;
+import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Interpreter;
 import com.example.beebzb.codingkid.entity.Level;
+import com.example.beebzb.codingkid.module_preferences.MySharedPreferences;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks, GameGrid.GameCallback {
+
+    @Inject
+    MySharedPreferences mPreferences;
 
     @BindView(R.id.code_list_view)
     ListView codeListView;
@@ -176,7 +182,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     @OnClick(R.id.button_play)
     public void play() {
         if (buttonMode == ButtonMode.PLAY) {
-            if (mCommandTypes.size() >0) {
+            if (mCommandTypes.size() > 0) {
                 if (isValidCode()) {
                     buttonMode = ButtonMode.RESET;
                     playButton.setEnabled(false);
@@ -186,8 +192,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
                     Utils.longToast(this, R.string.game_activity_toast_invalid_code);
                 }
             }
-        }
-        else {
+        } else {
             gameGrid.reset();
             buttonMode = ButtonMode.PLAY;
             playButton.setEnabled(true);
@@ -249,7 +254,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     @Override
     public void onHeartGathered(int gatheredHearts) {
-        if (gatheredHearts <= level.getHearts()){
+        if (gatheredHearts <= level.getHearts()) {
             int remainHearts = level.getHearts() - gatheredHearts;
             remainingHeartsLabel.setText(String.valueOf(remainHearts));
         }
@@ -264,10 +269,16 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
 
     @Override
     public void onWin() {
+        // TODO winning animation? dialog?
         Utils.shortToast(this, "Vyhral si");
         playButton.setText(R.string.game_activity_button_reset);
         playButton.setEnabled(true);
-        // TODO if default level / increase in settings
+        int levelId = levelFromMainActivity.getId();
+        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT && levelId > mPreferences.getHighestLevel()) {
+            // TODO  if it is default level and not the last one - make some play next level button
+
+            mPreferences.setHighestLevel(levelId);
+        }
     }
 
 

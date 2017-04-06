@@ -4,7 +4,6 @@ package com.example.beebzb.codingkid.screens.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,17 +39,14 @@ public class LevelChoiceFragment extends Fragment {
     @BindView(R.id.shapeLayout)
     LinearLayout shapeLayout;
 
-
     @Inject
     Preferences preferences;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         ((MainApplication) getActivity().getApplication()).getComponent().injectLevelChoiceFragment(this);
         super.onCreate(savedInstanceState);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,25 +75,27 @@ public class LevelChoiceFragment extends Fragment {
         }
     }
 
+    // TODO  checking highest won level ? in onResume
+
+
     private void openGame(int id) {
-        // TODO get level based on id
-        Level level = DefaultLevels.DEFAULT_LEVELS[0];
+        //TODO remove
+        preferences.setHighestLevel(14);
+        Level level = DefaultLevels.DEFAULT_LEVELS[id];
         GameActivity.startActivity(getContext(), level);
     }
 
     private void init() {
-        // TODO remove setting highest level
-        preferences.setHighestLevel(12);
         buttons = new ArrayList<>();
         final int countButtons = 20;
         ChoiceButton button;
         int width = 200;
-        final int y = 0 ;
+        final int y = 0;
         int highestLevel = preferences.getHighestLevel();
         final int x = width * highestLevel;
 
         for (int i = 0; i < countButtons; i++) {
-            button = new ChoiceButton(getContext(), i + 1);
+            button = new ChoiceButton(getContext(), i);
             TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f);
             button.setLayoutParams(params);
             ChoiceButton.Type type = getType(highestLevel, i);
