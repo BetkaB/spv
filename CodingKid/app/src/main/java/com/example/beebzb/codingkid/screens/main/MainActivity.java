@@ -5,19 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import com.example.beebzb.codingkid.EditorActivity;
 import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
+import com.example.beebzb.codingkid.screens.settings.SettingsActivity;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,5 +53,13 @@ public class MainActivity extends AppCompatActivity {
         menu.getItem(0).setVisible(true);
         return super.onCreateOptionsMenu(menu);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.settings){
+            SettingsActivity.startActivity(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

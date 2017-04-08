@@ -1,10 +1,13 @@
 package com.example.beebzb.codingkid;
 
 
+import com.example.beebzb.codingkid.screens.game.GameActivity;
+import com.example.beebzb.codingkid.screens.editor.EditorActivity;
 import com.example.beebzb.codingkid.module_preferences.PreferencesModule;
 import com.example.beebzb.codingkid.screens.main.CustomLevelChoiceFragment;
 import com.example.beebzb.codingkid.screens.main.LevelChoiceFragment;
 import com.example.beebzb.codingkid.screens.main.MainActivity;
+import com.example.beebzb.codingkid.screens.settings.SettingsActivity;
 
 import javax.inject.Singleton;
 
@@ -22,4 +25,6 @@ public interface AppComponent {
     void injectEditorActivity(EditorActivity editorActivity);
 
     void injectCustomLevelChoiceFragment(CustomLevelChoiceFragment customLevelChoiceFragment);
+
+    void injectSettingsActivity(SettingsActivity settingsActivity);
 }

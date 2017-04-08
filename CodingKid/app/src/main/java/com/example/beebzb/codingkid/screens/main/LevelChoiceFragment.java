@@ -13,10 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-import com.example.beebzb.codingkid.GameActivity;
+import com.example.beebzb.codingkid.screens.game.GameActivity;
 import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
-import com.example.beebzb.codingkid.entity.ChoiceButton;
 import com.example.beebzb.codingkid.entity.DefaultLevels;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;

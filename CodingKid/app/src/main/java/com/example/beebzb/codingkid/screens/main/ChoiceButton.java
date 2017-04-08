@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid.entity;
+package com.example.beebzb.codingkid.screens.main;
 
 import android.content.Context;
 import android.widget.Button;
