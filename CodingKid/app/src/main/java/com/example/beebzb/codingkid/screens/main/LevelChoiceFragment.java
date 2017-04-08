@@ -4,6 +4,7 @@ package com.example.beebzb.codingkid.screens.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.entity.ChoiceButton;
 import com.example.beebzb.codingkid.entity.DefaultLevels;
+import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
@@ -75,19 +77,26 @@ public class LevelChoiceFragment extends Fragment {
         }
     }
 
-    // TODO  checking highest won level ? in onResume
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG,"onResume");
+        int highestLevelDone = preferences.getHighestLevel();
+        for (ChoiceButton button : buttons){
+            ChoiceButton.Type type = getType(highestLevelDone, button.getId());
+            button.setType(type);
+        }
+    }
 
     private void openGame(int id) {
-        //TODO remove
-        preferences.setHighestLevel(14);
+        Log.d(TAG,"opening game with id " + id) ;
         Level level = DefaultLevels.DEFAULT_LEVELS[id];
         GameActivity.startActivity(getContext(), level);
     }
 
     private void init() {
         buttons = new ArrayList<>();
-        final int countButtons = 20;
+        final int countButtons = GameConstants.DEFAULT_LEVELS_COUNT;
         ChoiceButton button;
         int width = 200;
         final int y = 0;

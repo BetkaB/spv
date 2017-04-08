@@ -2,14 +2,12 @@ package com.example.beebzb.codingkid.entity;
 
 public class Command {
     private CommandType mCommandType;
-    private int count = 0;
-
+    private int count = 1;
 
     public Command(CommandType mCommandType) {
-
         this.mCommandType = mCommandType;
-        if (mCommandType == CommandType.LOOP_START) {
-            count = 1;
+        if (mCommandType == CommandType.LOOP_END) {
+            count = 0;
         }
     }
 
@@ -17,12 +15,11 @@ public class Command {
         return count;
     }
 
-    public CommandType getmCommandType() {
+    public CommandType getCommandType() {
         return mCommandType;
     }
 
     public void setCount(int count) {
-
         this.count = count;
     }
 

@@ -15,10 +15,12 @@ import android.widget.Toast;
 import com.example.beebzb.codingkid.entity.Command;
 import com.example.beebzb.codingkid.entity.CommandAdapter;
 import com.example.beebzb.codingkid.entity.CommandType;
+import com.example.beebzb.codingkid.entity.DefaultLevels;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Interpreter;
 import com.example.beebzb.codingkid.entity.Level;
 import com.example.beebzb.codingkid.module_preferences.MySharedPreferences;
+import com.example.beebzb.codingkid.screens.main.LevelChoiceFragment;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks, GameGrid.GameCallback {
+public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks, GameGrid.GameCallback, AfterWinDialog.AfterWinDialogCallback {
 
     @Inject
     MySharedPreferences mPreferences;
@@ -73,18 +75,14 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         }
         levelFromMainActivity = level;
         context.startActivity(intent);
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_game);
-
         ButterKnife.bind(this);
         ((MainApplication) getApplication()).getComponent().injectGameActivity(this);
-
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -93,8 +91,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         }
 
         if (levelFromMainActivity != null) {
-            this.level = levelFromMainActivity;
-            init();
+            initNewGame(levelFromMainActivity);
         } else {
             Log.e(TAG, "Level is null");
         }
@@ -205,9 +202,9 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         int loopStarts = 0;
         int loopEnds = 0;
         for (Command command : mCommandTypes) {
-            if (command.getmCommandType() == CommandType.LOOP_START) {
+            if (command.getCommandType() == CommandType.LOOP_START) {
                 loopStarts++;
-            } else if (command.getmCommandType() == CommandType.LOOP_END) {
+            } else if (command.getCommandType() == CommandType.LOOP_END) {
                 loopEnds++;
             }
         }
@@ -264,23 +261,23 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     public void onLost() {
         playButton.setText(R.string.game_activity_button_reset);
         playButton.setEnabled(true);
-
     }
 
     @Override
     public void onWin() {
-        // TODO winning animation? dialog?
-        Utils.shortToast(this, "Vyhral si");
         playButton.setText(R.string.game_activity_button_reset);
         playButton.setEnabled(true);
-        int levelId = levelFromMainActivity.getId();
-        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT && levelId > mPreferences.getHighestLevel()) {
-            // TODO  if it is default level and not the last one - make some play next level button
+        int levelId = this.level.getId();
+        Log.d(LevelChoiceFragment.TAG, "onWin levelId " + levelId);
+        Log.d(LevelChoiceFragment.TAG, "highest " + mPreferences.getHighestLevel());
+        Log.d(LevelChoiceFragment.TAG, "default levels " + GameConstants.DEFAULT_LEVELS_COUNT);
 
-            mPreferences.setHighestLevel(levelId);
+        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT && levelId >= mPreferences.getHighestLevel()) {
+            int highestLevel = levelId + 1;
+            mPreferences.setHighestLevel(highestLevel);
+            new AfterWinDialog(this, this, highestLevel).show();
         }
     }
-
 
     @OnClick({R.id.button_loop_end, R.id.button_loop_start, R.id.button_down, R.id.button_up, R.id.button_left, R.id.button_right})
     public void scrollMyListViewToBottom() {
@@ -291,6 +288,23 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
                 codeListView.setSelection(mCommandAdapter.getCount() - 1);
             }
         });
+    }
+
+    @Override
+    public void onActionButtonClicked(int highestLevelDone) {
+        int nextLevelId = highestLevelDone + 1;
+        if (nextLevelId < DefaultLevels.DEFAULT_LEVELS.length) {
+            finish();
+            GameActivity.startActivity(this, DefaultLevels.DEFAULT_LEVELS[nextLevelId]);
+        }
+        else {
+            finish();
+        }
+    }
+
+    private void initNewGame(Level level) {
+        this.level = level;
+        init();
     }
 
 }

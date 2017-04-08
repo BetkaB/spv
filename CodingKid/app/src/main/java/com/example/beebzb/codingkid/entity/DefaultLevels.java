@@ -3,7 +3,7 @@ package com.example.beebzb.codingkid.entity;
 
 public class DefaultLevels {
     public static final Level[] DEFAULT_LEVELS = new Level[]{
-            get1(), get2(), get3(), get3(), get3(), get6(), get7(), get8(), get9(),
+            get1(), get2(), get3(), get4(), get3(), get6(), get7(), get8(), get9(),
             get10(), get11(), get12(), get13(), get14(), get15()};
 
     // TODO add levels: 4, 5, 16, 17, 18, + add to array!
@@ -53,6 +53,26 @@ public class DefaultLevels {
     private static Level get3() {
         Level level1 = new Level();
         level1.setId(2);
+        level1.setCommands(1);
+        level1.setHearts(1);
+        level1.setStartPosition(new Position(4, 6));
+        int[][] gameMap = new int[GameConstants.rows][GameConstants.columns];
+        gameMap[4][6] = Level.CONST_BOX;
+        gameMap[4][7] = Level.CONST_BOX;
+        gameMap[4][8] = Level.CONST_BOX;
+        gameMap[4][10] = Level.CONST_BOX;
+        gameMap[4][11] = Level.CONST_BOX;
+        gameMap[4][12] = Level.CONST_HOUSE;
+        gameMap[4][9] = Level.CONST_HEART;
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 3");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+    private static Level get4() {
+        Level level1 = new Level();
+        level1.setId(3);
         level1.setCommands(1);
         level1.setHearts(1);
         level1.setStartPosition(new Position(4, 6));

@@ -28,10 +28,8 @@ public class CommandAdapter extends ArrayAdapter<Command> {
         void onLoopIterationChange(int position, int newValue);
     }
 
-    // TODO when direcation is added - display 1, when end of cycle - do not display buttons
     private Context context;
     private List<Command> mData = new ArrayList<>();
-    private static LayoutInflater inflater = null;
     private AdapterCallbacks callbacks;
 
     public CommandAdapter(Context context, List<Command> data, AdapterCallbacks callbacks) {
@@ -39,7 +37,7 @@ public class CommandAdapter extends ArrayAdapter<Command> {
         this.context = context;
         this.mData = data;
         this.callbacks = callbacks;
-        inflater = (LayoutInflater) context
+        LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -86,7 +84,7 @@ public class CommandAdapter extends ArrayAdapter<Command> {
         int start = 0;
         int end = 0;
         for (Command command : mData) {
-            CommandType commandType = command.getmCommandType();
+            CommandType commandType = command.getCommandType();
             if (commandType == CommandType.LOOP_START) {
                 start++;
             } else if (commandType == CommandType.LOOP_END) {
@@ -127,21 +125,24 @@ public class CommandAdapter extends ArrayAdapter<Command> {
         private void init(Command command, int position) {
             this.position = position;
             this.command = command;
-            labelText.setText(context.getString(command.getmCommandType().getStringId()));
+            labelText.setText(context.getString(command.getCommandType().getStringId()));
 
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) labelText.getLayoutParams();
             params.leftMargin = 0;
-            CommandType commandType = command.getmCommandType();
+            CommandType commandType = command.getCommandType();
             if (isInsideOfLoop() && commandType != CommandType.LOOP_END && commandType != CommandType.LOOP_START) {
                 params.leftMargin = (int) context.getResources().getDimension(R.dimen.activity_game_code_commands_margin);
 
             }
-            labelText.setLayoutParams(params);
+            //labelText.setLayoutParams(params);
+            btnDecrease.setLayoutParams(params);
 
-
-            setVisibility(View.VISIBLE);
+            if (commandType != CommandType.LOOP_END) {
+                setVisibility(View.VISIBLE);
+            } else {
+                setVisibility(View.GONE);
+            }
             labelNumber.setText(String.valueOf(command.getCount()));
-
         }
 
         private void setVisibility(int mode) {

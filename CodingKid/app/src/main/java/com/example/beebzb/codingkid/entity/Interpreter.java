@@ -40,34 +40,34 @@ public class Interpreter {
             if (mToken == null) {
                 break;
             }
-            if (mToken.getmCommandType() == CommandType.LEFT) {
+            if (mToken.getCommandType() == CommandType.LEFT) {
                 for (int i = 0; i < mToken.getCount(); i++){
                     mResultCommandTypes.add(CommandType.LEFT);
                 }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
                 scan();
-            } else if (mToken.getmCommandType() == CommandType.DOWN) {
+            } else if (mToken.getCommandType() == CommandType.DOWN) {
                 for (int i = 0; i < mToken.getCount(); i++){
                     mResultCommandTypes.add(CommandType.DOWN);
                 }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
 
                 scan();
-            } else if (mToken.getmCommandType() == CommandType.UP) {
+            } else if (mToken.getCommandType() == CommandType.UP) {
                 for (int i = 0; i < mToken.getCount(); i++){
                     mResultCommandTypes.add(CommandType.UP);
                 }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
 
                 scan();
-            } else if (mToken.getmCommandType() == CommandType.RIGHT) {
+            } else if (mToken.getCommandType() == CommandType.RIGHT) {
                 for (int i = 0; i < mToken.getCount(); i++){
                     mResultCommandTypes.add(CommandType.RIGHT);
                 }
                 Log.d(TAG, "Commands: " + mResultCommandTypes.toString());
 
                 scan();
-            } else if (mToken.getmCommandType() == CommandType.LOOP_START) {
+            } else if (mToken.getCommandType() == CommandType.LOOP_START) {
                 int count = mToken.getCount();
                 scan();
                 int start = mIndex-1;
@@ -76,7 +76,7 @@ public class Interpreter {
                     scan();
                     interpret();
                     count--;
-                    if (mToken.getmCommandType() == CommandType.LOOP_END) {
+                    if (mToken.getCommandType() == CommandType.LOOP_END) {
                         scan();
                     }
                 }
