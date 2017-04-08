@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.screens.game;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,8 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.beebzb.codingkid.MainApplication;
+import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.Command;
-import com.example.beebzb.codingkid.entity.CommandAdapter;
 import com.example.beebzb.codingkid.entity.CommandType;
 import com.example.beebzb.codingkid.entity.DefaultLevels;
 import com.example.beebzb.codingkid.entity.GameConstants;

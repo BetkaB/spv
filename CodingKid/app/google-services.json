@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "207408485523",
+    "firebase_url": "https://codingkid-6a98a.firebaseio.com",
+    "project_id": "codingkid-6a98a",
+    "storage_bucket": "codingkid-6a98a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207408485523:android:96c3d160d2586f3b",
+        "android_client_info": {
+          "package_name": "com.example.beebzb.codingkid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207408485523-mn9b169a7bkgqujtto3j6fheokfo6euj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beebzb.codingkid",
+            "certificate_hash": "b0f62d7023835069a2a0b744bc089a3d744e2df6"
+          }
+        },
+        {
+          "client_id": "207408485523-l1hn45scqndv84ft9fbdtb2fk6f1b115.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDodoQFAURRTLWLfVWzvbndhCWaWqKze0I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207408485523-l1hn45scqndv84ft9fbdtb2fk6f1b115.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.screens.game;
 
 
 import android.content.Context;
@@ -18,6 +18,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.CommandType;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;

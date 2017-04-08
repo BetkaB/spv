@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="com.example.beebzb.codingkid.GameActivity">
+    tools:context=".screens.game.GameActivity">
 
     <LinearLayout
         android:id="@+id/up_row"
@@ -18,7 +18,7 @@
 
         <view
             android:id="@+id/canvas"
-            class="com.example.beebzb.codingkid.GameGrid"
+            class="com.example.beebzb.codingkid.screens.game.GameGrid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

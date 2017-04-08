@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid.entity;
+package com.example.beebzb.codingkid.screens.editor;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.entity.Position;
 
 
 public class EditorButton extends Button {

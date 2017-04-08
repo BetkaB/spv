@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid.entity;
+package com.example.beebzb.codingkid.screens.editor;
 
 import android.app.Dialog;
 import android.content.Context;

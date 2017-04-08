@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.beebzb.codingkid.EditorActivity;
-import com.example.beebzb.codingkid.GameActivity;
+import com.example.beebzb.codingkid.ServerTransaction;
+import com.example.beebzb.codingkid.screens.editor.EditorActivity;
+import com.example.beebzb.codingkid.screens.game.GameActivity;
 import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.Utils;
@@ -115,6 +116,6 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
 
     @Override
     public void onShareButtonClicked() {
-
+        new ServerTransaction().writeData();
     }
 }

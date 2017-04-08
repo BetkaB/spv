@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.screens.game;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
+
+import com.example.beebzb.codingkid.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

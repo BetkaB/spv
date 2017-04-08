@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid.entity;
+package com.example.beebzb.codingkid.screens.game;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.entity.Command;
+import com.example.beebzb.codingkid.entity.CommandType;
 
 import java.util.ArrayList;
 import java.util.List;

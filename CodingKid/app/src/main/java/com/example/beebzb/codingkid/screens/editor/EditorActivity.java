@@ -1,4 +1,4 @@
-package com.example.beebzb.codingkid;
+package com.example.beebzb.codingkid.screens.editor;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 
-import com.example.beebzb.codingkid.entity.EditorButton;
+import com.example.beebzb.codingkid.MainApplication;
+import com.example.beebzb.codingkid.R;
+import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;
 import com.example.beebzb.codingkid.entity.Position;
