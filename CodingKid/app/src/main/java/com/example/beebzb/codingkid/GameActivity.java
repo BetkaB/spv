@@ -91,6 +91,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         }
 
         if (levelFromMainActivity != null) {
+            Log.d(LevelChoiceFragment.TAG, "onCreate level: "+levelFromMainActivity.getId());
             initNewGame(levelFromMainActivity);
         } else {
             Log.e(TAG, "Level is null");
@@ -291,8 +292,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
     }
 
     @Override
-    public void onActionButtonClicked(int highestLevelDone) {
-        int nextLevelId = highestLevelDone + 1;
+    public void onActionButtonClicked(int nextLevelId) {
         if (nextLevelId < DefaultLevels.DEFAULT_LEVELS.length) {
             finish();
             GameActivity.startActivity(this, DefaultLevels.DEFAULT_LEVELS[nextLevelId]);
