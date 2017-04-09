@@ -71,7 +71,7 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
     @OnItemClick(R.id.custom_levels_listview)
     public void onItemClicked(int position) {
         chosenLevel = levelsAdapter.getItem(position);
-        LevelPickerDialog levelPickerDialog = new LevelPickerDialog(getContext(), this);
+        LevelPickerDialog levelPickerDialog = new LevelPickerDialog(getContext(), this, mPreferences.isUserStudent());
         levelPickerDialog.show();
     }
 
@@ -116,6 +116,8 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
 
     @Override
     public void onShareButtonClicked() {
-        new ServerTransaction().getLevels(mPreferences);
+        if (!mPreferences.isUserStudent() && chosenLevel != null){
+            ServerTransaction.writeData(chosenLevel, mPreferences);
+        }
     }
 }
