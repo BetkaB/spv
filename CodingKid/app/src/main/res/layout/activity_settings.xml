@@ -9,88 +9,83 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:weightSum="4"
     tools:context="com.example.beebzb.codingkid.screens.settings.SettingsActivity">
 
+    <RadioButton
+        android:checked="true"
+        android:id="@+id/settings_activity_student_radio_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_activity_student" />
 
     <LinearLayout
+        android:id="@+id/settings_activity_student_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/google_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/desc_firebase_lockup"
-            />
-
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/google_title_text"
-       />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/status"
-            android:text="@string/signed_out" />
+            android:text="@string/settings_activity_teachers_id" />
 
-        <TextView
+        <EditText
+            android:id="@+id/settings_activity_id_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/detail"
-            tools:text="Firebase User ID: 123456789abc" />
+            android:inputType="textEmailAddress" />
 
     </LinearLayout>
 
+    <RadioButton
+        android:id="@+id/settings_activity_teacher_radio_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_activity_teacher" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorKeppel">
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="visible"
-            tools:visibility="gone" />
+    <LinearLayout
+        android:id="@+id/settings_activity_teacher_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/sign_out_and_disconnect"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/sign_out_button"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sign_out"
-               />
+                android:text="@string/settings_activity_my_id" />
 
-            <Button
-                android:id="@+id/disconnect_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/disconnect"
-                 />
+            <TextView
+                android:paddingLeft="8dp"
+                android:textStyle="bold"
+                android:id="@+id/settings_activity_signed_user_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/settings_activity_user_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_activity_teacher_signed_out" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/settings_activity_google_sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/settings_activity_sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_activity_teacher_sign_out"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </LinearLayout>

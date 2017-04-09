@@ -32,4 +32,12 @@ public interface Preferences {
 
     int getLevelId();
 
+    void setUserEmail(String mail);
+
+    String getUserEmail();
+
+    boolean isUserStudent();
+
+    void setUserStudent(boolean value);
+
 }

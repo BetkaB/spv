@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +19,7 @@ import com.example.beebzb.codingkid.entity.DefaultLevels;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Interpreter;
 import com.example.beebzb.codingkid.entity.Level;
+import com.example.beebzb.codingkid.entity.MyActivity;
 import com.example.beebzb.codingkid.module_preferences.MySharedPreferences;
 import com.example.beebzb.codingkid.screens.main.LevelChoiceFragment;
 
@@ -32,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GameActivity extends AppCompatActivity implements CommandAdapter.AdapterCallbacks, GameGrid.GameCallback, AfterWinDialog.AfterWinDialogCallback {
+public class GameActivity extends MyActivity implements CommandAdapter.AdapterCallbacks, GameGrid.GameCallback, AfterWinDialog.AfterWinDialogCallback {
 
     @Inject
     MySharedPreferences mPreferences;
@@ -86,29 +85,13 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         ButterKnife.bind(this);
         ((MainApplication) getApplication()).getComponent().injectGameActivity(this);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-        }
-
         if (levelFromMainActivity != null) {
-            Log.d(LevelChoiceFragment.TAG, "onCreate level: "+levelFromMainActivity.getId());
+            Log.d(LevelChoiceFragment.TAG, "onCreate level: " + levelFromMainActivity.getId());
             initNewGame(levelFromMainActivity);
         } else {
             Log.e(TAG, "Level is null");
         }
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-        }
-        return true;
     }
 
     private void init() {
@@ -298,8 +281,7 @@ public class GameActivity extends AppCompatActivity implements CommandAdapter.Ad
         if (nextLevelId < DefaultLevels.DEFAULT_LEVELS.length) {
             finish();
             GameActivity.startActivity(this, DefaultLevels.DEFAULT_LEVELS[nextLevelId]);
-        }
-        else {
+        } else {
             finish();
         }
     }

@@ -23,6 +23,8 @@ public class MySharedPreferences implements Preferences {
     private final String KEY_USER_NAME = "KEY_USER_NAME";
     private final String KEY_USER_LEVEL_COUNT = "KEY_USER_LEVEL_COUNT";
     private final String KEY_USER_LEVEL_ID = "KEY_USER_LEVEL_ID";
+    private final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
+    private final String KEY_USER_STUDENT = "KEY_USER_STUDENT";
 
     private final SharedPreferences mSharedPreferences;
 
@@ -103,6 +105,26 @@ public class MySharedPreferences implements Preferences {
     @Override
     public int getLevelId() {
         return mSharedPreferences.getInt(KEY_USER_LEVEL_ID, GameConstants.DEFAULT_LEVELS_COUNT);
+    }
+
+    @Override
+    public void setUserEmail(String email) {
+        mSharedPreferences.edit().putString(KEY_USER_EMAIL, email).apply();
+    }
+
+    @Override
+    public String getUserEmail() {
+        return mSharedPreferences.getString(KEY_USER_EMAIL, null);
+    }
+
+    @Override
+    public boolean isUserStudent() {
+        return mSharedPreferences.getBoolean(KEY_USER_STUDENT,true);
+    }
+
+    @Override
+    public void setUserStudent(boolean value) {
+        mSharedPreferences.edit().putBoolean(KEY_USER_STUDENT, value).apply();
     }
 
 }
