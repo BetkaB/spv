@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"/>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +31,17 @@
         <fragment
             android:id="@+id/fragment_custom_levels"
             android:name="com.example.beebzb.codingkid.screens.main.CustomLevelChoiceFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
+
+        <fragment
+            android:id="@+id/fragment_shared_levels"
+            android:name="com.example.beebzb.codingkid.screens.main.SharedLevelsFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />

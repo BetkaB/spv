@@ -11,7 +11,7 @@
     <string name="main_activity_custom_levels_title">Moje hry</string>
     <string name="main_activity_shared_levels_title">Zdieľané hry</string>
     <string name="main_activity_add_level">Vytvoriť hru</string>
-    <string name="main_activity_update">Aktualizovať</string>
+    <string name="main_activity_update">Aktualizovať hry</string>
 
     <string name="menu_settings">Nastavenia</string>
 
@@ -74,5 +74,8 @@
     <string name="settings_activity_teacher_status">Google používateľ: %s</string>
     <string name="settings_activity_connection_failed">Ste prihlásení na internete? </string>
     <string name="settings_activity_authentication_failed">Autentifikácia zlyhala </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

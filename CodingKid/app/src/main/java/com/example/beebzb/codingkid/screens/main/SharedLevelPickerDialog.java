@@ -12,42 +12,39 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LevelPickerDialog extends CustomDialog {
-    interface LevelPickerDialogCallback {
+public class SharedLevelPickerDialog extends CustomDialog {
+    interface SharedLevelPickerDialogCallback {
         void onPlayButtonClicked();
 
-        void onEditButtonClicked();
-
         void onDeleteButtonClicked();
-
-        void onShareButtonClicked();
     }
+
+    @BindView(R.id.dialog_level_picker_edit)
+    ImageButton editImageButton;
 
     @BindView(R.id.dialog_level_picker_share)
     ImageButton shareImageButton;
 
-    private final String TAG = "LevelPickerDialog";
+    private final String TAG = "SharedLevelPickerDialog";
 
-    private LevelPickerDialogCallback callback;
+    private SharedLevelPickerDialog.SharedLevelPickerDialogCallback callback;
 
-    public LevelPickerDialog(Context context, LevelPickerDialogCallback callback, boolean isUserStudent) {
+    public SharedLevelPickerDialog(Context context, SharedLevelPickerDialog.SharedLevelPickerDialogCallback callback) {
         super(context);
         if (callback != null) {
             this.callback = callback;
         } else {
             Log.e(TAG, "Callback for level picker is null");
         }
-
-        init(isUserStudent);
+        init();
     }
 
-    private void init(boolean isUserStudent) {
+    private void init() {
         View view = View.inflate(getContext(), R.layout.dialog_level_picker, null);
         ButterKnife.bind(this, view);
         setContentView(view);
-        if (isUserStudent){
-            shareImageButton.setVisibility(View.GONE);
-        }
+        shareImageButton.setVisibility(View.GONE);
+        editImageButton.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.dialog_level_picker_play)
@@ -56,21 +53,9 @@ public class LevelPickerDialog extends CustomDialog {
         callback.onPlayButtonClicked();
     }
 
-    @OnClick(R.id.dialog_level_picker_share)
-    public void onShareButtonClicked() {
-        dismiss();
-        callback.onShareButtonClicked();
-    }
-
     @OnClick(R.id.dialog_level_picker_delete)
     public void onDeleteButtonClicked() {
         dismiss();
         callback.onDeleteButtonClicked();
-    }
-
-    @OnClick(R.id.dialog_level_picker_edit)
-    public void onEditButtonClicked() {
-        dismiss();
-        callback.onEditButtonClicked();
     }
 }
