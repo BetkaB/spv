@@ -116,6 +116,6 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
 
     @Override
     public void onShareButtonClicked() {
-        new ServerTransaction().writeData();
+        new ServerTransaction().getLevels(mPreferences);
     }
 }

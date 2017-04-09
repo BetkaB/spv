@@ -3,22 +3,28 @@ package com.example.beebzb.codingkid.screens.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.audiofx.BassBoost;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.beebzb.codingkid.MainApplication;
 import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.Utils;
+import com.example.beebzb.codingkid.entity.MyActivity;
+import com.example.beebzb.codingkid.entity.MyProgressDialog;
+import com.example.beebzb.codingkid.module_preferences.Preferences;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
@@ -30,11 +36,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class SettingsActivity extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+public class SettingsActivity extends MyActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SettingsActivity.class);
@@ -47,21 +55,43 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
     private static final String TAG = "SettingsActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
 
-    // [START declare_auth_listener]
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // [END declare_auth_listener]
 
     private GoogleApiClient mGoogleApiClient;
 
-    @BindView(R.id.status)
+    private MyProgressDialog mProgressDialog;
+
+    @Inject
+    Preferences mPreferences;
+
+    @BindView(R.id.settings_activity_user_status)
     TextView mStatusTextView;
 
-    @BindView(R.id.detail)
-    TextView mDetailTextView;
+    @BindView(R.id.settings_activity_sign_out_button)
+    Button signOutButton;
+
+    @BindView(R.id.settings_activity_google_sign_in_button)
+    SignInButton signInButton;
+
+    @BindView(R.id.settings_activity_teacher_radio_button)
+    RadioButton teacherRadioButton;
+
+    @BindView(R.id.settings_activity_student_radio_button)
+    RadioButton studentRadioButton;
+
+    @BindView(R.id.settings_activity_student_layout)
+    LinearLayout studentLayout;
+
+    @BindView(R.id.settings_activity_teacher_layout)
+    LinearLayout teacherLayout;
+
+    @BindView(R.id.settings_activity_id_input)
+    EditText idInput;
+
+    @BindView(R.id.settings_activity_signed_user_mail)
+    TextView userMailLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,61 +102,76 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
 
         initLayout();
 
-        // Button listeners
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
-
-        // [START config_signin]
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        // [END config_signin]
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
-        // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+                    mPreferences.setUserEmail(user.getEmail());
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
+                    mPreferences.setUserEmail(null);
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // [START_EXCLUDE]
                 updateUI(user);
-                // [END_EXCLUDE]
             }
         };
-        // [END auth_state_listener]
     }
 
     private void initLayout() {
-
+        mProgressDialog = new MyProgressDialog(this);
+        checkRadioButtons();
     }
 
-    // [START on_start_add_listener]
+    private void checkRadioButtons() {
+        if (mPreferences.isUserStudent()) {
+            studentRadioButton.setChecked(true);
+            teacherRadioButton.setChecked(false);
+            signInButton.setEnabled(false);
+            signOutButton.setEnabled(false);
+            idInput.setEnabled(true);
+        } else {
+            studentRadioButton.setChecked(false);
+            teacherRadioButton.setChecked(true);
+            signInButton.setEnabled(true);
+            signOutButton.setEnabled(true);
+            idInput.setEnabled(false);
+        }
+    }
+
+    @OnClick(R.id.settings_activity_student_radio_button)
+    public void onStudentRadioButtonClicked() {
+        mPreferences.setUserStudent(true);
+        checkRadioButtons();
+    }
+
+    @OnClick(R.id.settings_activity_teacher_radio_button)
+    public void onTeacherRadioButtonClicked() {
+        mPreferences.setUserStudent(false);
+        checkRadioButtons();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
-    // [END on_start_add_listener]
 
-    // [START on_stop_remove_listener]
     @Override
     public void onStop() {
         super.onStop();
@@ -134,9 +179,7 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-    // [END on_stop_remove_listener]
 
-    // [START onactivityresult]
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -150,21 +193,16 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
-                // [START_EXCLUDE]
                 updateUI(null);
-                // [END_EXCLUDE]
             }
         }
     }
-    // [END onactivityresult]
 
-    // [START auth_with_google]
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-        // [START_EXCLUDE silent]
-        //showProgressDialog(); // TODO show
-        // [END_EXCLUDE]
+        mProgressDialog.setMessage(R.string.progress_dialog_message_signing_in);
+        mProgressDialog.show();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -177,28 +215,24 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Utils.shortToast(SettingsActivity.this, "Authentication failed.");
+                            Log.e(TAG, "signInWithCredential", task.getException());
+                            Utils.shortToast(SettingsActivity.this, R.string.settings_activity_authentication_failed);
                         }
-                        // [START_EXCLUDE]
-                        //hideProgressDialog();// TODO hide
-                        // [END_EXCLUDE]
+                        mProgressDialog.hide();
                     }
                 });
     }
-    // [END auth_with_google]
 
-    // [START signin]
-    private void signIn() {
+    @OnClick(R.id.settings_activity_google_sign_in_button)
+    public void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signin]
 
-    private void signOut() {
+    @OnClick(R.id.settings_activity_sign_out_button)
+    public void signOut() {
         // Firebase sign out
         mAuth.signOut();
-
         // Google sign out
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -209,34 +243,19 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
                 });
     }
 
-    private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
-
-        // Google revoke access
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        updateUI(null);
-                    }
-                });
-    }
-
     private void updateUI(FirebaseUser user) {
-        //hideProgressDialog();// TODO hide
+        if (mProgressDialog != null) {
+            mProgressDialog.hide();
+        }
         if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            userMailLabel.setText(user.getEmail());
+            mStatusTextView.setText(getString(R.string.settings_activity_teacher_status, user.getEmail()));
+            signInButton.setVisibility(View.GONE);
+            signOutButton.setVisibility(View.VISIBLE);
         } else {
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
-
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            mStatusTextView.setText(R.string.settings_activity_teacher_signed_out);
+            signInButton.setVisibility(View.VISIBLE);
+            signOutButton.setVisibility(View.GONE);
         }
     }
 
@@ -245,19 +264,7 @@ public class SettingsActivity extends FragmentActivity implements GoogleApiClien
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
-        Utils.shortToast(this, "Google Play Services error.");
-    }
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.sign_in_button) {
-            signIn();
-        } else if (i == R.id.sign_out_button) {
-            signOut();
-        } else if (i == R.id.disconnect_button) {
-            revokeAccess();
-        }
+        Utils.shortToast(this, R.string.settings_activity_connection_failed);
     }
 
 

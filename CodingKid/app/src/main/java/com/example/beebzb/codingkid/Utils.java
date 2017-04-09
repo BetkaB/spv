@@ -45,4 +45,8 @@ public class Utils {
         }
         return levels;
     }
+
+    public static String getChangedStringForFirebase(String userEmail){
+        return userEmail.replace(".","*");
+    }
 }
