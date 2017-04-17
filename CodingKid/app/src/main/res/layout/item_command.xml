@@ -27,27 +27,30 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textSize="@dimen/item_command_text_size" />
 
         <TextView
             android:id="@+id/command_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginEnd="@dimen/item_command_number_padding"
+            android:layout_marginLeft="@dimen/item_command_number_padding"
+            android:layout_marginRight="@dimen/item_command_number_padding"
+            android:layout_marginStart="@dimen/item_command_number_padding"
+            android:textSize="@dimen/item_command_text_size"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/command_x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/command_loop_start_2" />
+            android:text="@string/command_loop_start_2"
+            android:textSize="@dimen/item_command_text_size" />
 
         <ImageButton
-            style="@style/LoopButton"
             android:id="@+id/button_increase"
+            style="@style/LoopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add_black_24dp"

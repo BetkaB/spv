@@ -1,0 +1,29 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Game activity -->
+    <dimen name="activity_game_code_commands_margin">16dp</dimen>
+    <dimen name="activity_game_remaining_hearts_label_left_padding">4dp</dimen>
+    <dimen name="activity_game_separator_padding_bottom">16dp</dimen>
+    <dimen name="activity_game_control_panel_buttons_padding">36dp</dimen>
+    <dimen name="activity_game_info_panel_padding">12dp</dimen>
+    <dimen name="activity_game_info_panel_text_size">22sp</dimen>
+    <dimen name="activity_game_control_panel_text_size">22sp</dimen>
+
+    <!-- Item command -->
+    <dimen name="item_command_text_size">18sp</dimen>
+    <dimen name="item_command_number_padding">4dp</dimen>
+
+    <!-- Main activity -->
+    <dimen name="fragment_level_picker_item_height">80dp</dimen>
+    <dimen name="fragment_level_picker_item_padding">8dp</dimen>
+
+    <!-- Settings activity -->
+    <dimen name="activity_settings_left_padding_from_id">8dp</dimen>
+
+    <!-- Editor activity -->
+    <dimen name="activity_editor_input_text_size">18sp</dimen>
+
+</resources>

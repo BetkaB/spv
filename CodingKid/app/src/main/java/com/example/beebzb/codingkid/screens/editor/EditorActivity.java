@@ -19,6 +19,7 @@ import com.example.beebzb.codingkid.R;
 import com.example.beebzb.codingkid.Utils;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;
+import com.example.beebzb.codingkid.entity.MyActivity;
 import com.example.beebzb.codingkid.entity.Position;
 import com.example.beebzb.codingkid.module_preferences.Preferences;
 
@@ -30,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends MyActivity {
     @BindView(R.id.inputName)
     EditText inputLevelName;
 

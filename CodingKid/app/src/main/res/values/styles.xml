@@ -44,6 +44,7 @@
 
     <style name="GameActivityInfoLabels">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textSize">@dimen/activity_game_info_panel_text_size</item>
     </style>
 
     <style name="GameActivityInfoNumbers" parent="GameActivityInfoLabels">
@@ -58,5 +59,9 @@
         <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">@dimen/activity_settings_left_padding_from_id</item>
         <item name="android:paddingRight">0dp</item>
+    </style>
+
+    <style name="EditorActivityInputPanelText" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textSize">@dimen/activity_editor_input_text_size</item>
     </style>
 </resources>
