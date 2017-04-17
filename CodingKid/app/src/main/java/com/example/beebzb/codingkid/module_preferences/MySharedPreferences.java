@@ -1,10 +1,8 @@
 package com.example.beebzb.codingkid.module_preferences;
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.example.beebzb.codingkid.Utils;
-import com.example.beebzb.codingkid.entity.DefaultLevels;
 import com.example.beebzb.codingkid.entity.GameConstants;
 import com.example.beebzb.codingkid.entity.Level;
 
@@ -37,6 +35,10 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public void setHighestLevel(int id) {
+        /*SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.putInt(KEY_HIGHEST_LEVEL, id).apply();
+        */
         mSharedPreferences.edit().putInt(KEY_HIGHEST_LEVEL, id).apply();
     }
 
@@ -54,13 +56,13 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public Set<String> getCustomLevels() {
-        return  mSharedPreferences.getStringSet(KEY_CUSTOM_LEVELS, new HashSet<String>());
+        return mSharedPreferences.getStringSet(KEY_CUSTOM_LEVELS, new HashSet<String>());
     }
 
     @Override
     public void setCustomLevels(ArrayList<Level> levels) {
         HashSet<String> newLevels = new HashSet<>();
-        for (Level level : levels){
+        for (Level level : levels) {
             newLevels.add(Utils.getLevelInString(level));
         }
         mSharedPreferences.edit().putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
@@ -68,9 +70,10 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public void setCustomLevels(Set<String> newLevels) {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        /*SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.clear();
-        editor.putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
+        editor.putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();*/
+        mSharedPreferences.edit().putStringSet(KEY_CUSTOM_LEVELS, newLevels).apply();
     }
 
     @Override
@@ -119,7 +122,7 @@ public class MySharedPreferences implements Preferences {
 
     @Override
     public boolean isUserStudent() {
-        return mSharedPreferences.getBoolean(KEY_USER_STUDENT,true);
+        return mSharedPreferences.getBoolean(KEY_USER_STUDENT, true);
     }
 
     @Override

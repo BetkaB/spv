@@ -65,17 +65,16 @@ public class SharedLevelsFragment extends Fragment implements SharedLevelPickerD
         init();
     }
 
-    private void init(){
+    private void init() {
         sendSharedLevelsRequest();
     }
 
     @OnItemClick(R.id.shared_levels_listview)
     public void onItemClicked(int position) {
         chosenLevel = levelsAdapter.getItem(position);
-        if (mPreferences.isUserStudent()){
+        if (mPreferences.isUserStudent()) {
             GameActivity.startActivity(getContext(), chosenLevel);
-        }
-        else {
+        } else {
             SharedLevelPickerDialog levelPickerDialog = new SharedLevelPickerDialog(getContext(), this);
             levelPickerDialog.show();
         }
@@ -87,33 +86,35 @@ public class SharedLevelsFragment extends Fragment implements SharedLevelPickerD
     }
 
     @OnClick(R.id.update_button)
-    public void onUpdateButtonClicked(){
+    public void onUpdateButtonClicked() {
 
     }
 
     private void sendSharedLevelsRequest() {
         DatabaseReference ref = ServerTransaction.getReference(mPreferences);
+        if (ref != null) {
 
-        Log.d(TAG, "ref: " + ref);
-        // listener
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String post = postSnapshot.getValue(String.class);
-                    Level newLevel = Utils.stringToLevel(post);
-                    sharedLevelData.add(newLevel);
+            Log.d(TAG, "ref: " + ref);
+            // listener
+            ValueEventListener postListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Get Post object and use the values to update the UI
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        String post = postSnapshot.getValue(String.class);
+                        Level newLevel = Utils.stringToLevel(post);
+                        sharedLevelData.add(newLevel);
+                    }
+                    initLayout();
                 }
-                initLayout();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "loadPost: onCancelled", databaseError.toException());
-            }
-        };
-        ref.addValueEventListener(postListener);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "loadPost: onCancelled", databaseError.toException());
+                }
+            };
+            ref.addValueEventListener(postListener);
+        }
     }
 
     @Override

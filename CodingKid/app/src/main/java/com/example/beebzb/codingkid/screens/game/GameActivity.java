@@ -258,10 +258,16 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
         Log.d(LevelChoiceFragment.TAG, "highest " + mPreferences.getHighestLevel());
         Log.d(LevelChoiceFragment.TAG, "default levels " + GameConstants.DEFAULT_LEVELS_COUNT);
 
-        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT && levelId >= mPreferences.getHighestLevel()) {
+        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT-1) {
             int highestLevel = levelId + 1;
             mPreferences.setHighestLevel(highestLevel);
             new AfterWinDialog(this, this, highestLevel).show();
+        }
+
+        else {
+            AfterWinDialog sharedAndCustom = new AfterWinDialog(this, this);
+            sharedAndCustom.setReturningType();
+            sharedAndCustom.show();
         }
     }
 
@@ -278,7 +284,7 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
 
     @Override
     public void onActionButtonClicked(int nextLevelId) {
-        if (nextLevelId < DefaultLevels.DEFAULT_LEVELS.length) {
+        if (nextLevelId != -1 && nextLevelId < DefaultLevels.DEFAULT_LEVELS.length) {
             finish();
             GameActivity.startActivity(this, DefaultLevels.DEFAULT_LEVELS[nextLevelId]);
         } else {

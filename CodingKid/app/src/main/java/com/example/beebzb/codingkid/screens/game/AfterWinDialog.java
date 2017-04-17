@@ -6,24 +6,42 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 
 import com.example.beebzb.codingkid.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class AfterWinDialog extends Dialog {
+
     interface AfterWinDialogCallback {
         void onActionButtonClicked(int highestLevelDone);
     }
 
-    private int mHighestLevelDone;
+    @BindView(R.id.dialog_action_button)
+    ImageButton button;
+
+    private int mHighestLevelDone = -1;
 
     private AfterWinDialogCallback callback;
 
     public AfterWinDialog(Context context, AfterWinDialogCallback callback, int highestLevel) {
         super(context);
+        init();
+        this.callback = callback;
+        this.mHighestLevelDone = highestLevel;
+    }
+
+    public AfterWinDialog(Context context, AfterWinDialogCallback callback) {
+        super(context);
+        init();
+        this.callback = callback;
+    }
+
+    private void init() {
         View view = View.inflate(getContext(), R.layout.dialog_next_level, null);
         ButterKnife.bind(this, view);
 
@@ -33,13 +51,14 @@ public class AfterWinDialog extends Dialog {
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         setContentView(view);
-
-        this.callback = callback;
-        this.mHighestLevelDone = highestLevel;
     }
 
     @OnClick(R.id.dialog_action_button)
     public void onActionButtonClicked() {
         callback.onActionButtonClicked(mHighestLevelDone);
+    }
+
+    public void setReturningType() {
+        button.setImageResource(R.drawable.ic_button_back);
     }
 }

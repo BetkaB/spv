@@ -160,7 +160,7 @@ public class EditorActivity extends AppCompatActivity {
         parseObjectsFromGameSurface();
         if (isInputFieldEmpty(inputLevelName)) {
             String defaultName = getResources().getString(R.string.editor_activity_level_default);
-            level.setName(preferences.getUserName() + defaultName + preferences.getUserLevelCount());
+            level.setName(preferences.getUserName() + defaultName + " " + preferences.getUserLevelCount());
         } else {
             level.setName(inputLevelName.getText().toString());
         }
@@ -229,16 +229,10 @@ public class EditorActivity extends AppCompatActivity {
             preferences.saveCustomLevel(Utils.getLevelInString(createdLevel));
             preferences.incrementUserLevelCount();
         } else {
+            Log.d(TAG, "updating");
             // removing current level from custom levels
             int updatedLevelId = levelToEdit.getId();
-            Set<String> customLevels = preferences.getCustomLevels();
-            for (String levelInString : customLevels) {
-                Level savedLevel = Utils.stringToLevel(levelInString);
-                if (savedLevel.getId() == updatedLevelId) {
-                    customLevels.remove(levelInString);
-                    return;
-                }
-            }
+            Set<String> customLevels = getNewCustomLevelsWithRemovedUpdated(updatedLevelId);
             createdLevel.setId(updatedLevelId);
             customLevels.add(Utils.getLevelInString(createdLevel));
             preferences.setCustomLevels(customLevels);
@@ -246,6 +240,27 @@ public class EditorActivity extends AppCompatActivity {
 
         finish();
         Utils.shortToast(this, R.string.editor_activity_level_was_saved);
+    }
+
+    private Set<String> getNewCustomLevelsWithRemovedUpdated(int currentLevelId) {
+        String levelForDeleting = null;
+        Set<String> customLevels = preferences.getCustomLevels();
+        Log.d(TAG, "before removing size" + customLevels.size());
+
+        for (String levelInString : customLevels) {
+            Level savedLevel = Utils.stringToLevel(levelInString);
+            if (savedLevel.getId() == currentLevelId) {
+                levelForDeleting = levelInString;
+                Log.d(TAG, "id are equals");
+            }
+        }
+        if (levelForDeleting != null) {
+            customLevels.remove(levelForDeleting);
+            Log.d(TAG, "removing level");
+            Log.d(TAG, "after removing size" + customLevels.size());
+
+        }
+        return customLevels;
     }
 
 

@@ -2,7 +2,6 @@ package com.example.beebzb.codingkid;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.beebzb.codingkid.entity.Level;
@@ -14,6 +13,7 @@ import java.util.Set;
 
 public class Utils {
     private static final String TAG = "Utils";
+
     public static String getLevelInString(Level level) {
         Gson gson = new Gson();
         return gson.toJson(level);
@@ -29,11 +29,11 @@ public class Utils {
     }
 
     public static void shortToast(Context context, @StringRes int stringId) {
-        Toast.makeText(context,context.getString(stringId), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getString(stringId), Toast.LENGTH_SHORT).show();
     }
 
     public static void longToast(Context context, @StringRes int stringId) {
-        Toast.makeText(context,context.getString(stringId), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, context.getString(stringId), Toast.LENGTH_LONG).show();
     }
 
     public static ArrayList<Level> getLevels(Preferences preferences) {
@@ -46,7 +46,7 @@ public class Utils {
         return levels;
     }
 
-    public static String getChangedStringForFirebase(String userEmail){
-        return userEmail.replace(".","*");
+    public static String getChangedStringForFirebase(String userEmail) {
+        return userEmail.replace(".", "*");
     }
 }
