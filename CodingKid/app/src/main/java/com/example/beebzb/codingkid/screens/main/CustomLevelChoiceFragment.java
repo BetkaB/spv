@@ -117,7 +117,7 @@ public class CustomLevelChoiceFragment extends Fragment implements LevelPickerDi
     @Override
     public void onShareButtonClicked() {
         if (!mPreferences.isUserStudent() && chosenLevel != null){
-            ServerTransaction.writeData(chosenLevel, mPreferences);
+            ServerTransaction.writeData(chosenLevel, mPreferences.getUserEmail());
         }
     }
 }

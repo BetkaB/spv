@@ -20,27 +20,4 @@
         android:layout_weight="5"
         android:background="@drawable/bg_level_picker_fragment" />
 
-    <LinearLayout
-        android:id="@+id/update_button"
-        style="@style/MainActivityButtonBg"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:orientation="horizontal">
-
-        <ImageView
-            style="@style/MainActivityButtonImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_update" />
-
-        <TextView
-            style="@style/MainActivityButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_activity_update" />
-
-    </LinearLayout>
-
 </LinearLayout>

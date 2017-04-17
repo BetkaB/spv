@@ -23,6 +23,9 @@ public class MySharedPreferences implements Preferences {
     private final String KEY_USER_LEVEL_ID = "KEY_USER_LEVEL_ID";
     private final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
     private final String KEY_USER_STUDENT = "KEY_USER_STUDENT";
+    private final String KEY_TEACHERS_ID = "KEY_TEACHERS_ID";
+    private final String KEY_MINE_ID = "KEY_MINE_ID";
+
 
     private final SharedPreferences mSharedPreferences;
 
@@ -128,6 +131,26 @@ public class MySharedPreferences implements Preferences {
     @Override
     public void setUserStudent(boolean value) {
         mSharedPreferences.edit().putBoolean(KEY_USER_STUDENT, value).apply();
+    }
+
+    @Override
+    public void setTeachersId(String teachersId) {
+        mSharedPreferences.edit().putString(KEY_TEACHERS_ID, teachersId).apply();
+    }
+
+    @Override
+    public String getTeachersId() {
+        return mSharedPreferences.getString(KEY_TEACHERS_ID, null);
+    }
+
+    @Override
+    public void setMineId(String mineId) {
+        mSharedPreferences.edit().putString(KEY_MINE_ID, mineId).apply();
+    }
+
+    @Override
+    public String getMineId() {
+        return mSharedPreferences.getString(KEY_MINE_ID, null);
     }
 
 }

@@ -40,4 +40,13 @@ public interface Preferences {
 
     void setUserStudent(boolean value);
 
+    void setTeachersId(String teachersId);
+
+    String getTeachersId();
+
+    void setMineId(String mineId);
+
+    String getMineId();
+
+
 }

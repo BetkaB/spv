@@ -1,14 +1,18 @@
 package com.example.beebzb.codingkid.screens.settings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -87,11 +91,14 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
     @BindView(R.id.settings_activity_teacher_layout)
     LinearLayout teacherLayout;
 
-    @BindView(R.id.settings_activity_id_input)
-    EditText idInput;
-
     @BindView(R.id.settings_activity_signed_user_mail)
     TextView userMailLabel;
+
+    @BindView(R.id.settings_activity_teachers_id)
+    TextView teachersIdLabel;
+
+    @BindView(R.id.settings_activity_edit_teachers_id_button)
+    ImageView editTeachersIdButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,8 +141,31 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
     }
 
     private void initLayout() {
+        if (mPreferences.isUserStudent() && mAuth != null){
+            signInAnonymously();
+        }
         mProgressDialog = new MyProgressDialog(this);
         checkRadioButtons();
+        initTeachersId();
+        initMineId();
+    }
+
+    private void initTeachersId() {
+        String teacherId = mPreferences.getTeachersId();
+        if (teacherId == null) {
+            teachersIdLabel.setText(R.string.settings_activity_teachers_id_not_defined);
+        } else {
+            teachersIdLabel.setText(teacherId);
+        }
+    }
+
+    private void initMineId() {
+        String mail = mPreferences.getUserEmail();
+        if (mail == null) {
+            userMailLabel.setText(R.string.settings_activity_mine_id_not_defined);
+        } else {
+            userMailLabel.setText(mail);
+        }
     }
 
     private void checkRadioButtons() {
@@ -144,25 +174,30 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
             teacherRadioButton.setChecked(false);
             signInButton.setEnabled(false);
             signOutButton.setEnabled(false);
-            idInput.setEnabled(true);
+            editTeachersIdButton.setEnabled(true);
+
         } else {
             studentRadioButton.setChecked(false);
             teacherRadioButton.setChecked(true);
             signInButton.setEnabled(true);
             signOutButton.setEnabled(true);
-            idInput.setEnabled(false);
+            editTeachersIdButton.setEnabled(false);
         }
     }
 
     @OnClick(R.id.settings_activity_student_radio_button)
     public void onStudentRadioButtonClicked() {
         mPreferences.setUserStudent(true);
+        signInAnonymously();
         checkRadioButtons();
     }
 
     @OnClick(R.id.settings_activity_teacher_radio_button)
     public void onTeacherRadioButtonClicked() {
         mPreferences.setUserStudent(false);
+        if (mAuth != null){
+            signOut();
+        }
         checkRadioButtons();
     }
 
@@ -243,6 +278,7 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
                 });
     }
 
+
     private void updateUI(FirebaseUser user) {
         if (mProgressDialog != null) {
             mProgressDialog.hide();
@@ -265,6 +301,66 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Utils.shortToast(this, R.string.settings_activity_connection_failed);
+    }
+
+    private void signInAnonymously() {
+        mProgressDialog = new MyProgressDialog(this);
+        mProgressDialog.setMessage(R.string.progress_dialog_message_signing_in);
+        mProgressDialog.show();
+        signOut();
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInAnonymously:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInAnonymously", task.getException());
+                            Utils.shortToast(SettingsActivity.this, R.string.settings_activity_authentication_failed);
+                        }
+
+                        mProgressDialog.hide();
+                    }
+                });
+    }
+
+    @OnClick(R.id.settings_activity_edit_teachers_id_button)
+    public void onEditTeacherIdButtonClicked() {
+        openAlertWithEditText();
+    }
+
+    private void openAlertWithEditText() {
+        String oldTeachersId = mPreferences.getTeachersId();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.settings_activity_alert_with_input_title);
+
+        final EditText input = new EditText(this);
+        if (oldTeachersId != null){
+            input.setText(oldTeachersId);
+        }
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        builder.setView(input);
+
+        builder.setPositiveButton(R.string.settings_activity_alert_with_input_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newTeachersId = input.getText().toString();
+                mPreferences.setTeachersId(newTeachersId);
+                initTeachersId();
+            }
+        });
+        builder.setNegativeButton(R.string.settings_activity_alert_with_input_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
 

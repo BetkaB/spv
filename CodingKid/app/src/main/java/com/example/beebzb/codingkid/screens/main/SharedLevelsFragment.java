@@ -85,20 +85,15 @@ public class SharedLevelsFragment extends Fragment implements SharedLevelPickerD
         sharedLevelsListView.setAdapter(levelsAdapter);
     }
 
-    @OnClick(R.id.update_button)
-    public void onUpdateButtonClicked() {
-
-    }
-
     private void sendSharedLevelsRequest() {
-        DatabaseReference ref = ServerTransaction.getReference(mPreferences);
+        DatabaseReference ref = ServerTransaction.getReference(getIdForDownloadingLevels());
         if (ref != null) {
-
-            Log.d(TAG, "ref: " + ref);
+            Log.d(TAG, "downloading levels for ref: " + ref);
             // listener
             ValueEventListener postListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    sharedLevelData = new ArrayList<>();
                     // Get Post object and use the values to update the UI
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         String post = postSnapshot.getValue(String.class);
@@ -115,6 +110,9 @@ public class SharedLevelsFragment extends Fragment implements SharedLevelPickerD
             };
             ref.addValueEventListener(postListener);
         }
+        else {
+            Utils.shortToast(getContext(), R.string.main_activity_cannot_download_levels);
+        }
     }
 
     @Override
@@ -124,6 +122,22 @@ public class SharedLevelsFragment extends Fragment implements SharedLevelPickerD
 
     @Override
     public void onDeleteButtonClicked() {
-        //TODO delete remote level
+        ServerTransaction.removeLevel(getIdForDownloadingLevels(), chosenLevel.getName());
+        sendSharedLevelsRequest();
+    }
+
+    private String getIdForDownloadingLevels() {
+        if (mPreferences.isUserStudent()) {
+            return mPreferences.getTeachersId();
+        }
+        return mPreferences.getUserEmail();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sendSharedLevelsRequest();
     }
 }
+
+// TODO intro - need to call anonymous authentication

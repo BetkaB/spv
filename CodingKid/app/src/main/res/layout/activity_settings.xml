@@ -12,33 +12,57 @@
     tools:context="com.example.beebzb.codingkid.screens.settings.SettingsActivity">
 
     <RadioButton
-        android:checked="true"
         android:id="@+id/settings_activity_student_radio_button"
+        style="@style/SettingsActivityRadioButtonText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checked="true"
         android:text="@string/settings_activity_student" />
 
     <LinearLayout
         android:id="@+id/settings_activity_student_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:weightSum="18">
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/settings_activity_teachers_id" />
+            android:layout_weight="16"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/settings_activity_id_input"
-            android:layout_width="match_parent"
+            <TextView
+                style="@style/SettingsActivityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_activity_teachers_id" />
+
+            <TextView
+                android:id="@+id/settings_activity_teachers_id"
+                style="@style/SettingsActivityId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_activity_teachers_id_not_defined" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/settings_activity_edit_teachers_id_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:layout_weight="2"
+            android:src="@drawable/settings_ic_edit" />
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorKeppel" />
+
     <RadioButton
         android:id="@+id/settings_activity_teacher_radio_button"
+        style="@style/SettingsActivityRadioButtonText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_activity_teacher" />
@@ -55,20 +79,21 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/SettingsActivityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/settings_activity_my_id" />
 
             <TextView
-                android:paddingLeft="8dp"
-                android:textStyle="bold"
                 android:id="@+id/settings_activity_signed_user_mail"
+                style="@style/SettingsActivityId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/settings_activity_user_status"
+            style="@style/SettingsActivityText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_activity_teacher_signed_out" />

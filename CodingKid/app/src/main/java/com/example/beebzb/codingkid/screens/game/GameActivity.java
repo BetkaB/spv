@@ -254,17 +254,14 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
         playButton.setText(R.string.game_activity_button_reset);
         playButton.setEnabled(true);
         int levelId = this.level.getId();
-        Log.d(LevelChoiceFragment.TAG, "onWin levelId " + levelId);
-        Log.d(LevelChoiceFragment.TAG, "highest " + mPreferences.getHighestLevel());
-        Log.d(LevelChoiceFragment.TAG, "default levels " + GameConstants.DEFAULT_LEVELS_COUNT);
 
-        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT-1) {
+        if (levelId < GameConstants.DEFAULT_LEVELS_COUNT - 1) {
             int highestLevel = levelId + 1;
-            mPreferences.setHighestLevel(highestLevel);
+            if (mPreferences.getHighestLevel() > highestLevel) {
+                mPreferences.setHighestLevel(highestLevel);
+            }
             new AfterWinDialog(this, this, highestLevel).show();
-        }
-
-        else {
+        } else {
             AfterWinDialog sharedAndCustom = new AfterWinDialog(this, this);
             sharedAndCustom.setReturningType();
             sharedAndCustom.show();

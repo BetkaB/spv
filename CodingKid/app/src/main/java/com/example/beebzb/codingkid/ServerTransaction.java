@@ -12,21 +12,27 @@ public class ServerTransaction {
 
     private static DatabaseReference mDatabase;
 
-    public static void writeData(Level level, Preferences preferences) {
-        DatabaseReference ref = getReference(preferences);
+    public static void writeData(Level level, String userId) {
+        DatabaseReference ref = getReference(userId);
         if (ref != null) {
             String levelRepre = Utils.getLevelInString(level);
             ref.child(level.getName()).setValue(levelRepre);
         }
     }
 
-    public static DatabaseReference getReference(Preferences preferences) {
-        String mail = preferences.getUserEmail();
-        if (mail != null) {
-            String teacherId = Utils.getChangedStringForFirebase(mail);
+    public static DatabaseReference getReference(String id) {
+        if (id != null) {
+            String teacherId = Utils.getChangedStringForFirebase(id);
             mDatabase = FirebaseDatabase.getInstance().getReference();
             return mDatabase.child(FIELD_LEVELS).child(teacherId);
         }
         return null;
+    }
+
+    public static void removeLevel(String userId, String levelName){
+        DatabaseReference ref = getReference(userId);
+        if (ref != null) {
+            ref.child(levelName).removeValue();
+        }
     }
 }
