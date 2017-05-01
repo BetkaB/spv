@@ -95,7 +95,7 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
     }
 
     private void init() {
-        mCommandTypes = new ArrayList<Command>();
+        mCommandTypes = new ArrayList<>();
         mCommandAdapter = new CommandAdapter(this, mCommandTypes, this);
         codeListView.setAdapter(mCommandAdapter);
 
@@ -165,7 +165,6 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
             int lastPosition = mCommandAdapter.getCount() - 1;
             Command lastCommand = mCommandAdapter.getItem(lastPosition);
             if (lastCommand != null && lastCommand.getCommandType() == commandType) {
-                Log.d(TAG, "should increase last comman");
                 mCommandTypes.get(lastPosition).setCount(lastCommand.getCount() + 1);
                 mCommandAdapter.setData(mCommandTypes);
                 return true;
@@ -179,7 +178,6 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
     public void commandRight() {
         if (!increaseSame(CommandType.RIGHT)) {
             if (decreasedRemainingCommands()) {
-                Log.d(TAG, "decreaded Remaining COmmands");
                 mCommandTypes.add(new Command(CommandType.RIGHT));
                 mCommandAdapter.setData(mCommandTypes);
             }

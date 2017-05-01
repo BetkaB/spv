@@ -222,13 +222,13 @@ public class GameGrid extends GridLayout {
                 toXPosition = level.getPlayer().x - mPartWidth;
                 dirAnimDrawId = R.drawable.player_animation_down;
                 newX--;
-                // TODO change drawbale file
+                // TODO change drawable file
                 break;
             case UP:
                 toYPosition = level.getPlayer().y - mPartHeight;
                 dirAnimDrawId = R.drawable.player_animation_down;
                 newY--;
-                // TODO change drawbale file
+                // TODO change drawable file
                 break;
             case DOWN:
                 newY++;

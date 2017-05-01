@@ -25,7 +25,7 @@
             android:name=".screens.editor.EditorActivity"
             android:label="@string/editor"
             android:screenOrientation="landscape" />
-        <activity android:name=".screens.settings.SettingsActivity"></activity>
+        <activity android:name=".screens.settings.SettingsActivity"/>
     </application>
 
 </manifest>

@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 public class SharedLevelsFragment extends Fragment implements SharedLevelPickerDialog.SharedLevelPickerDialogCallback {

@@ -1,7 +1,6 @@
 package com.example.beebzb.codingkid;
 
 import com.example.beebzb.codingkid.entity.Level;
-import com.example.beebzb.codingkid.module_preferences.Preferences;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -15,8 +14,8 @@ public class ServerTransaction {
     public static void writeData(Level level, String userId) {
         DatabaseReference ref = getReference(userId);
         if (ref != null) {
-            String levelRepre = Utils.getLevelInString(level);
-            ref.child(level.getName()).setValue(levelRepre);
+            String levelRepresentation = Utils.getLevelInString(level);
+            ref.child(level.getName()).setValue(levelRepresentation);
         }
     }
 

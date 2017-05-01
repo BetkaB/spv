@@ -51,9 +51,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="SettingsActivityRadioButtonText" parent="TextAppearance.AppCompat.Large"></style>
+    <style name="SettingsActivityRadioButtonText" parent="TextAppearance.AppCompat.Large"/>
 
-    <style name="SettingsActivityText" parent="TextAppearance.AppCompat.Medium"></style>
+    <style name="SettingsActivityText" parent="TextAppearance.AppCompat.Medium"/>
 
     <style name="SettingsActivityId" parent="SettingsActivityText">
         <item name="android:textStyle">bold</item>

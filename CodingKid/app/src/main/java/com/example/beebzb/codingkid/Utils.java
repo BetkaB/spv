@@ -39,8 +39,8 @@ public class Utils {
     public static ArrayList<Level> getLevels(Preferences preferences) {
         Set<String> savedLevels = preferences.getCustomLevels();
         ArrayList<Level> levels = new ArrayList<>();
-        for (String levelRepre : savedLevels) {
-            Level newLevel = stringToLevel(levelRepre);
+        for (String levelRepresentation : savedLevels) {
+            Level newLevel = stringToLevel(levelRepresentation);
             levels.add(newLevel);
         }
         return levels;
