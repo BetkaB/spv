@@ -257,7 +257,7 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
 
         if (levelId < GameConstants.DEFAULT_LEVELS_COUNT - 1) {
             int highestLevel = levelId + 1;
-            if (mPreferences.getHighestLevel() > highestLevel) {
+            if (mPreferences.getHighestLevel() < highestLevel) {
                 mPreferences.setHighestLevel(highestLevel);
             }
             new AfterWinDialog(this, this, highestLevel).show();
