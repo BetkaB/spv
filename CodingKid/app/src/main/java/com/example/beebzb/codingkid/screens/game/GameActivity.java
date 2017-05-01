@@ -132,33 +132,57 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
 
     @OnClick(R.id.button_left)
     public void commandLeft() {
-        if (decreasedRemainingCommands()) {
-            mCommandTypes.add(new Command(CommandType.LEFT));
-            mCommandAdapter.setData(mCommandTypes);
+        if (!increaseSame(CommandType.DOWN)) {
+            if (decreasedRemainingCommands()) {
+                mCommandTypes.add(new Command(CommandType.LEFT));
+                mCommandAdapter.setData(mCommandTypes);
+            }
         }
     }
 
     @OnClick(R.id.button_down)
     public void commandDown() {
-        if (decreasedRemainingCommands()) {
-            mCommandTypes.add(new Command(CommandType.DOWN));
-            mCommandAdapter.setData(mCommandTypes);
+        if (!increaseSame(CommandType.DOWN)) {
+            if (decreasedRemainingCommands()) {
+                mCommandTypes.add(new Command(CommandType.DOWN));
+                mCommandAdapter.setData(mCommandTypes);
+            }
         }
     }
 
     @OnClick(R.id.button_up)
     public void commandUp() {
-        if (decreasedRemainingCommands()) {
-            mCommandTypes.add(new Command(CommandType.UP));
-            mCommandAdapter.setData(mCommandTypes);
+        if (!increaseSame(CommandType.UP)) {
+            if (decreasedRemainingCommands()) {
+                mCommandTypes.add(new Command(CommandType.UP));
+                mCommandAdapter.setData(mCommandTypes);
+            }
         }
+    }
+
+    private boolean increaseSame(CommandType commandType) {
+        if (mCommandAdapter.getCount() > 0) {
+            int lastPosition = mCommandAdapter.getCount() - 1;
+            Command lastCommand = mCommandAdapter.getItem(lastPosition);
+            if (lastCommand != null && lastCommand.getCommandType() == commandType) {
+                Log.d(TAG, "should increase last comman");
+                mCommandTypes.get(lastPosition).setCount(lastCommand.getCount() + 1);
+                mCommandAdapter.setData(mCommandTypes);
+                return true;
+            }
+        }
+        return false;
+
     }
 
     @OnClick(R.id.button_right)
     public void commandRight() {
-        if (decreasedRemainingCommands()) {
-            mCommandTypes.add(new Command(CommandType.RIGHT));
-            mCommandAdapter.setData(mCommandTypes);
+        if (!increaseSame(CommandType.RIGHT)) {
+            if (decreasedRemainingCommands()) {
+                Log.d(TAG, "decreaded Remaining COmmands");
+                mCommandTypes.add(new Command(CommandType.RIGHT));
+                mCommandAdapter.setData(mCommandTypes);
+            }
         }
     }
 
