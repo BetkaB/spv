@@ -124,6 +124,7 @@ public class GameGrid extends GridLayout {
             movePlayer(mStepsToMove.get(mIndex));
         } else {
             Log.d(TAG, "end of animation");
+            playerView.clearAnimation();
             Utils.longToast(getContext(), R.string.game_end_of_animations);
             mGameCallback.onLastMove();
         }
