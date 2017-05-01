@@ -80,5 +80,7 @@
     <string name="settings_activity_alert_with_input_title">Zadaj ID učiteľa</string>
     <string name="settings_activity_alert_with_input_ok">ok</string>
     <string name="settings_activity_alert_with_input_cancel">Zrušiť</string>
+    <string name="settings_activity_dialog_password_title">Zadaj heslo</string>
+    <string name="settings_activity_dialog_password_bad">Zlé heslo! Nie je možné prepnúť na mód učiteľa.</string>
 
 </resources>

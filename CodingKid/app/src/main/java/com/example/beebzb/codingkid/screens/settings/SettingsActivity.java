@@ -46,7 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsActivity extends MyActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class SettingsActivity extends MyActivity implements GoogleApiClient.OnConnectionFailedListener, PasswordDialog.Callback {
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SettingsActivity.class);
@@ -141,7 +141,7 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
     }
 
     private void initLayout() {
-        if (mPreferences.isUserStudent() && mAuth != null){
+        if (mPreferences.isUserStudent() && mAuth != null) {
             signInAnonymously();
         }
         mProgressDialog = new MyProgressDialog(this);
@@ -194,11 +194,7 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
 
     @OnClick(R.id.settings_activity_teacher_radio_button)
     public void onTeacherRadioButtonClicked() {
-        mPreferences.setUserStudent(false);
-        if (mAuth != null){
-            signOut();
-        }
-        checkRadioButtons();
+        new PasswordDialog(this, this);
     }
 
     @Override
@@ -339,7 +335,7 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
         builder.setTitle(R.string.settings_activity_alert_with_input_title);
 
         final EditText input = new EditText(this);
-        if (oldTeachersId != null){
+        if (oldTeachersId != null) {
             input.setText(oldTeachersId);
         }
         input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
@@ -364,4 +360,25 @@ public class SettingsActivity extends MyActivity implements GoogleApiClient.OnCo
     }
 
 
+    @Override
+    public void onPasswordConfirmed(boolean isCorrect) {
+        if (isCorrect) {
+            mPreferences.setUserStudent(false);
+            if (mAuth != null) {
+                signOut();
+            }
+            checkRadioButtons();
+        }
+        else {
+            teacherRadioButton.setChecked(false);
+            studentRadioButton.setChecked(true);
+            Utils.longToast(this,R.string.settings_activity_dialog_password_bad);
+        }
+    }
+
+    @Override
+    public void onDialogCanceled() {
+        teacherRadioButton.setChecked(false);
+        studentRadioButton.setChecked(true);
+    }
 }
