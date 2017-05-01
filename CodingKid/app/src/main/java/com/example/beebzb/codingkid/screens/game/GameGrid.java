@@ -386,6 +386,7 @@ public class GameGrid extends GridLayout {
                         nextStep();
                         break;
                     case WIN:
+                        playerView.clearAnimation();
                         // TODO make win animation and at the end - onWin callback
                         mGameCallback.onWin();
                         break;
