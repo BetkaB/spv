@@ -55,15 +55,17 @@ public class DefaultLevels {
         level1.setId(2);
         level1.setCommands(1);
         level1.setHearts(1);
-        level1.setStartPosition(new Position(4, 6));
-        int[][] gameMap = new int[GameConstants.rows][GameConstants.columns];
-        gameMap[4][6] = Level.CONST_BOX;
-        gameMap[4][7] = Level.CONST_BOX;
-        gameMap[4][8] = Level.CONST_BOX;
-        gameMap[4][10] = Level.CONST_BOX;
-        gameMap[4][11] = Level.CONST_BOX;
-        gameMap[4][12] = Level.CONST_HOUSE;
-        gameMap[4][9] = Level.CONST_HEART;
+        level1.setStartPosition(new Position(4, 10));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, Level.CONST_HOUSE, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
         level1.setGameMap(gameMap);
         level1.setName("Hra 3");
         level1.setAuthor("Default Kid");
@@ -330,7 +332,7 @@ public class DefaultLevels {
         level1.setStartPosition(new Position(6, 0));
         int[][] gameMap = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0},
