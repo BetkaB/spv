@@ -287,6 +287,7 @@ public class GameGrid extends GridLayout {
     }
 
     private void pickHeart(final int newY, final int newX) {
+        mGatheredHearts++;
         final GridLayout view = this;
         ScaleAnimation sAnim = getPickedUpHeartAnimation();
         sAnim.setAnimationListener(new Animation.AnimationListener() {
@@ -298,7 +299,7 @@ public class GameGrid extends GridLayout {
             @Override
             public void onAnimationEnd(Animation animation) {
                 mCurrentHeartsViews[newY][newX] = null;
-                mGatheredHearts++;
+
                 mGameCallback.onHeartGathered(mGatheredHearts);
             }
 
