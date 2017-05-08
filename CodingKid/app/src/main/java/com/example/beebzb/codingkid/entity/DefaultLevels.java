@@ -462,7 +462,7 @@ public class DefaultLevels {
         level1.setId(20);
         level1.setCommands(8);
         level1.setHearts(4);
-        level1.setStartPosition(new Position(4, 3));
+        level1.setStartPosition(new Position(5, 3));
         int[][] gameMap = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
