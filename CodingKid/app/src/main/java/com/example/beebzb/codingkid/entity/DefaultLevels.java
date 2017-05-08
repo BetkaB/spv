@@ -3,8 +3,9 @@ package com.example.beebzb.codingkid.entity;
 
 public class DefaultLevels {
     public static final Level[] DEFAULT_LEVELS = new Level[]{
-            get1(), get2(), get3(), get4(), get5(), get6(), get7(), get8(), get9(),
-            get10(), get11(), get12(), get13(), get14(), get15(), get16(), get17(), get18()};
+            get1(), get2(), get3(), get4(), get5(), get6(), get7(), get8(), get9(), get10(),
+            get11(), get12(), get13(), get14(), get15(), get16(), get17(), get18(), get19(), get20(),
+            get21(), get22(), get23(), get24(), get25(), get26(), get27(), get28(), get29()};
 
     private static Level get1() {
         Level level1 = new Level();
@@ -192,15 +193,15 @@ public class DefaultLevels {
         level1.setId(9);
         level1.setCommands(2);
         level1.setHearts(2);
-        level1.setStartPosition(new Position(1, 11));
+        level1.setStartPosition(new Position(1, 13));
         int[][] gameMap = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
-                {0, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, Level.CONST_HOUSE, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0},
+                {0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, Level.CONST_HOUSE, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
@@ -212,6 +213,50 @@ public class DefaultLevels {
     private static Level get11() {
         Level level1 = new Level();
         level1.setId(10);
+        level1.setCommands(2);
+        level1.setHearts(2);
+        level1.setStartPosition(new Position(1, 13));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0},
+                {0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, Level.CONST_HOUSE, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_HEART, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 11");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+    private static Level get12() {
+        Level level1 = new Level();
+        level1.setId(11);
+        level1.setCommands(2);
+        level1.setHearts(3);
+        level1.setStartPosition(new Position(1, 13));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0},
+                {0, 0, 0, 0, 0, Level.CONST_HEART, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, Level.CONST_HOUSE, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_HEART, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 12");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+    private static Level get13() {
+        Level level1 = new Level();
+        level1.setId(12);
         level1.setCommands(4);
         level1.setHearts(0);
         level1.setStartPosition(new Position(5, 6));
@@ -227,14 +272,14 @@ public class DefaultLevels {
 
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 11");
+        level1.setName("Hra 13");
         level1.setAuthor("Default Kid");
         return level1;
     }
 
-    private static Level get12() {
+    private static Level get14() {
         Level level1 = new Level();
-        level1.setId(11);
+        level1.setId(13);
         level1.setCommands(4);
         level1.setHearts(0);
         level1.setStartPosition(new Position(5, 12));
@@ -250,14 +295,14 @@ public class DefaultLevels {
 
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 12");
+        level1.setName("Hra 14");
         level1.setAuthor("Default Kid");
         return level1;
     }
 
-    private static Level get13() {
+    private static Level get15() {
         Level level1 = new Level();
-        level1.setId(12);
+        level1.setId(14);
         level1.setCommands(5);
         level1.setHearts(0);
         level1.setStartPosition(new Position(7, 4));
@@ -272,14 +317,37 @@ public class DefaultLevels {
                 {0, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 13");
+        level1.setName("Hra 15");
         level1.setAuthor("Default Kid");
         return level1;
     }
 
-    private static Level get14() {
+    private static Level get16() {
         Level level1 = new Level();
-        level1.setId(13);
+        level1.setId(15);
+        level1.setCommands(4);
+        level1.setHearts(0);
+        level1.setStartPosition(new Position(6, 0));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 16");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+
+    private static Level get17() {
+        Level level1 = new Level();
+        level1.setId(16);
         level1.setCommands(5);
         level1.setHearts(0);
         level1.setStartPosition(new Position(1, 2));
@@ -294,14 +362,36 @@ public class DefaultLevels {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 14");
+        level1.setName("Hra 17");
         level1.setAuthor("Default Kid");
         return level1;
     }
 
-    private static Level get15() {
+    private static Level get18() {
         Level level1 = new Level();
-        level1.setId(14);
+        level1.setId(17);
+        level1.setCommands(7);
+        level1.setHearts(3);
+        level1.setStartPosition(new Position(1, 0));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HOUSE, 0, 0},
+                {0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, Level.CONST_HEART, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 18");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+    private static Level get19() {
+        Level level1 = new Level();
+        level1.setId(18);
         level1.setCommands(6);
         level1.setHearts(3);
         level1.setStartPosition(new Position(1, 13));
@@ -316,7 +406,7 @@ public class DefaultLevels {
                 {0, Level.CONST_HOUSE, Level.CONST_BOX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 15");
+        level1.setName("Hra 19");
         level1.setAuthor("Default Kid");
         return level1;
     }
@@ -343,9 +433,9 @@ public class DefaultLevels {
         return level1;
     }
 
-    private static Level get16() {
+    private static Level get20() {
         Level level1 = new Level();
-        level1.setId(15);
+        level1.setId(19);
         level1.setCommands(6);
         level1.setHearts(4);
         level1.setStartPosition(new Position(4, 3));
@@ -360,14 +450,104 @@ public class DefaultLevels {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 16");
+        level1.setName("Hra 20");
         level1.setAuthor("Default Kid");
         return level1;
     }
 
-    private static Level get17() {
+    private static Level get21() {
         Level level1 = new Level();
-        level1.setId(16);
+        level1.setId(20);
+        level1.setCommands(8);
+        level1.setHearts(4);
+        level1.setStartPosition(new Position(4, 3));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_HEART, 0, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_HEART, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0},
+                {0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0},
+                {0, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0},
+                {0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HOUSE, Level.CONST_HOUSE, Level.CONST_HOUSE, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 21");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+    private static Level get22() {
+        Level level1 = new Level();
+        level1.setId(21);
+        level1.setCommands(9);
+        level1.setHearts(3);
+        level1.setStartPosition(new Position(3, 11));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, Level.CONST_HOUSE, Level.CONST_BOX, 0, Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_HEART, Level.CONST_BOX, 0, 0, 0, 0, 0, 0},
+                {0, Level.CONST_HOUSE, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, Level.CONST_BOX, 0, 0},
+                {0, Level.CONST_HOUSE, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_HOUSE, 0, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_HOUSE, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0, 0, 0, Level.CONST_HEART, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 22");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+
+    private static Level get23() {
+        Level level1 = new Level();
+        level1.setId(22);
+        level1.setCommands(8);
+        level1.setHearts(3);
+        level1.setStartPosition(new Position(6, 3));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_HEART, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_HEART, 0, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, 0},
+                {0, 0, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HOUSE},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 22");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+    private static Level get24() {
+        Level level1 = new Level();
+        level1.setId(23);
+        level1.setCommands(11);
+        level1.setHearts(4);
+        level1.setStartPosition(new Position(7, 2));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HEART, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_HEART, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, 0, Level.CONST_BOX, 0, 0, Level.CONST_HEART, 0, 0, Level.CONST_BOX, 0, 0, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HOUSE, 0, 0},
+                {0, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HOUSE, 0, 0},
+                {0, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HOUSE, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 24");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+
+    private static Level get25() {
+        Level level1 = new Level();
+        level1.setId(24);
         level1.setCommands(6);
         level1.setHearts(3);
         level1.setStartPosition(new Position(5, 4));
@@ -382,14 +562,60 @@ public class DefaultLevels {
                 {0, 0, 0, 0, 0, 0, 0, 0, Level.CONST_HOUSE, 0, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 17");
+        level1.setName("Hra 25");
         level1.setAuthor("Default Kid");
         return level1;
     }
 
-    private static Level get18() {
+    private static Level get26() {
         Level level1 = new Level();
-        level1.setId(17);
+        level1.setId(25);
+        level1.setCommands(6);
+        level1.setHearts(3);
+        level1.setStartPosition(new Position(3, 11));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {Level.CONST_BOX, Level.CONST_HEART, 0, Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HEART, 0, Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0},
+                {Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0},
+                {Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HOUSE, 0, 0},
+                {Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0},
+                {Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HEART, 0, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HEART, 0, Level.CONST_BOX, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 26");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+
+    private static Level get27() {
+        Level level1 = new Level();
+        level1.setId(26);
+        level1.setCommands(7);
+        level1.setHearts(0);
+        level1.setStartPosition(new Position(1, 0));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_HOUSE, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 27");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+
+    private static Level get28() {
+        Level level1 = new Level();
+        level1.setId(27);
         level1.setCommands(6);
         level1.setHearts(0);
         level1.setStartPosition(new Position(1, 0));
@@ -404,8 +630,33 @@ public class DefaultLevels {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
         level1.setGameMap(gameMap);
-        level1.setName("Hra 18");
+        level1.setName("Hra 28");
         level1.setAuthor("Default Kid");
         return level1;
     }
+
+
+    private static Level get29() {
+        Level level1 = new Level();
+        level1.setId(28);
+        level1.setCommands(7);
+        level1.setHearts(3);
+        level1.setStartPosition(new Position(6, 1));
+        int[][] gameMap = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, Level.CONST_BOX, Level.CONST_HEART, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_HEART, Level.CONST_BOX, Level.CONST_BOX, 0},
+                {0, 0, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_HEART, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0, Level.CONST_BOX, 0},
+                {0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, Level.CONST_BOX, Level.CONST_BOX, 0, Level.CONST_BOX, 0},
+                {0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0},
+                {0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_BOX, 0, 0, 0, Level.CONST_HOUSE, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        level1.setGameMap(gameMap);
+        level1.setName("Hra 29");
+        level1.setAuthor("Default Kid");
+        return level1;
+    }
+
+
 }
