@@ -132,7 +132,7 @@ public class GameActivity extends MyActivity implements CommandAdapter.AdapterCa
 
     @OnClick(R.id.button_left)
     public void commandLeft() {
-        if (!increaseSame(CommandType.DOWN)) {
+        if (!increaseSame(CommandType.LEFT)) {
             if (decreasedRemainingCommands()) {
                 mCommandTypes.add(new Command(CommandType.LEFT));
                 mCommandAdapter.setData(mCommandTypes);
